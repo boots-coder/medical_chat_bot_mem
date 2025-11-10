@@ -23,9 +23,12 @@ def main():
     result = clusterer.process(dialogue_list, return_details=True)
 
     labels = result['labels']
+    qa_pairs = result['qa_pairs']
     representatives = result['representatives']
     cluster_dialogues = result['cluster_dialogues']
     details = result['details']
+
+    print(f"\n配对后的问答对数量: {len(qa_pairs)}")
 
     # 2. 打印聚类统计信息
     print(f"\n聚类统计:")
@@ -33,33 +36,36 @@ def main():
     print(f"  - 噪声点数量: {details['n_noise_points']}")
     print("=" * 80)
 
-    # 3. 打印每个簇的代表性对话
-    print(f"\n每个簇的代表性对话:\n")
+    # 3. 打印每个簇的代表性问答对
+    print(f"\n每个簇的代表性问答对:\n")
     for cluster_id in sorted(representatives.keys()):
         if cluster_id == -1:
-            print(f"簇 {cluster_id} (噪声点) - 代表性对话:")
+            print(f"簇 {cluster_id} (噪声点) - 代表性问答对:")
         else:
-            print(f"簇 {cluster_id} - 代表性对话:")
+            print(f"簇 {cluster_id} - 代表性问答对:")
 
         for rep in representatives[cluster_id][:5]:  # 只显示前5个代表
-            print(f"  [{rep['role']}] {rep['content']}")
-        print()
+            print(f"  [问答对 #{rep['index']}]")
+            print(f"    用户: {rep['user']}")
+            print(f"    助手: {rep['assistant']}")
+            print()
 
     print("=" * 80)
 
-    # 1. 打印每个簇的完整对话内容
-    print(f"\n每个簇的完整对话内容:\n")
+    # 4. 打印每个簇的完整问答对内容
+    print(f"\n每个簇的完整问答对内容:\n")
     for cluster_id in sorted(cluster_dialogues.keys()):
-        dialogues = cluster_dialogues[cluster_id]
+        qa_list = cluster_dialogues[cluster_id]
 
         if cluster_id == -1:
-            print(f"簇 {cluster_id} (噪声点) - 共 {len(dialogues)} 轮对话:")
+            print(f"簇 {cluster_id} (噪声点) - 共 {len(qa_list)} 个问答对:")
         else:
-            print(f"簇 {cluster_id} - 共 {len(dialogues)} 轮对话:")
+            print(f"簇 {cluster_id} - 共 {len(qa_list)} 个问答对:")
 
-        for turn in dialogues:
-            print(f"  [{turn['role']}] {turn['content']}")
-        print()
+        for qa in qa_list:
+            print(f"  用户: {qa['user']}")
+            print(f"  助手: {qa['assistant']}")
+            print()
         print("-" * 80)
 
 
