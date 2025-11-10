@@ -9,7 +9,11 @@ class TokenLimitExceeded(Exception):
 
 
 class DialogueAnalyzer:
-    """对话分析器：将医疗对话转换为三层存储结构"""
+    """
+    对话分析器：将医疗对话信息转换为三层存储结构，
+    用于后面的存储；提示词工程。
+    后续可以进行小模型微调替换。 
+    """
     
     def __init__(
         self, 
@@ -27,8 +31,8 @@ class DialogueAnalyzer:
         dialogue_list: List[Dict[str, str]],
         session_id: str,
         user_id: str,
-        start_time: str,  # <-- [修改点 1] 增加参数
-        end_time: str     # <-- [修改点 2] 增加参数
+        start_time: str,  
+        end_time: str     
     ) -> Dict:
         """
         分析对话session，返回三层存储结构
@@ -196,8 +200,8 @@ if __name__ == "__main__":
             dialogue_list=dialogue,
             session_id="sess_1a2b3c",
             user_id="user_789",
-            start_time="2025-11-04T12:30:00Z",  # <-- 传入真实数据
-            end_time="2025-11-04T12:34:51Z"    # <-- 传入真实数据
+            start_time="2025-11-04T12:30:00Z",  
+            end_time="2025-11-04T12:34:51Z"    
         )
         print(json.dumps(result, ensure_ascii=False, indent=2))
     except TokenLimitExceeded as e:
