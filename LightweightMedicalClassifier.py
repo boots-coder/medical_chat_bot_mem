@@ -1,6 +1,6 @@
 import json
-from openai import OpenAI
 from typing import Dict, List, Tuple, Optional
+from APIManager import APIManager
 
 class LightweightMedicalClassifier:
     """
@@ -8,33 +8,19 @@ class LightweightMedicalClassifier:
     用来过滤掉，聚类后的质点对应的上下文信息。 
     """
     
-    def __init__(self):
+    def __init__(self, api_manager: APIManager = None):
+        """
+        初始化轻量级医疗分类器
+        
+        Args:
+            api_manager: API管理器实例，如果为None则创建默认实例
+        """
         # TODO: 未来将这里替换为本地SFT（监督微调）的小模型
         
-        # 警告：请勿在生产环境中硬编码 API 密钥。
-        # 请将 "YOUR_OPENROUTER_API_KEY" 替换为您自己的密钥
-        self.api_key="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"
-
-        
-        self.base_url = "https://openrouter.ai/api/v1"
-        self.model = "openai/gpt-4o-mini" 
-        
-        if "YOUR_OPENROUTER_API_KEY" in self.api_key:
-            print("="*50)
-            print("⚠️ 警告: API 密钥未设置。")
-            print("请在代码中将 'sk-or-v1-YOUR_OPENROUTER_API_KEY' 替换为您的 OpenRouter 密钥。")
-            print("="*50)
-            self.client = None
-        else:
-            # 【修正点 1】: 按照您的示例，添加 default_headers
-            self.client = OpenAI(
-                base_url=self.base_url,
-                api_key=self.api_key,
-                default_headers={
-                    "HTTP-Referer": "https://medical-chat-memory-manager.com", # 替换成您的站点 URL
-                    "X-Title": "Medical-Triage-Classifier" # 替换成您的项目名
-                }
-            )
+        # 初始化API管理器
+        self.api_manager = api_manager if api_manager else APIManager()
+        if not self.api_manager.is_available():
+            print("⚠️ 警告: API不可用，医疗分类功能将无法使用")
 
 
 
@@ -94,41 +80,30 @@ class LightweightMedicalClassifier:
             - False: 非医疗
             - None: API 调用或解析失败
         """
-        if not self.client:
-            print(f"错误: 客户端未初始化 (API 密钥缺失?) - 无法分类: '{text}'")
-            return None # 返回 None 表示错误
+        if not self.api_manager.is_available():
+            print(f"错误: API不可用 - 无法分类: '{text}'")
+            return None
 
-        system_prompt = self._build_system_prompt()
-        
-        # 消息格式保持 text-only 即可，您给的示例是多模态的
+        # 使用API管理器进行调用
         user_prompt = f"请对以下文本进行分类：\n\n{text}"
         
-        try:
-            completion = self.client.chat.completions.create(
-                model=self.model,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                response_format={"type": "json_object"},
-                temperature=0.0,
-                max_tokens=50 
-            )
-            
-            response_content = completion.choices[0].message.content
-            result_data = json.loads(response_content)
-            
-            is_medical = result_data.get("is_medical") # 不设默认值
-            
-            if isinstance(is_medical, bool):
-                return is_medical
-            else:
-                print(f"警告: API 返回了意外的非布尔值: {is_medical}")
-                return None # 视为解析失败
-
-        except Exception as e:
-            # 【修正点 2】: 打印真实错误，并返回 None
-            print(f"API 调用或 JSON 解析失败: {e}")
+        result = self.api_manager.call_json_completion(
+            system_prompt=self._build_system_prompt(),
+            user_prompt=user_prompt,
+            temperature=0.0,
+            max_tokens=50
+        )
+        
+        if not result:
+            print(f"API调用或JSON解析失败")
             return None
+        
+        is_medical = result.get("is_medical")  # 不设默认值
+        
+        if isinstance(is_medical, bool):
+            return is_medical
+        else:
+            print(f"警告: API返回了意外的非布尔值: {is_medical}")
+            return None  # 视为解析失败
 
 

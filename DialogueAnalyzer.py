@@ -1,6 +1,6 @@
-from openai import OpenAI
 from typing import List, Dict
 import json
+from APIManager import APIManager
 
 
 class TokenLimitExceeded(Exception):
@@ -17,14 +17,21 @@ class DialogueAnalyzer:
     
     def __init__(
         self, 
-        api_key: str,
-        base_url: str = "https://openrouter.ai/api/v1",
-        model: str = "openai/gpt-4o-mini",
+        api_manager: APIManager = None,
         max_input_tokens: int = 4096
     ):
-        self.client = OpenAI(base_url=base_url, api_key=api_key)
-        self.model = model
+        """
+        初始化对话分析器
+        
+        Args:
+            api_manager: API管理器实例，如果为None则创建默认实例
+            max_input_tokens: 最大输入token数限制
+        """
+        self.api_manager = api_manager if api_manager else APIManager()
         self.max_input_tokens = max_input_tokens
+        
+        if not self.api_manager.is_available():
+            print("⚠️ 警告: API不可用，对话分析功能将无法使用")
         
     def analyze_session(
         self, 
@@ -54,22 +61,20 @@ class DialogueAnalyzer:
         system_prompt = self._build_system_prompt()
         user_prompt = self._build_user_prompt(dialogue_list, session_id, user_id,start_time, end_time)
         
-        # 调用LLM
-        completion = self.client.chat.completions.create(
-            model=self.model,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
-            response_format={"type": "json_object"},
-            extra_headers={
-                "HTTP-Referer": "https://medical-dialogue-system.com",
-                "X-Title": "Medical Dialogue Analyzer"
-            }
+        # 使用API管理器调用LLM
+        if not self.api_manager.is_available():
+            raise RuntimeError("API不可用，无法进行对话分析")
+        
+        result = self.api_manager.call_json_completion(
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            temperature=0.1,  # 低温度确保结构化输出的一致性
+            max_tokens=1000
         )
         
-        # 解析返回的JSON
-        result = json.loads(completion.choices[0].message.content)
+        if not result:
+            raise RuntimeError("对话分析API调用失败")
+        
         return result
     
     def _build_system_prompt(self) -> str:
@@ -182,10 +187,7 @@ class DialogueAnalyzer:
 
 # 使用示例
 if __name__ == "__main__":
-    analyzer = DialogueAnalyzer(
-        api_key="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",
-        max_input_tokens=4096
-    )
+    analyzer = DialogueAnalyzer(max_input_tokens=4096)
 
     # 模拟对话数据
     dialogue = [
@@ -204,7 +206,7 @@ if __name__ == "__main__":
             end_time="2025-11-04T12:34:51Z"    
         )
         print(json.dumps(result, ensure_ascii=False, indent=2))
-    except TokenLimitExceeded as e:
+    except (TokenLimitExceeded, RuntimeError) as e:
         print(f"错误: {e}")
         # TODO: 未来实现对话压缩逻辑
         # compressed_dialogue = compress_dialogue(dialogue)
