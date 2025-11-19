@@ -140,6 +140,44 @@ async function getSummary() {
 }
 
 /**
+ * 获取长期记忆摘要
+ */
+async function getMemorySummary() {
+    if (!currentSessionId) {
+        showError('没有可用的会话ID');
+        return;
+    }
+
+    hideError();
+
+    try {
+        const response = await fetch(`/api/session/${currentSessionId}/memory-summary`);
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.detail || '获取长期记忆摘要失败');
+        }
+
+        const memory = await response.json();
+        console.log('长期记忆摘要:', memory);
+
+        // 显示格式化的摘要
+        document.getElementById('mem-topic').textContent = memory.session_topic || '无';
+        document.getElementById('mem-narrative').textContent = memory.narrative_summary || '无';
+        document.getElementById('mem-complaint').textContent = memory.main_complaint || '无';
+        document.getElementById('mem-rounds').textContent = memory.dialogue_rounds || 0;
+        document.getElementById('mem-entities').textContent = memory.knowledge_graph.entities_count || 0;
+        document.getElementById('mem-relations').textContent = memory.knowledge_graph.relationships_count || 0;
+
+        document.getElementById('memory-summary').classList.remove('hidden');
+
+    } catch (error) {
+        console.error('获取长期记忆摘要失败:', error);
+        showError(error.message);
+    }
+}
+
+/**
  * 重置表单
  */
 function resetForm() {
@@ -151,6 +189,7 @@ function resetForm() {
     document.getElementById('create-session-form').parentElement.classList.remove('hidden');
     document.getElementById('session-info').classList.add('hidden');
     document.getElementById('session-summary').classList.add('hidden');
+    document.getElementById('memory-summary').classList.add('hidden');
 
     hideError();
 }

@@ -3,7 +3,6 @@ from typing import Optional, Dict, Any
 from backend.ml.APIManager import APIManager
 from backend.models.ShortTermMemoryManager import ShortTermMemoryManager
 from backend.ml.RAGIntentClassifier import RAGIntentClassifier
-from TestData import get_test_scenario
 
 
 class MedicalResponseGenerator:
@@ -63,8 +62,7 @@ class MedicalResponseGenerator:
         self,
         user_query: str,
         short_term_context: str = "",
-        long_term_memory: str = "",
-        mock_mode: bool = False
+        long_term_memory: str = ""
     ) -> Dict[str, Any]:
         """
         生成医疗回复
@@ -72,8 +70,7 @@ class MedicalResponseGenerator:
         Args:
             user_query: 用户当前查询
             short_term_context: 短期记忆上下文（从SessionManager获取）
-            long_term_memory: 长期记忆上下文（如果需要RAG）
-            mock_mode: 是否为测试模式（使用模拟的RAG结果）
+            long_term_memory: 长期记忆上下文（由MemoryRetrieval检索）
 
         Returns:
             {
@@ -101,15 +98,8 @@ class MedicalResponseGenerator:
         rag_triggered = rag_result["need_rag"] if rag_result else False
         confidence = rag_result["confidence"] if rag_result else 0.0
         
-        # 3. 确定长期记忆内容
-        final_long_memory = ""
-        if rag_triggered:
-            if mock_mode and long_term_memory:
-                # 测试模式：使用提供的模拟长期记忆
-                final_long_memory = long_term_memory
-            elif not mock_mode:
-                # 生产模式：这里应该调用实际的RAG检索
-                final_long_memory = "【生产模式】这里应该调用实际的RAG检索系统"
+        # 3. 使用传入的长期记忆内容（已经由外部RAG检索完成）
+        final_long_memory = long_term_memory if long_term_memory else ""
         
         # 4. 构建完整的上下文提示
         context_parts = []
@@ -161,86 +151,3 @@ class MedicalResponseGenerator:
     def get_memory_stats(self) -> Dict:
         """获取记忆状态统计"""
         return self.memory_manager.get_stats()
-
-
-# 完整集成测试
-def test_complete_system():
-    """完整系统集成测试：使用TestData中的场景"""
-    print("="*70)
-    print("完整系统集成测试")
-    print("="*70)
-    
-    generator = MedicalResponseGenerator()
-    
-    # 测试场景1：需要RAG的对话
-    print("\n【测试场景1：需要RAG的对话】")
-    print("-" * 50)
-    
-    rag_scenario = get_test_scenario("rag_required")
-    generator.new_session()  # 开始新session
-    
-    # 模拟完整对话过程，但不包括最后一轮
-    conversation = rag_scenario["conversation"][:-1]  # 除了最后一轮
-    for turn in conversation:
-        generator.add_conversation_turn(turn["role"], turn["content"])
-        print(f"{turn['role'].upper()}: {turn['content']}")
-    
-    # 最后一轮是需要RAG的查询
-    final_query = rag_scenario["final_query"]
-    mock_rag_data = rag_scenario["mock_rag_result"]
-    
-    print(f"\n👤 用户最终查询：{final_query}")
-    print("\n🤖 系统处理中...")
-    
-    # 生成回复（使用模拟的RAG数据）
-    result = generator.generate_response(
-        user_query=final_query,
-        long_term_memory=mock_rag_data,
-        mock_mode=True
-    )
-    
-    print(f"\n✅ RAG触发：{result['rag_triggered']}")
-    print(f"✅ 置信度：{result['confidence']:.2f}")
-    print(f"\n🩺 AI回复：\n{result['response']}")
-    
-    # 测试场景2：不需要RAG的对话
-    print("\n" + "="*70)
-    print("\n【测试场景2：不需要RAG的对话】")
-    print("-" * 50)
-    
-    no_rag_scenario = get_test_scenario("no_rag")
-    generator.new_session()  # 开始新session
-    
-    # 模拟完整对话过程，但不包括最后一轮
-    conversation = no_rag_scenario["conversation"][:-1]  # 除了最后一轮
-    for turn in conversation:
-        generator.add_conversation_turn(turn["role"], turn["content"])
-        print(f"{turn['role'].upper()}: {turn['content']}")
-    
-    # 最后一轮是不需要RAG的查询
-    final_query = no_rag_scenario["final_query"]
-    
-    print(f"\n👤 用户最终查询：{final_query}")
-    print("\n🤖 系统处理中...")
-    
-    # 生成回复（不应该触发RAG）
-    result = generator.generate_response(
-        user_query=final_query,
-        mock_mode=True
-    )
-    
-    print(f"\n✅ RAG触发：{result['rag_triggered']}")
-    print(f"✅ 置信度：{result['confidence']:.2f}")
-    print(f"\n🩺 AI回复：\n{result['response']}")
-    
-    # 显示最终记忆状态
-    print(f"\n【系统记忆状态】")
-    print(generator.get_memory_stats())
-    
-    print("\n" + "="*70)
-    print("集成测试完成")
-    print("="*70)
-
-
-if __name__ == "__main__":
-    test_complete_system()

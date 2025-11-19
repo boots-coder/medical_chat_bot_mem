@@ -131,7 +131,11 @@
                 <div class="pt-3 border-t">
                     <button onclick="getSummary()"
                             class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition mr-2">
-                        查看会话摘要
+                        查看会话信息
+                    </button>
+                    <button onclick="getMemorySummary()"
+                            class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition mr-2">
+                        查看长期记忆摘要
                     </button>
                     <button onclick="resetForm()"
                             class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition">
@@ -141,10 +145,43 @@
             </div>
         </div>
 
-        <!-- 会话摘要展示 -->
+        <!-- 会话基本信息展示 -->
         <div id="session-summary" class="bg-white rounded-lg shadow-md p-6 mt-6 hidden">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">会话摘要</h2>
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">会话基本信息</h2>
             <pre id="summary-content" class="bg-gray-50 p-4 rounded-md overflow-auto text-sm"></pre>
+        </div>
+
+        <!-- 长期记忆摘要展示 -->
+        <div id="memory-summary" class="bg-white rounded-lg shadow-md p-6 mt-6 hidden">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">长期记忆摘要</h2>
+            <div id="memory-content" class="space-y-4">
+                <div class="bg-blue-50 p-4 rounded-md">
+                    <h3 class="font-semibold text-blue-900 mb-2">对话主题</h3>
+                    <p id="mem-topic" class="text-gray-700"></p>
+                </div>
+                <div class="bg-green-50 p-4 rounded-md">
+                    <h3 class="font-semibold text-green-900 mb-2">完整摘要</h3>
+                    <p id="mem-narrative" class="text-gray-700 whitespace-pre-wrap"></p>
+                </div>
+                <div class="bg-yellow-50 p-4 rounded-md">
+                    <h3 class="font-semibold text-yellow-900 mb-2">主诉关键词</h3>
+                    <p id="mem-complaint" class="text-gray-700"></p>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-md grid grid-cols-3 gap-4">
+                    <div>
+                        <h3 class="font-semibold text-purple-900 text-sm">对话轮数</h3>
+                        <p id="mem-rounds" class="text-2xl font-bold text-purple-600"></p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-purple-900 text-sm">实体数量</h3>
+                        <p id="mem-entities" class="text-2xl font-bold text-purple-600"></p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-purple-900 text-sm">关系数量</h3>
+                        <p id="mem-relations" class="text-2xl font-bold text-purple-600"></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 错误信息 -->

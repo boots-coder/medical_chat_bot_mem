@@ -369,6 +369,47 @@ async def get_session_summary(session_id: str):
     }
 
 
+@app.get("/api/session/{session_id}/memory-summary")
+async def get_session_memory_summary(session_id: str):
+    """
+    获取会话的长期记忆摘要
+
+    从向量数据库中读取完整的对话分析结果
+    """
+    from backend.core.DatabaseManager import get_db_manager
+
+    db = get_db_manager()
+
+    # 从 Chroma 查询该会话的长期记忆
+    results = db.chroma_collection.get(
+        where={"session_id": session_id},
+        include=["metadatas", "documents"]
+    )
+
+    if not results['ids']:
+        raise HTTPException(status_code=404, detail="未找到该会话的长期记忆")
+
+    # 解析第一条记录（通常一个会话只有一条）
+    metadata = results['metadatas'][0]
+    document = results['documents'][0]
+    analysis = json.loads(metadata['analysis_json'])
+
+    return {
+        "session_id": session_id,
+        "patient_id": metadata['patient_id'],
+        "session_topic": analysis.get('session_topic', ''),
+        "narrative_summary": analysis.get('narrative_summary', ''),
+        "main_complaint": analysis.get('main_complaint_vectorized', ''),
+        "dialogue_rounds": analysis.get('dialogue_rounds', 0),
+        "start_time": metadata['created_at'],
+        "end_time": metadata['end_time'],
+        "knowledge_graph": {
+            "entities_count": len(analysis.get('knowledge_graph', {}).get('entities', [])),
+            "relationships_count": len(analysis.get('knowledge_graph', {}).get('relationships', []))
+        }
+    }
+
+
 # ==================== 健康检查 ====================
 
 @app.get("/health")
