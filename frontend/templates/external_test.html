@@ -1,75 +1,75 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>外部医疗系统模拟 - 测试页面</title>
+    <title>External Medical System Simulation - Test Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body class="bg-gradient-to-r from-blue-50 to-indigo-50 min-h-screen">
     <div class="container mx-auto max-w-4xl p-6">
-        <!-- 标题 -->
+        <!-- Title -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h1 class="text-3xl font-bold text-gray-800 mb-2">外部医疗系统模拟</h1>
-            <p class="text-gray-600">此页面用于测试医疗咨询系统的会话创建功能</p>
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">External Medical System Simulation</h1>
+            <p class="text-gray-600">This page is used to test the medical consultation system's session creation functionality</p>
         </div>
 
-        <!-- 创建会话表单 -->
+        <!-- Create Session Form -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">创建会话</h2>
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Create Session</h2>
 
             <form id="create-session-form" class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- 患者信息 -->
+                    <!-- Patient Information -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">患者ID</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Patient ID</label>
                         <input type="text" id="patient_id" name="patient_id" required
                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                placeholder="P12345">
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">患者姓名</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Patient Name</label>
                         <input type="text" id="patient_name" name="patient_name" required
                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                               placeholder="张三">
+                               placeholder="John Doe">
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">年龄</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Age</label>
                         <input type="number" id="patient_age" name="patient_age" required
                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                placeholder="45" min="1" max="150">
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">性别</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
                         <select id="gender" name="gender" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="">请选择</option>
-                            <option value="male">男</option>
-                            <option value="female">女</option>
-                            <option value="other">其他</option>
+                            <option value="">Please select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">医生姓名</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Doctor Name</label>
                         <input type="text" id="doctor_name" name="doctor_name" required
                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                               placeholder="李医生">
+                               placeholder="Dr. Smith">
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">科室</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Department</label>
                         <input type="text" id="department" name="department" required
                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                               placeholder="心内科">
+                               placeholder="Cardiology">
                     </div>
 
                     <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">预约ID</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Appointment ID</label>
                         <input type="text" id="appointment_id" name="appointment_id" required
                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                placeholder="APT001">
@@ -79,39 +79,39 @@
                 <div class="flex justify-end space-x-3">
                     <button type="button" onclick="fillTestData()"
                             class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
-                        填充测试数据
+                        Fill Test Data
                     </button>
                     <button type="submit"
                             class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
-                        创建会话
+                        Create Session
                     </button>
                 </div>
             </form>
         </div>
 
-        <!-- 会话信息展示 -->
+        <!-- Session Info Display -->
         <div id="session-info" class="bg-white rounded-lg shadow-md p-6 hidden">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">会话创建成功</h2>
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Session Created Successfully</h2>
 
             <div class="space-y-3">
                 <div>
-                    <label class="block text-sm font-medium text-gray-600 mb-1">会话ID</label>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">Session ID</label>
                     <input id="display-session-id" type="text" readonly
                            class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-600 mb-1">患者访问URL</label>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">Patient Access URL</label>
                     <div class="flex space-x-2">
                         <input id="display-url" type="text" readonly
                                class="flex-1 px-3 py-2 bg-gray-50 border border-gray-300 rounded-md">
                         <button onclick="copyURL()"
                                 class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
-                            复制
+                            Copy
                         </button>
                         <a id="open-chat-link" href="#" target="_blank"
                            class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
-                            打开聊天
+                            Open Chat
                         </a>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-600 mb-1">过期时间</label>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">Expiration Time</label>
                     <input id="display-expires" type="text" readonly
                            class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md">
                 </div>
@@ -131,62 +131,62 @@
                 <div class="pt-3 border-t">
                     <button onclick="getSummary()"
                             class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition mr-2">
-                        查看会话信息
+                        View Session Info
                     </button>
                     <button onclick="getMemorySummary()"
                             class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition mr-2">
-                        查看长期记忆摘要
+                        View Long-term Memory Summary
                     </button>
                     <button onclick="resetForm()"
                             class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition">
-                        创建新会话
+                        Create New Session
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- 会话基本信息展示 -->
+        <!-- Session Basic Info Display -->
         <div id="session-summary" class="bg-white rounded-lg shadow-md p-6 mt-6 hidden">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">会话基本信息</h2>
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Session Basic Information</h2>
             <pre id="summary-content" class="bg-gray-50 p-4 rounded-md overflow-auto text-sm"></pre>
         </div>
 
-        <!-- 长期记忆摘要展示 -->
+        <!-- Long-term Memory Summary Display -->
         <div id="memory-summary" class="bg-white rounded-lg shadow-md p-6 mt-6 hidden">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">长期记忆摘要</h2>
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Long-term Memory Summary</h2>
             <div id="memory-content" class="space-y-4">
                 <div class="bg-blue-50 p-4 rounded-md">
-                    <h3 class="font-semibold text-blue-900 mb-2">对话主题</h3>
+                    <h3 class="font-semibold text-blue-900 mb-2">Dialogue Topic</h3>
                     <p id="mem-topic" class="text-gray-700"></p>
                 </div>
                 <div class="bg-green-50 p-4 rounded-md">
-                    <h3 class="font-semibold text-green-900 mb-2">完整摘要</h3>
+                    <h3 class="font-semibold text-green-900 mb-2">Complete Summary</h3>
                     <p id="mem-narrative" class="text-gray-700 whitespace-pre-wrap"></p>
                 </div>
                 <div class="bg-yellow-50 p-4 rounded-md">
-                    <h3 class="font-semibold text-yellow-900 mb-2">主诉关键词</h3>
+                    <h3 class="font-semibold text-yellow-900 mb-2">Chief Complaint Keywords</h3>
                     <p id="mem-complaint" class="text-gray-700"></p>
                 </div>
                 <div class="bg-purple-50 p-4 rounded-md grid grid-cols-3 gap-4">
                     <div>
-                        <h3 class="font-semibold text-purple-900 text-sm">对话轮数</h3>
+                        <h3 class="font-semibold text-purple-900 text-sm">Dialogue Rounds</h3>
                         <p id="mem-rounds" class="text-2xl font-bold text-purple-600"></p>
                     </div>
                     <div>
-                        <h3 class="font-semibold text-purple-900 text-sm">实体数量</h3>
+                        <h3 class="font-semibold text-purple-900 text-sm">Entity Count</h3>
                         <p id="mem-entities" class="text-2xl font-bold text-purple-600"></p>
                     </div>
                     <div>
-                        <h3 class="font-semibold text-purple-900 text-sm">关系数量</h3>
+                        <h3 class="font-semibold text-purple-900 text-sm">Relationship Count</h3>
                         <p id="mem-relations" class="text-2xl font-bold text-purple-600"></p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 错误信息 -->
+        <!-- Error Message -->
         <div id="error-message" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md mt-6 hidden">
-            <strong>错误：</strong>
+            <strong>Error:</strong>
             <span id="error-text"></span>
         </div>
     </div>

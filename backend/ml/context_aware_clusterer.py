@@ -5,7 +5,7 @@ from typing import List, Dict, Tuple
 
 
 class ContextAwareDialogueClusterer:
-    """基于上下文感知的对话聚类器 - 问答对级别，只融合上文"""
+    """Context-aware dialogue clusterer - Q&A pair level, fusing only previous context"""
 
     def __init__(
         self,
@@ -16,10 +16,10 @@ class ContextAwareDialogueClusterer:
     ):
         """
         Args:
-            sbert_model_name: SBERT模型名称
-            current_weight: 当前问答对的权重 (剩余权重按平方递减分配给历史)
-            min_cluster_size: HDBSCAN最小簇大小
-            min_samples: HDBSCAN密度估计参数
+            sbert_model_name: SBERT model name
+            current_weight: Weight of current Q&A pair (remaining weight distributed to history with quadratic decay)
+            min_cluster_size: HDBSCAN minimum cluster size
+            min_samples: HDBSCAN density estimation parameter
         """
         self.sbert = SentenceTransformer(sbert_model_name)
         self.current_weight = current_weight
@@ -28,20 +28,20 @@ class ContextAwareDialogueClusterer:
 
     def _pair_dialogues(self, dialogue_list: List[Dict[str, str]]) -> List[Dict[str, str]]:
         """
-        将user-assistant对话配对成问答对
+        Pair user-assistant dialogues into Q&A pairs
 
         Args:
             dialogue_list: [{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."}, ...]
 
         Returns:
-            qa_pairs: [{"user": "...", "assistant": "...", "combined": "用户：...\n助手：..."}]
+            qa_pairs: [{"user": "...", "assistant": "...", "combined": "User: ...\nAssistant: ..."}]
         """
         qa_pairs = []
         for i in range(0, len(dialogue_list), 2):
             if i + 1 < len(dialogue_list):
                 user_content = dialogue_list[i]["content"]
                 assistant_content = dialogue_list[i + 1]["content"]
-                combined = f"用户：{user_content}\n助手：{assistant_content}"
+                combined = f"User: {user_content}\nAssistant: {assistant_content}"
                 qa_pairs.append({
                     "user": user_content,
                     "assistant": assistant_content,
@@ -51,17 +51,17 @@ class ContextAwareDialogueClusterer:
 
     def _compute_history_weights(self, n_history: int, total_weight: float) -> np.ndarray:
         """
-        计算历史权重，按平方递减分配
+        Compute history weights with quadratic decay
 
-        求解: w + w^2 + w^3 + ... + w^n_history = total_weight
-        使用二分法数值求解
+        Solve: w + w^2 + w^3 + ... + w^n_history = total_weight
+        Use binary search for numerical solution
 
         Args:
-            n_history: 历史问答对数量
-            total_weight: 分配给历史的总权重
+            n_history: Number of historical Q&A pairs
+            total_weight: Total weight allocated to history
 
         Returns:
-            weights: array of shape (n_history,)，从最近到最远: [w, w^2, w^3, ...]
+            weights: array of shape (n_history,), from most recent to oldest: [w, w^2, w^3, ...]
         """
         if n_history == 0:
             return np.array([])
@@ -69,14 +69,14 @@ class ContextAwareDialogueClusterer:
         if n_history == 1:
             return np.array([total_weight])
 
-        # 二分法求解 w
+        # Binary search to solve for w
         def sum_geometric_powers(w, n):
-            """计算 w + w^2 + ... + w^n"""
+            """Calculate w + w^2 + ... + w^n"""
             if abs(w - 1.0) < 1e-10:
                 return n
             return w * (1 - w**n) / (1 - w)
 
-        # 二分搜索
+        # Binary search
         left, right = 0.0, 1.0
         epsilon = 1e-8
         max_iter = 100
@@ -94,12 +94,12 @@ class ContextAwareDialogueClusterer:
             else:
                 right = mid
         else:
-            w = mid  # 使用最后的mid值
+            w = mid  # Use the last mid value
 
-        # 生成权重序列 [w, w^2, w^3, ...]
+        # Generate weight sequence [w, w^2, w^3, ...]
         weights = np.array([w ** (i + 1) for i in range(n_history)])
 
-        # 归一化确保总和等于 total_weight
+        # Normalize to ensure sum equals total_weight
         weights = weights / weights.sum() * total_weight
 
         return weights
@@ -109,25 +109,25 @@ class ContextAwareDialogueClusterer:
         dialogue_list: List[Dict[str, str]]
     ) -> Tuple[np.ndarray, List[Dict[str, str]]]:
         """
-        对每个问答对进行上下文感知编码（只融合上文，权重平方递减）
+        Encode each Q&A pair with context awareness (fusing only previous context, weights with quadratic decay)
 
-        对于问答对[i]，其向量 = w_curr * vec[i] + Σ(w_history_j * vec[i-j])
+        For Q&A pair[i], its vector = w_curr * vec[i] + Σ(w_history_j * vec[i-j])
 
         Args:
             dialogue_list: [{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."}, ...]
 
         Returns:
             embeddings: shape=(n_qa_pairs, embedding_dim)
-            qa_pairs: 配对后的问答对列表
+            qa_pairs: List of paired Q&A pairs
         """
-        # 配对对话
+        # Pair dialogues
         qa_pairs = self._pair_dialogues(dialogue_list)
         n = len(qa_pairs)
 
         if n == 0:
             return np.array([]), []
 
-        # 编码所有问答对的combined文本
+        # Encode all Q&A pairs' combined text
         combined_texts = [qa["combined"] for qa in qa_pairs]
         all_embeddings = self.sbert.encode(combined_texts, convert_to_numpy=True)
 
@@ -136,19 +136,19 @@ class ContextAwareDialogueClusterer:
         for i in range(n):
             emb_curr = all_embeddings[i]
 
-            # 第一个问答对，权重全给当前
+            # First Q&A pair, give all weight to current
             if i == 0:
                 context_emb = emb_curr
             else:
-                # 计算历史权重
+                # Compute history weights
                 n_history = i
                 history_weight = 1.0 - self.current_weight
                 history_weights = self._compute_history_weights(n_history, history_weight)
 
-                # 加权融合：当前 + 历史
+                # Weighted fusion: current + history
                 context_emb = self.current_weight * emb_curr
 
-                # 从最近到最远累加历史
+                # Accumulate history from most recent to oldest
                 for j in range(n_history):
                     hist_idx = i - j - 1  # i-1, i-2, i-3, ...
                     context_emb += history_weights[j] * all_embeddings[hist_idx]
@@ -156,22 +156,22 @@ class ContextAwareDialogueClusterer:
             context_embeddings.append(context_emb)
 
         return np.array(context_embeddings), qa_pairs
-    
+
     def cluster_dialogue(
         self,
         dialogue_list: List[Dict[str, str]]
     ) -> Tuple[np.ndarray, HDBSCAN, np.ndarray, List[Dict[str, str]]]:
         """
-        执行HDBSCAN聚类
+        Execute HDBSCAN clustering
 
         Args:
-            dialogue_list: 对话列表
+            dialogue_list: Dialogue list
 
         Returns:
-            labels: 每个问答对的簇标签，-1表示噪声点
-            clusterer: HDBSCAN聚类器对象
-            embeddings: 上下文感知向量
-            qa_pairs: 配对后的问答对列表
+            labels: Cluster label for each Q&A pair, -1 indicates noise point
+            clusterer: HDBSCAN clusterer object
+            embeddings: Context-aware vectors
+            qa_pairs: List of paired Q&A pairs
         """
         embeddings, qa_pairs = self.encode_with_context(dialogue_list)
 
@@ -187,7 +187,7 @@ class ContextAwareDialogueClusterer:
 
         labels = clusterer.fit_predict(embeddings)
         return labels, clusterer, embeddings, qa_pairs
-    
+
     def extract_representative_texts(
         self,
         qa_pairs: List[Dict[str, str]],
@@ -196,17 +196,17 @@ class ContextAwareDialogueClusterer:
         n_representatives: int = 5
     ) -> Dict[int, List[Dict]]:
         """
-        提取每个簇的代表性问答对（距离簇中心最近的K个）
+        Extract representative Q&A pairs for each cluster (closest K to cluster center)
 
         Args:
-            qa_pairs: 问答对列表
-            embeddings: 上下文感知向量
-            labels: 聚类标签
-            n_representatives: 每个簇选择的代表数量
+            qa_pairs: List of Q&A pairs
+            embeddings: Context-aware vectors
+            labels: Cluster labels
+            n_representatives: Number of representatives to select per cluster
 
         Returns:
             representatives: {cluster_id: [{"index": i, "user": "...", "assistant": "...", "combined": "..."}]}
-                             cluster_id=-1 表示噪声簇
+                             cluster_id=-1 indicates noise cluster
         """
         representatives = {}
         unique_labels = set(labels)
@@ -242,18 +242,18 @@ class ContextAwareDialogueClusterer:
                 ]
 
         return representatives
-    
+
     def get_cluster_dialogues(
         self,
         qa_pairs: List[Dict[str, str]],
         labels: np.ndarray
     ) -> Dict[int, List[Dict[str, str]]]:
         """
-        获取每个簇的完整问答对内容（保持原始顺序）
+        Get complete Q&A pair content for each cluster (maintaining original order)
 
         Args:
-            qa_pairs: 问答对列表
-            labels: 聚类标签
+            qa_pairs: List of Q&A pairs
+            labels: Cluster labels
 
         Returns:
             cluster_dialogues: {cluster_id: [qa_pairs]}
@@ -269,36 +269,36 @@ class ContextAwareDialogueClusterer:
             cluster_dialogues[label].append(qa_pair)
 
         return cluster_dialogues
-    
+
     def process(
         self,
         dialogue_list: List[Dict[str, str]],
         return_details: bool = False
     ) -> Dict:
         """
-        完整聚类流程
+        Complete clustering pipeline
 
-        流程：
-        1. 配对user-assistant为问答对
-        2. 上下文感知编码（只融合上文，权重平方递减）
-        3. HDBSCAN聚类（自动确定簇数，保留噪声点）
-        4. 提取每个簇的代表问答对
-        5. 组织每个簇的完整问答对
+        Process:
+        1. Pair user-assistant into Q&A pairs
+        2. Context-aware encoding (fusing only previous context, weights with quadratic decay)
+        3. HDBSCAN clustering (automatically determine cluster count, preserve noise points)
+        4. Extract representative Q&A pairs for each cluster
+        5. Organize complete Q&A pairs for each cluster
 
         Args:
-            dialogue_list: 原始对话 [{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."}, ...]
-            return_details: 是否返回详细信息
+            dialogue_list: Raw dialogue [{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."}, ...]
+            return_details: Whether to return detailed information
 
         Returns:
             {
-                "labels": 聚类标签 (对应问答对),
-                "qa_pairs": 配对后的问答对列表,
-                "representatives": 代表问答对,
-                "cluster_dialogues": 每个簇的完整问答对,
-                "details": {  # 仅当return_details=True时返回
-                    "n_clusters": 有效簇数量（不含噪声）,
-                    "n_noise_points": 噪声点数量,
-                    "embeddings": 上下文感知向量
+                "labels": Cluster labels (corresponding to Q&A pairs),
+                "qa_pairs": List of paired Q&A pairs,
+                "representatives": Representative Q&A pairs,
+                "cluster_dialogues": Complete Q&A pairs for each cluster,
+                "details": {  # Only returned when return_details=True
+                    "n_clusters": Number of valid clusters (excluding noise),
+                    "n_noise_points": Number of noise points,
+                    "embeddings": Context-aware vectors
                 }
             }
         """

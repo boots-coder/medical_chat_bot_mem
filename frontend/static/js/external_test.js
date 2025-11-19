@@ -1,35 +1,35 @@
 /**
  * External Medical System Test Page
- * 外部医疗系统模拟测试页面逻辑
+ * Test page logic for external medical system simulation
  */
 
 let currentSessionId = null;
 
 /**
- * 填充测试数据
+ * Fill test data
  */
 function fillTestData() {
     const timestamp = Date.now();
     document.getElementById('patient_id').value = `P${timestamp}`;
-    document.getElementById('patient_name').value = '张三';
+    document.getElementById('patient_name').value = 'John Doe';
     document.getElementById('patient_age').value = '45';
     document.getElementById('gender').value = 'male';
-    document.getElementById('doctor_name').value = '李医生';
-    document.getElementById('department').value = '心内科';
+    document.getElementById('doctor_name').value = 'Dr. Smith';
+    document.getElementById('department').value = 'Cardiology';
     document.getElementById('appointment_id').value = `APT${timestamp}`;
 }
 
 /**
- * 创建会话
+ * Create session
  */
 document.getElementById('create-session-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    // 隐藏错误和摘要
+    // Hide error and summary
     hideError();
     document.getElementById('session-summary').classList.add('hidden');
 
-    // 获取表单数据
+    // Get form data
     const formData = {
         patient_id: document.getElementById('patient_id').value,
         patient_name: document.getElementById('patient_name').value,
@@ -40,7 +40,7 @@ document.getElementById('create-session-form').addEventListener('submit', async 
         appointment_id: document.getElementById('appointment_id').value
     };
 
-    console.log('正在创建会话...', formData);
+    console.log('Creating session...', formData);
 
     try {
         const response = await fetch('/api/external/create-session', {
@@ -53,26 +53,26 @@ document.getElementById('create-session-form').addEventListener('submit', async 
 
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.detail || '创建会话失败');
+            throw new Error(error.detail || 'Failed to create session');
         }
 
         const data = await response.json();
-        console.log('会话创建成功:', data);
+        console.log('Session created successfully:', data);
 
-        // 保存会话ID
+        // Save session ID
         currentSessionId = data.session_id;
 
-        // 显示会话信息
+        // Display session info
         displaySessionInfo(data);
 
     } catch (error) {
-        console.error('创建会话失败:', error);
+        console.error('Failed to create session:', error);
         showError(error.message);
     }
 });
 
 /**
- * 显示会话信息
+ * Display session info
  */
 function displaySessionInfo(data) {
     document.getElementById('display-session-id').value = data.session_id;
@@ -80,39 +80,39 @@ function displaySessionInfo(data) {
     document.getElementById('display-token').value = data.url_token;
     document.getElementById('display-expires').value = formatDateTime(data.expires_at);
 
-    // 设置打开聊天链接
+    // Set open chat link
     document.getElementById('open-chat-link').href = data.url;
 
-    // 显示会话信息区域
+    // Show session info area
     document.getElementById('session-info').classList.remove('hidden');
 
-    // 隐藏表单
+    // Hide form
     document.getElementById('create-session-form').parentElement.classList.add('hidden');
 }
 
 /**
- * 复制URL到剪贴板
+ * Copy URL to clipboard
  */
 function copyURL() {
     const urlInput = document.getElementById('display-url');
     urlInput.select();
-    urlInput.setSelectionRange(0, 99999); // 移动设备兼容
+    urlInput.setSelectionRange(0, 99999); // Mobile device compatibility
 
     try {
         document.execCommand('copy');
-        alert('URL已复制到剪贴板！');
+        alert('URL copied to clipboard!');
     } catch (error) {
-        console.error('复制失败:', error);
-        alert('复制失败，请手动复制');
+        console.error('Copy failed:', error);
+        alert('Copy failed, please copy manually');
     }
 }
 
 /**
- * 获取会话摘要
+ * Get session summary
  */
 async function getSummary() {
     if (!currentSessionId) {
-        showError('没有可用的会话ID');
+        showError('No session ID available');
         return;
     }
 
@@ -123,28 +123,28 @@ async function getSummary() {
 
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.detail || '获取摘要失败');
+            throw new Error(error.detail || 'Failed to get summary');
         }
 
         const summary = await response.json();
-        console.log('会话摘要:', summary);
+        console.log('Session summary:', summary);
 
-        // 显示摘要
+        // Display summary
         document.getElementById('summary-content').textContent = JSON.stringify(summary, null, 2);
         document.getElementById('session-summary').classList.remove('hidden');
 
     } catch (error) {
-        console.error('获取摘要失败:', error);
+        console.error('Failed to get summary:', error);
         showError(error.message);
     }
 }
 
 /**
- * 获取长期记忆摘要
+ * Get long-term memory summary
  */
 async function getMemorySummary() {
     if (!currentSessionId) {
-        showError('没有可用的会话ID');
+        showError('No session ID available');
         return;
     }
 
@@ -155,16 +155,16 @@ async function getMemorySummary() {
 
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.detail || '获取长期记忆摘要失败');
+            throw new Error(error.detail || 'Failed to get long-term memory summary');
         }
 
         const memory = await response.json();
-        console.log('长期记忆摘要:', memory);
+        console.log('Long-term memory summary:', memory);
 
-        // 显示格式化的摘要
-        document.getElementById('mem-topic').textContent = memory.session_topic || '无';
-        document.getElementById('mem-narrative').textContent = memory.narrative_summary || '无';
-        document.getElementById('mem-complaint').textContent = memory.main_complaint || '无';
+        // Display formatted summary
+        document.getElementById('mem-topic').textContent = memory.session_topic || 'None';
+        document.getElementById('mem-narrative').textContent = memory.narrative_summary || 'None';
+        document.getElementById('mem-complaint').textContent = memory.main_complaint || 'None';
         document.getElementById('mem-rounds').textContent = memory.dialogue_rounds || 0;
         document.getElementById('mem-entities').textContent = memory.knowledge_graph.entities_count || 0;
         document.getElementById('mem-relations').textContent = memory.knowledge_graph.relationships_count || 0;
@@ -172,20 +172,20 @@ async function getMemorySummary() {
         document.getElementById('memory-summary').classList.remove('hidden');
 
     } catch (error) {
-        console.error('获取长期记忆摘要失败:', error);
+        console.error('Failed to get long-term memory summary:', error);
         showError(error.message);
     }
 }
 
 /**
- * 重置表单
+ * Reset form
  */
 function resetForm() {
-    // 重置所有字段
+    // Reset all fields
     document.getElementById('create-session-form').reset();
     currentSessionId = null;
 
-    // 显示表单，隐藏会话信息和摘要
+    // Show form, hide session info and summary
     document.getElementById('create-session-form').parentElement.classList.remove('hidden');
     document.getElementById('session-info').classList.add('hidden');
     document.getElementById('session-summary').classList.add('hidden');
@@ -195,29 +195,29 @@ function resetForm() {
 }
 
 /**
- * 显示错误信息
+ * Show error message
  */
 function showError(message) {
     document.getElementById('error-text').textContent = message;
     document.getElementById('error-message').classList.remove('hidden');
 
-    // 滚动到错误消息
+    // Scroll to error message
     document.getElementById('error-message').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 /**
- * 隐藏错误信息
+ * Hide error message
  */
 function hideError() {
     document.getElementById('error-message').classList.add('hidden');
 }
 
 /**
- * 格式化日期时间
+ * Format date and time
  */
 function formatDateTime(isoString) {
     const date = new Date(isoString);
-    return date.toLocaleString('zh-CN', {
+    return date.toLocaleString('en-US', {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
@@ -228,13 +228,13 @@ function formatDateTime(isoString) {
 }
 
 /**
- * 页面加载时初始化
+ * Initialize on page load
  */
 window.addEventListener('DOMContentLoaded', () => {
-    console.log('外部医疗系统测试页面已加载');
+    console.log('External medical system test page loaded');
 
-    // 自动填充一些测试数据（仅用于开发）
+    // Auto-fill some test data (for development only)
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        console.log('检测到本地环境，可以使用"填充测试数据"按钮快速测试');
+        console.log('Local environment detected, you can use "Fill Test Data" button for quick testing');
     }
 });

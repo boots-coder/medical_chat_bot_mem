@@ -1,5 +1,5 @@
 """
-数据库管理器：统一管理SQLite、Chroma、Neo4j三个数据库的连接和操作
+Database Manager: Unified management of SQLite, Chroma, and Neo4j database connections and operations
 """
 import sqlite3
 import json
@@ -16,57 +16,57 @@ from backend.core.database_schemas import SQLITE_SCHEMA, NEO4J_SCHEMA, GRAPH_QUE
 
 
 class DatabaseManager:
-    """数据库管理器：管理三个数据库的连接和基本操作"""
+    """Database Manager: Manages connections and basic operations for three databases"""
 
     def __init__(self):
-        """初始化数据库连接"""
+        """Initialize database connections"""
         self.sqlite_conn: Optional[sqlite3.Connection] = None
         self.chroma_client: Optional[chromadb.ClientAPI] = None
         self.chroma_collection: Optional[chromadb.Collection] = None
         self.neo4j_driver: Optional[GraphDatabase.driver] = None
 
-        # 初始化各个数据库
+        # Initialize all databases
         self._init_sqlite()
         self._init_chroma()
         self._init_neo4j()
 
-    # ==================== SQLite 初始化 ====================
+    # ==================== SQLite Initialization ====================
 
     def _init_sqlite(self):
-        """初始化SQLite数据库"""
+        """Initialize SQLite database"""
         try:
-            # 确保数据目录存在
+            # Ensure data directory exists
             db_path = Path(settings.sqlite_db_path)
             db_path.parent.mkdir(parents=True, exist_ok=True)
 
-            # 连接数据库
+            # Connect to database
             self.sqlite_conn = sqlite3.connect(
                 settings.sqlite_db_path,
-                check_same_thread=False,  # 允许多线程访问
+                check_same_thread=False,  # Allow multi-threaded access
                 timeout=10.0
             )
-            self.sqlite_conn.row_factory = sqlite3.Row  # 使用Row对象，可以按列名访问
+            self.sqlite_conn.row_factory = sqlite3.Row  # Use Row objects for column name access
 
-            # 创建表
+            # Create tables
             self.sqlite_conn.executescript(SQLITE_SCHEMA)
             self.sqlite_conn.commit()
 
-            print(f"✓ SQLite 初始化成功: {settings.sqlite_db_path}")
+            print(f"✓ SQLite initialization successful: {settings.sqlite_db_path}")
 
         except Exception as e:
-            print(f"✗ SQLite 初始化失败: {e}")
+            print(f"✗ SQLite initialization failed: {e}")
             raise
 
-    # ==================== Chroma 初始化 ====================
+    # ==================== Chroma Initialization ====================
 
     def _init_chroma(self):
-        """初始化Chroma向量数据库"""
+        """Initialize Chroma vector database"""
         try:
-            # 确保持久化目录存在
+            # Ensure persistence directory exists
             persist_dir = Path(settings.chroma_persist_dir)
             persist_dir.mkdir(parents=True, exist_ok=True)
 
-            # 创建Chroma客户端（持久化模式）
+            # Create Chroma client (persistent mode)
             self.chroma_client = chromadb.PersistentClient(
                 path=str(persist_dir),
                 settings=ChromaSettings(
@@ -75,60 +75,60 @@ class DatabaseManager:
                 )
             )
 
-            # 获取或创建collection
+            # Get or create collection
             self.chroma_collection = self.chroma_client.get_or_create_collection(
                 name="medical_memory",
-                metadata={"description": "医疗对话长期记忆存储"}
+                metadata={"description": "Medical dialogue long-term memory storage"}
             )
 
-            print(f"✓ Chroma 初始化成功: {settings.chroma_persist_dir}")
-            print(f"  Collection: medical_memory, 文档数: {self.chroma_collection.count()}")
+            print(f"✓ Chroma initialization successful: {settings.chroma_persist_dir}")
+            print(f"  Collection: medical_memory, Document count: {self.chroma_collection.count()}")
 
         except Exception as e:
-            print(f"✗ Chroma 初始化失败: {e}")
+            print(f"✗ Chroma initialization failed: {e}")
             raise
 
-    # ==================== Neo4j 初始化 ====================
+    # ==================== Neo4j Initialization ====================
 
     def _init_neo4j(self):
-        """初始化Neo4j图数据库"""
+        """Initialize Neo4j graph database"""
         try:
-            # 创建Neo4j驱动
+            # Create Neo4j driver
             self.neo4j_driver = GraphDatabase.driver(
                 settings.neo4j_uri,
                 auth=(settings.neo4j_user, settings.neo4j_password)
             )
 
-            # 验证连接
+            # Verify connectivity
             self.neo4j_driver.verify_connectivity()
 
-            # 创建约束和索引
+            # Create constraints and indexes
             with self.neo4j_driver.session() as session:
-                # 创建唯一性约束
+                # Create uniqueness constraints
                 for constraint in NEO4J_SCHEMA["constraints"]:
                     try:
                         session.run(constraint)
                     except Exception as e:
-                        # 约束可能已存在，忽略错误
+                        # Constraint may already exist, ignore error
                         pass
 
-                # 创建索引
+                # Create indexes
                 for index in NEO4J_SCHEMA["indexes"]:
                     try:
                         session.run(index)
                     except Exception as e:
-                        # 索引可能已存在，忽略错误
+                        # Index may already exist, ignore error
                         pass
 
-            print(f"✓ Neo4j 初始化成功: {settings.neo4j_uri}")
+            print(f"✓ Neo4j initialization successful: {settings.neo4j_uri}")
 
         except Exception as e:
-            print(f"✗ Neo4j 初始化失败: {e}")
-            print(f"  提示: 请确保Neo4j服务正在运行，用户名密码正确")
-            # Neo4j不是必需的，可以继续运行
+            print(f"✗ Neo4j initialization failed: {e}")
+            print(f"  Hint: Please ensure Neo4j service is running and credentials are correct")
+            # Neo4j is not required, can continue running
             self.neo4j_driver = None
 
-    # ==================== 会话管理（SQLite）====================
+    # ==================== Session Management (SQLite) ====================
 
     def create_session(
         self,
@@ -138,7 +138,7 @@ class DatabaseManager:
         token_expires_at: datetime,
         patient_info: Dict[str, Any]
     ) -> bool:
-        """创建新会话"""
+        """Create a new session"""
         try:
             cursor = self.sqlite_conn.cursor()
             cursor.execute("""
@@ -162,11 +162,11 @@ class DatabaseManager:
             return True
 
         except sqlite3.IntegrityError as e:
-            print(f"创建会话失败（可能已存在）: {e}")
+            print(f"Failed to create session (may already exist): {e}")
             return False
 
     def get_session_by_token(self, url_token: str) -> Optional[Dict]:
-        """通过token获取会话信息"""
+        """Get session information by token"""
         cursor = self.sqlite_conn.cursor()
         cursor.execute("SELECT * FROM sessions WHERE url_token = ?", (url_token,))
         row = cursor.fetchone()
@@ -176,7 +176,7 @@ class DatabaseManager:
         return None
 
     def update_session_activity(self, session_id: str):
-        """更新会话活动时间"""
+        """Update session activity time"""
         cursor = self.sqlite_conn.cursor()
         cursor.execute("""
             UPDATE sessions
@@ -186,7 +186,7 @@ class DatabaseManager:
         self.sqlite_conn.commit()
 
     def end_session(self, session_id: str):
-        """结束会话"""
+        """End a session"""
         cursor = self.sqlite_conn.cursor()
         cursor.execute("""
             UPDATE sessions
@@ -197,7 +197,7 @@ class DatabaseManager:
         self.sqlite_conn.commit()
 
     def get_expired_sessions(self) -> List[Dict]:
-        """获取所有超时的会话"""
+        """Get all expired sessions"""
         cursor = self.sqlite_conn.cursor()
         cursor.execute("""
             SELECT * FROM sessions
@@ -206,7 +206,7 @@ class DatabaseManager:
         """)
         return [dict(row) for row in cursor.fetchall()]
 
-    # ==================== 向量存储（Chroma）====================
+    # ==================== Vector Storage (Chroma) ====================
 
     def store_memory_unit(
         self,
@@ -215,7 +215,7 @@ class DatabaseManager:
         document: str,
         metadata: Dict[str, Any]
     ):
-        """存储记忆单元到向量数据库"""
+        """Store memory unit to vector database"""
         try:
             self.chroma_collection.add(
                 ids=[unit_id],
@@ -223,10 +223,10 @@ class DatabaseManager:
                 documents=[document],
                 metadatas=[metadata]
             )
-            print(f"✓ 向量存储成功: {unit_id}")
+            print(f"✓ Vector storage successful: {unit_id}")
 
         except Exception as e:
-            print(f"✗ 向量存储失败: {e}")
+            print(f"✗ Vector storage failed: {e}")
             raise
 
     def query_memory_by_vector(
@@ -236,13 +236,13 @@ class DatabaseManager:
         n_results: int = 5,
         additional_filters: Optional[Dict] = None
     ) -> Dict:
-        """通过向量相似度查询记忆"""
+        """Query memory by vector similarity"""
         try:
-            # 构建过滤条件
+            # Build filter conditions
             where_filter = {"patient_id": patient_id}
 
             if additional_filters:
-                # 如果有额外过滤条件，使用$and
+                # If additional filters exist, use $and
                 where_filter = {
                     "$and": [
                         {"patient_id": patient_id},
@@ -259,10 +259,10 @@ class DatabaseManager:
             return results
 
         except Exception as e:
-            print(f"✗ 向量查询失败: {e}")
+            print(f"✗ Vector query failed: {e}")
             return {"ids": [[]], "metadatas": [[]], "documents": [[]]}
 
-    # ==================== 图存储（Neo4j）====================
+    # ==================== Graph Storage (Neo4j) ====================
 
     def store_knowledge_graph(
         self,
@@ -271,20 +271,20 @@ class DatabaseManager:
         knowledge_graph: Dict[str, Any],
         timestamp: str
     ):
-        """存储知识图谱到Neo4j"""
+        """Store knowledge graph to Neo4j"""
         if not self.neo4j_driver:
-            print("⚠️  Neo4j未连接，跳过图存储")
+            print("⚠️  Neo4j not connected, skipping graph storage")
             return
 
         try:
             with self.neo4j_driver.session() as session:
-                # 1. 确保患者节点存在
+                # 1. Ensure patient node exists
                 session.run(
                     "MERGE (p:Patient {patient_id: $patient_id})",
                     patient_id=patient_id
                 )
 
-                # 2. 创建实体节点
+                # 2. Create entity nodes
                 for entity in knowledge_graph.get('entities', []):
                     label = entity['type']
                     entity_id = entity['id']
@@ -295,7 +295,7 @@ class DatabaseManager:
                         SET e.name = $name
                     """, id=entity_id, name=name)
 
-                # 3. 创建关系
+                # 3. Create relationships
                 for rel in knowledge_graph.get('relationships', []):
                     subject_id = rel['subject']
                     object_id = rel['object']
@@ -314,11 +314,11 @@ class DatabaseManager:
                     timestamp=timestamp
                     )
 
-            print(f"✓ 知识图谱存储成功: session={session_id}")
+            print(f"✓ Knowledge graph storage successful: session={session_id}")
 
         except Exception as e:
-            print(f"✗ 知识图谱存储失败: {e}")
-            # 图存储失败不影响主流程
+            print(f"✗ Knowledge graph storage failed: {e}")
+            # Graph storage failure doesn't affect main process
 
     def query_graph(
         self,
@@ -326,19 +326,19 @@ class DatabaseManager:
         patient_id: str,
         additional_params: Optional[Dict] = None
     ) -> List[Dict]:
-        """执行图查询"""
+        """Execute graph query"""
         if not self.neo4j_driver:
-            print("⚠️  Neo4j未连接，返回空结果")
+            print("⚠️  Neo4j not connected, returning empty results")
             return []
 
         try:
-            # 获取查询模板
+            # Get query template
             cypher = GRAPH_QUERY_TEMPLATES.get(query_type)
             if not cypher:
-                print(f"✗ 未找到查询模板: {query_type}")
+                print(f"✗ Query template not found: {query_type}")
                 return []
 
-            # 执行查询
+            # Execute query
             params = {"patient_id": patient_id}
             if additional_params:
                 params.update(additional_params)
@@ -350,38 +350,38 @@ class DatabaseManager:
             return records
 
         except Exception as e:
-            print(f"✗ 图查询失败: {e}")
+            print(f"✗ Graph query failed: {e}")
             return []
 
-    # ==================== 清理和关闭 ====================
+    # ==================== Cleanup and Shutdown ====================
 
     def close(self):
-        """关闭所有数据库连接"""
+        """Close all database connections"""
         if self.sqlite_conn:
             self.sqlite_conn.close()
-            print("✓ SQLite 连接已关闭")
+            print("✓ SQLite connection closed")
 
         if self.neo4j_driver:
             self.neo4j_driver.close()
-            print("✓ Neo4j 连接已关闭")
+            print("✓ Neo4j connection closed")
 
-        # Chroma客户端不需要显式关闭
+        # Chroma client doesn't need explicit closing
 
     def __enter__(self):
-        """上下文管理器支持"""
+        """Context manager support"""
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        """上下文管理器退出"""
+        """Context manager exit"""
         self.close()
 
 
-# 全局数据库管理器实例
+# Global database manager instance
 _db_manager: Optional[DatabaseManager] = None
 
 
 def get_db_manager() -> DatabaseManager:
-    """获取全局数据库管理器实例（单例模式）"""
+    """Get global database manager instance (singleton pattern)"""
     global _db_manager
     if _db_manager is None:
         _db_manager = DatabaseManager()
@@ -389,30 +389,30 @@ def get_db_manager() -> DatabaseManager:
 
 
 if __name__ == "__main__":
-    print("=== 数据库管理器测试 ===\n")
+    print("=== Database Manager Test ===\n")
 
-    # 测试初始化
+    # Test initialization
     with DatabaseManager() as db:
-        print("\n数据库初始化完成")
+        print("\nDatabase initialization complete")
 
-        # 测试SQLite
-        print("\n--- 测试SQLite ---")
-        print(f"会话表是否存在: ", end="")
+        # Test SQLite
+        print("\n--- Test SQLite ---")
+        print(f"Sessions table exists: ", end="")
         cursor = db.sqlite_conn.cursor()
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='sessions'")
         print("✓" if cursor.fetchone() else "✗")
 
-        # 测试Chroma
-        print("\n--- 测试Chroma ---")
-        print(f"Collection文档数: {db.chroma_collection.count()}")
+        # Test Chroma
+        print("\n--- Test Chroma ---")
+        print(f"Collection document count: {db.chroma_collection.count()}")
 
-        # 测试Neo4j
-        print("\n--- 测试Neo4j ---")
+        # Test Neo4j
+        print("\n--- Test Neo4j ---")
         if db.neo4j_driver:
             with db.neo4j_driver.session() as session:
                 result = session.run("RETURN 1 AS test")
-                print(f"连接测试: {'✓' if result.single()['test'] == 1 else '✗'}")
+                print(f"Connection test: {'✓' if result.single()['test'] == 1 else '✗'}")
         else:
-            print("Neo4j未连接")
+            print("Neo4j not connected")
 
-    print("\n数据库连接已关闭")
+    print("\nDatabase connections closed")

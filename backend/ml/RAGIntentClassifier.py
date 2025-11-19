@@ -5,238 +5,238 @@ from backend.ml.APIManager import APIManager
 
 class RAGIntentClassifier:
     """
-    RAG意图分类器：判断用户查询是否需要检索长期记忆，并确定查询策略
+    RAG Intent Classifier: Determines if user query requires long-term memory retrieval and query strategy
 
-    功能：
-    1. 判断是否需要RAG检索（need_rag: bool）
-    2. 如果需要RAG，进一步判断查询策略：
-       - 是否需要查询图数据库（graph_db: bool）
-       - 图数据库查询类型（graph_query_type: str）
+    Features:
+    1. Determine if RAG retrieval is needed (need_rag: bool)
+    2. If RAG is needed, further determine query strategy:
+       - Whether graph database query is needed (graph_db: bool)
+       - Graph database query type (graph_query_type: str)
 
-    与ShortTermMemoryManager集成，基于当前query和短期记忆上下文
-    判断是否需要触发跨session的RAG查询
+    Integrates with ShortTermMemoryManager, based on current query and short-term memory context
+    determines if cross-session RAG query needs to be triggered
 
-    前提条件：用户来访次数 > 1（已有历史记录）
+    Prerequisite: User visit count > 1 (has historical records)
     """
 
-    # 图查询类型定义
+    # Graph query type definitions
     GRAPH_QUERY_TYPES = {
         "drug_interaction": {
-            "keywords": ["药物", "一起吃", "冲突", "相互作用", "能不能同时", "会不会影响"],
-            "description": "药物相互作用查询"
+            "keywords": ["medication", "drug", "together", "conflict", "interaction", "simultaneously", "affect"],
+            "description": "Drug interaction query"
         },
         "symptom_disease": {
-            "keywords": ["症状", "是什么病", "可能是", "诊断", "什么原因"],
-            "description": "症状-疾病关联查询"
+            "keywords": ["symptom", "what disease", "possibly", "diagnosis", "what cause"],
+            "description": "Symptom-disease association query"
         },
         "diagnosis_chain": {
-            "keywords": ["病史", "历史", "以前", "诊断过", "治疗过", "记录"],
-            "description": "诊断链查询"
+            "keywords": ["medical history", "history", "before", "previously", "diagnosed", "treated", "record"],
+            "description": "Diagnosis chain query"
         },
         "treatment_history": {
-            "keywords": ["治疗方案", "效果", "复查", "疗效", "好转"],
-            "description": "治疗历史查询"
+            "keywords": ["treatment plan", "effect", "followup", "efficacy", "improvement"],
+            "description": "Treatment history query"
         }
     }
 
     def __init__(self, api_manager: APIManager = None):
         """
-        初始化RAG意图分类器
+        Initialize RAG intent classifier
 
         Args:
-            api_manager: API管理器实例，如果为None则创建默认实例
+            api_manager: API manager instance, creates default instance if None
         """
-        # 初始化API管理器
+        # Initialize API manager
         self.api_manager = api_manager if api_manager else APIManager()
         if not self.api_manager.is_available():
-            print("⚠️ 警告: API不可用，RAG意图分类功能将无法使用")
+            print("⚠️ Warning: API unavailable, RAG intent classification feature will not work")
 
     def _build_system_prompt(self) -> str:
-        """构建RAG意图分类的系统提示词"""
-        return """你是一个专业的RAG意图分类器，专门为医疗对话系统设计。
+        """Build RAG intent classification system prompt"""
+        return """You are a professional RAG intent classifier, specially designed for medical dialogue systems.
 
-你的任务是判断用户的查询是否需要检索**长期记忆**（跨session历史记录）。
+Your task is to determine if the user's query requires retrieval of **long-term memory** (cross-session historical records).
 
-## 背景说明
-- 短期记忆：当前session内的对话上下文（包括历史摘要+当前窗口），始终可用
-- 长期记忆：跨session的历史医疗记录，需要RAG检索，成本较高
-- 系统会向你提供：用户当前查询 + 完整的短期记忆上下文
+## Background
+- Short-term memory: Current session's dialogue context (including historical summary + current window), always available
+- Long-term memory: Cross-session historical medical records, requires RAG retrieval, higher cost
+- System will provide: User's current query + complete short-term memory context
 
-## 分类原则
+## Classification Principles
 
-### 需要RAG检索 (需要长期记忆) - 返回 true
-1. **明确的历史引用**：
-   - "上次医生说的..."、"之前检查的结果..."
-   - "以前也有过..."、"我的病史中..."
-   - "上一次来看病时..."
+### Requires RAG Retrieval (needs long-term memory) - return true
+1. **Explicit historical references**:
+   - "What the doctor said last time...", "Previous examination results..."
+   - "I had this before...", "In my medical history..."
+   - "When I came to see the doctor last time..."
 
-2. **症状对比和趋势**：
-   - "这次和上次的头痛比..."
-   - "比之前严重了/好转了"
-   - "又犯了同样的病"、"老毛病又犯了"
+2. **Symptom comparison and trends**:
+   - "Compared to last time's headache..."
+   - "More severe/better than before"
+   - "Same problem again", "Old problem recurred"
 
-3. **治疗效果跟踪**：
-   - "吃了上次开的药后..."
-   - "按照之前的建议..."
-   - "上次的治疗方案效果..."
+3. **Treatment effect tracking**:
+   - "After taking the medicine prescribed last time..."
+   - "Following previous advice..."
+   - "Effect of last treatment plan..."
 
-4. **慢性病管理询问**：
-   - "我的高血压控制得怎么样"
-   - "糖尿病最近的变化"
-   - "定期复查的结果对比"
+4. **Chronic disease management inquiries**:
+   - "How is my hypertension controlled"
+   - "Recent changes in diabetes"
+   - "Regular checkup result comparison"
 
-### 不需要RAG检索 (短期记忆足够) - 返回 false
-1. **新症状描述**：
-   - 首次提及的症状或感受
-   - 当前的身体状况描述
+### Does Not Require RAG Retrieval (short-term memory sufficient) - return false
+1. **New symptom description**:
+   - First mention of symptom or feeling
+   - Current physical condition description
 
-2. **一般医学咨询**：
-   - 通用疾病知识询问
-   - 药物使用方法
+2. **General medical consultation**:
+   - General disease knowledge inquiry
+   - Medication usage methods
 
-3. **当前对话延续**：
-   - 对刚才提及内容的进一步询问
-   - 短期记忆上下文中已包含足够信息
+3. **Current dialogue continuation**:
+   - Further inquiry about just-mentioned content
+   - Short-term memory context already contains sufficient information
 
-## 关键判断点
-- 如果用户使用"上次"、"之前"、"以前"等时间词汇，且**不是**指当前session内容 → 需要RAG
-- 如果短期记忆上下文中已包含用户询问的相关信息 → 不需要RAG
-- 如果是症状的历史对比或趋势分析 → 需要RAG
+## Key Decision Points
+- If user uses time words like "last time", "before", "previously", and **not** referring to current session content → needs RAG
+- If short-term memory context already contains information related to user's inquiry → no need for RAG
+- If it's historical comparison or trend analysis of symptoms → needs RAG
 
-## 输出格式
-你必须只返回一个JSON对象：
+## Output Format
+You must only return a JSON object:
 ```json
 {
   "need_rag": true/false,
   "confidence": 0.0-1.0,
-  "reason": "简短说明判断依据"
+  "reason": "Brief explanation of decision basis"
 }
 ```
 
-注意：
-- need_rag: true表示需要检索长期记忆，false表示短期记忆足够
-- confidence: 置信度分数 (0.0-1.0)
-- reason: 一句话说明判断的核心依据"""
+Note:
+- need_rag: true means long-term memory retrieval needed, false means short-term memory sufficient
+- confidence: Confidence score (0.0-1.0)
+- reason: One sentence explaining the core basis of the decision"""
 
     def classify_rag_intent(self, user_query: str, short_term_context: str) -> Optional[dict]:
         """
-        分类用户查询的RAG意图
-        
+        Classify RAG intent of user query
+
         Args:
-            user_query: 用户当前的查询内容
-            short_term_context: 短期记忆管理器提供的上下文
-            
+            user_query: User's current query content
+            short_term_context: Context provided by short-term memory manager
+
         Returns:
             {
-                "need_rag": bool,        # 是否需要RAG检索
-                "confidence": float,     # 置信度 0.0-1.0
-                "reason": str           # 判断原因
+                "need_rag": bool,        # Whether RAG retrieval is needed
+                "confidence": float,     # Confidence 0.0-1.0
+                "reason": str           # Reason for decision
             }
-            返回None表示API调用失败
+            Returns None if API call fails
         """
         if not self.api_manager.is_available():
-            print(f"错误: API不可用 - 无法分类: '{user_query}'")
+            print(f"Error: API unavailable - unable to classify: '{user_query}'")
             return None
 
-        # 构建用户提示词
+        # Build user prompt
         if short_term_context.strip():
-            user_prompt = f"""用户当前查询：{user_query}
+            user_prompt = f"""User's current query: {user_query}
 
-短期记忆上下文：
+Short-term memory context:
 {short_term_context}
 
-请根据用户查询和短期记忆上下文，判断是否需要检索长期记忆。"""
+Please determine based on the user's query and short-term memory context whether long-term memory retrieval is needed."""
         else:
-            user_prompt = f"""用户当前查询：{user_query}
+            user_prompt = f"""User's current query: {user_query}
 
-短期记忆上下文：（空，新会话开始）
+Short-term memory context: (empty, new session starting)
 
-请判断是否需要检索长期记忆。"""
-        
-        # 使用API管理器进行调用
+Please determine if long-term memory retrieval is needed."""
+
+        # Use API manager for the call
         result = self.api_manager.call_json_completion(
             system_prompt=self._build_system_prompt(),
             user_prompt=user_prompt,
-            temperature=0.1,  # 保证分类一致性
+            temperature=0.1,  # Ensure classification consistency
             max_tokens=200
         )
-        
+
         if not result:
-            print(f"RAG意图分类API调用失败")
+            print(f"RAG intent classification API call failed")
             return None
-        
-        # 验证返回格式
+
+        # Validate return format
         required_keys = ["need_rag", "confidence", "reason"]
         if not all(key in result for key in required_keys):
-            print(f"警告: API返回格式不完整: {result}")
+            print(f"Warning: API return format incomplete: {result}")
             return None
-        
-        # 验证数据类型
+
+        # Validate data types
         if not isinstance(result["need_rag"], bool):
-            print(f"警告: need_rag 不是布尔值: {result['need_rag']}")
+            print(f"Warning: need_rag is not boolean: {result['need_rag']}")
             return None
-            
+
         if not isinstance(result["confidence"], (int, float)) or not (0 <= result["confidence"] <= 1):
-            print(f"警告: confidence 不在 0-1 范围内: {result['confidence']}")
+            print(f"Warning: confidence not in 0-1 range: {result['confidence']}")
             return None
-        
+
         return result
 
     def quick_check(self, user_query: str, short_term_context: str = "") -> bool:
         """
-        快速检查是否需要RAG（简化版本，仅返回True/False）
+        Quick check if RAG is needed (simplified version, only returns True/False)
 
         Args:
-            user_query: 用户查询
-            short_term_context: 短期记忆上下文
+            user_query: User query
+            short_term_context: Short-term memory context
 
         Returns:
-            True: 需要RAG检索, False: 不需要RAG检索或API调用失败
+            True: RAG retrieval needed, False: No need for RAG retrieval or API call failed
         """
         result = self.classify_rag_intent(user_query, short_term_context)
         return result["need_rag"] if result else False
 
     def classify_query_strategy(self, user_query: str) -> dict:
         """
-        基于规则的查询策略分类（不调用LLM，快速判断）
+        Rule-based query strategy classification (no LLM call, fast decision)
 
-        判断是否需要查询图数据库，以及使用什么类型的图查询
+        Determine if graph database query is needed and what type of graph query to use
 
         Args:
-            user_query: 用户查询内容
+            user_query: User query content
 
         Returns:
             {
-                "vector_db": True,           # 总是使用向量数据库
-                "graph_db": bool,            # 是否需要图数据库
-                "graph_query_type": str|None # 图查询类型
+                "vector_db": True,           # Always use vector database
+                "graph_db": bool,            # Whether graph database is needed
+                "graph_query_type": str|None # Graph query type
             }
         """
         query_lower = user_query.lower()
 
-        # 默认策略：只用向量检索
+        # Default strategy: only use vector retrieval
         strategy = {
             "vector_db": True,
             "graph_db": False,
             "graph_query_type": None
         }
 
-        # 检查是否匹配图查询模式
+        # Check if matches graph query pattern
         for query_type, config in self.GRAPH_QUERY_TYPES.items():
             if any(keyword in query_lower for keyword in config["keywords"]):
                 strategy["graph_db"] = True
                 strategy["graph_query_type"] = query_type
-                break  # 匹配到第一个就停止
+                break  # Stop at first match
 
         return strategy
 
     def classify_with_strategy(self, user_query: str, short_term_context: str) -> Optional[dict]:
         """
-        完整的RAG意图分类 + 查询策略判断
+        Complete RAG intent classification + query strategy determination
 
         Args:
-            user_query: 用户当前的查询内容
-            short_term_context: 短期记忆管理器提供的上下文
+            user_query: User's current query content
+            short_term_context: Context provided by short-term memory manager
 
         Returns:
             {
@@ -249,166 +249,166 @@ class RAGIntentClassifier:
                     "graph_query_type": str|None
                 }
             }
-            返回None表示API调用失败
+            Returns None if API call fails
         """
-        # 步骤1: RAG意图分类（LLM调用）
+        # Step 1: RAG intent classification (LLM call)
         rag_result = self.classify_rag_intent(user_query, short_term_context)
 
         if not rag_result:
             return None
 
-        # 步骤2: 如果需要RAG，进行查询策略分类（基于规则）
+        # Step 2: If RAG is needed, perform query strategy classification (rule-based)
         if rag_result["need_rag"]:
             strategy = self.classify_query_strategy(user_query)
         else:
-            # 不需要RAG，策略无意义
+            # No need for RAG, strategy is meaningless
             strategy = {
                 "vector_db": False,
                 "graph_db": False,
                 "graph_query_type": None
             }
 
-        # 合并结果
+        # Merge results
         rag_result["query_strategy"] = strategy
         return rag_result
 
 
-# 单元测试
+# Unit tests
 def test_rag_intent_classifier():
-    """RAG意图分类器单元测试（与短期记忆管理器集成）"""
+    """RAG intent classifier unit test (integrated with short-term memory manager)"""
     print("="*60)
-    print("RAG意图分类器单元测试")
+    print("RAG Intent Classifier Unit Test")
     print("="*60)
-    
-    classifier = RAGIntentClassifier()
-    
-    # 测试用例1：需要RAG - 历史症状对比
-    print("\n【测试用例1 - 需要RAG】")
-    print("场景：用户在讨论当前头痛时，提到了历史对比")
-    print("-" * 50)
-    
-    short_context_1 = """历史摘要：用户主诉头痛三天，太阳穴位置阵发性疼痛，伴有恶心。诊断可能为偏头痛，建议服用布洛芬。
 
-当前对话：
-用户：我按照您的建议吃了布洛芬，感觉好一些了
-助手：很好，症状有缓解是好现象。请继续观察"""
-    
-    query_1 = "这次的头痛和我上次来看的时候比起来，是不是严重一些？"
-    
+    classifier = RAGIntentClassifier()
+
+    # Test case 1: Requires RAG - historical symptom comparison
+    print("\n【Test Case 1 - Requires RAG】")
+    print("Scenario: User mentions historical comparison while discussing current headache")
+    print("-" * 50)
+
+    short_context_1 = """Historical summary: User complained of headache for three days, intermittent pain in temple area, with nausea. Possible diagnosis of migraine, recommended ibuprofen.
+
+Current dialogue:
+User: I took ibuprofen as you suggested, feeling better
+Assistant: Good, symptom relief is a good sign. Please continue to observe"""
+
+    query_1 = "Is this headache more severe compared to when I came last time?"
+
     result_1 = classifier.classify_rag_intent(query_1, short_context_1)
     if result_1:
         status = "✓" if result_1["need_rag"] else "✗"
-        print(f"{status} 查询: {query_1}")
-        print(f"   结果: need_rag={result_1['need_rag']}, confidence={result_1['confidence']:.2f}")
-        print(f"   原因: {result_1['reason']}")
-        print(f"   上下文: {short_context_1[:100]}...")
-    
-    # 测试用例2：不需要RAG - 当前session内容充足
-    print("\n【测试用例2 - 不需要RAG】")  
-    print("场景：用户询问的内容在短期记忆中已包含")
+        print(f"{status} Query: {query_1}")
+        print(f"   Result: need_rag={result_1['need_rag']}, confidence={result_1['confidence']:.2f}")
+        print(f"   Reason: {result_1['reason']}")
+        print(f"   Context: {short_context_1[:100]}...")
+
+    # Test case 2: Does not require RAG - current session content sufficient
+    print("\n【Test Case 2 - Does Not Require RAG】")
+    print("Scenario: User's inquiry is already contained in short-term memory")
     print("-" * 50)
-    
-    short_context_2 = """当前对话：
-用户：我胃痛，想吃点药
-助手：建议您服用奥美拉唑，饭前半小时服用，一天一次
-用户：好的，谢谢医生"""
-    
-    query_2 = "刚才您说的奥美拉唑，我需要吃多久？"
-    
+
+    short_context_2 = """Current dialogue:
+User: I have stomach pain, want to take some medicine
+Assistant: I recommend you take omeprazole, half an hour before meals, once a day
+User: Okay, thank you doctor"""
+
+    query_2 = "How long should I take the omeprazole you just mentioned?"
+
     result_2 = classifier.classify_rag_intent(query_2, short_context_2)
     if result_2:
         status = "✓" if not result_2["need_rag"] else "✗"
-        print(f"{status} 查询: {query_2}")
-        print(f"   结果: need_rag={result_2['need_rag']}, confidence={result_2['confidence']:.2f}")
-        print(f"   原因: {result_2['reason']}")
-        print(f"   上下文: {short_context_2}")
-    
-    # 测试用例3：边界情况 - 空上下文但提及历史
-    print("\n【测试用例3 - 边界情况：空上下文但提及历史】")
+        print(f"{status} Query: {query_2}")
+        print(f"   Result: need_rag={result_2['need_rag']}, confidence={result_2['confidence']:.2f}")
+        print(f"   Reason: {result_2['reason']}")
+        print(f"   Context: {short_context_2}")
+
+    # Test case 3: Edge case - empty context but mentions history
+    print("\n【Test Case 3 - Edge Case: Empty Context But Mentions History】")
     print("-" * 50)
-    
-    query_3 = "上次医生给我开的高血压药还能继续吃吗？"
+
+    query_3 = "Can I continue taking the hypertension medicine the doctor prescribed last time?"
     short_context_3 = ""
-    
+
     result_3 = classifier.classify_rag_intent(query_3, short_context_3)
     if result_3:
         status = "✓" if result_3["need_rag"] else "✗"
-        print(f"{status} 查询: {query_3}")
-        print(f"   结果: need_rag={result_3['need_rag']}, confidence={result_3['confidence']:.2f}")
-        print(f"   原因: {result_3['reason']}")
-    
+        print(f"{status} Query: {query_3}")
+        print(f"   Result: need_rag={result_3['need_rag']}, confidence={result_3['confidence']:.2f}")
+        print(f"   Reason: {result_3['reason']}")
+
     print("\n" + "="*60)
-    print("测试完成")
+    print("Test Complete")
     print("="*60)
 
 
 def test_query_strategy():
-    """测试查询策略分类功能"""
+    """Test query strategy classification feature"""
     print("="*60)
-    print("查询策略分类测试")
+    print("Query Strategy Classification Test")
     print("="*60)
 
     classifier = RAGIntentClassifier()
 
     test_cases = [
-        ("我现在吃的降压药和止痛药会不会有冲突？", "drug_interaction"),
-        ("这些症状可能是什么病？", "symptom_disease"),
-        ("我的糖尿病治疗历史记录", "diagnosis_chain"),
-        ("上次的治疗方案效果怎么样？", "treatment_history"),
-        ("我头痛应该吃什么药？", None),  # 不需要图查询
+        ("Will my current blood pressure medication conflict with pain medication?", "drug_interaction"),
+        ("What disease might these symptoms indicate?", "symptom_disease"),
+        ("My diabetes treatment history records", "diagnosis_chain"),
+        ("How was the effect of last treatment plan?", "treatment_history"),
+        ("What medicine should I take for my headache?", None),  # No graph query needed
     ]
 
     for query, expected_type in test_cases:
         strategy = classifier.classify_query_strategy(query)
-        print(f"\n查询: {query}")
-        print(f"  向量DB: {strategy['vector_db']}")
-        print(f"  图DB: {strategy['graph_db']}")
-        print(f"  图查询类型: {strategy['graph_query_type']}")
+        print(f"\nQuery: {query}")
+        print(f"  Vector DB: {strategy['vector_db']}")
+        print(f"  Graph DB: {strategy['graph_db']}")
+        print(f"  Graph Query Type: {strategy['graph_query_type']}")
 
         if expected_type:
             status = "✓" if strategy['graph_query_type'] == expected_type else "✗"
-            print(f"  {status} 预期类型: {expected_type}")
+            print(f"  {status} Expected Type: {expected_type}")
 
     print("\n" + "="*60)
-    print("策略测试完成")
+    print("Strategy Test Complete")
     print("="*60)
 
 
 def test_classify_with_strategy():
-    """测试完整的分类流程（意图 + 策略）"""
+    """Test complete classification flow (intent + strategy)"""
     print("="*60)
-    print("完整分类流程测试（意图 + 策略）")
+    print("Complete Classification Flow Test (Intent + Strategy)")
     print("="*60)
 
     classifier = RAGIntentClassifier()
 
-    # 测试场景：需要RAG且需要图查询
-    short_context = """历史摘要：患者有高血压病史，正在服用降压药。
+    # Test scenario: Requires RAG and requires graph query
+    short_context = """Historical summary: Patient has history of hypertension, currently taking antihypertensive medication.
 
-当前对话：
-用户：我最近头痛很厉害
-助手：您的头痛可能与血压有关，建议监测血压"""
+Current dialogue:
+User: I've been having severe headaches lately
+Assistant: Your headache may be related to blood pressure, recommend monitoring blood pressure"""
 
-    query = "我现在的降压药能和布洛芬一起吃吗？"
+    query = "Can I take ibuprofen together with my current blood pressure medication?"
 
-    print(f"\n查询: {query}")
-    print(f"短期上下文: {short_context[:50]}...")
+    print(f"\nQuery: {query}")
+    print(f"Short-term context: {short_context[:50]}...")
 
     result = classifier.classify_with_strategy(query, short_context)
 
     if result:
-        print(f"\n【RAG意图】")
+        print(f"\n【RAG Intent】")
         print(f"  need_rag: {result['need_rag']}")
         print(f"  confidence: {result['confidence']:.2f}")
         print(f"  reason: {result['reason']}")
 
-        print(f"\n【查询策略】")
-        print(f"  向量DB: {result['query_strategy']['vector_db']}")
-        print(f"  图DB: {result['query_strategy']['graph_db']}")
-        print(f"  图查询类型: {result['query_strategy']['graph_query_type']}")
+        print(f"\n【Query Strategy】")
+        print(f"  Vector DB: {result['query_strategy']['vector_db']}")
+        print(f"  Graph DB: {result['query_strategy']['graph_db']}")
+        print(f"  Graph Query Type: {result['query_strategy']['graph_query_type']}")
 
     print("\n" + "="*60)
-    print("完整测试完成")
+    print("Complete Test Finished")
     print("="*60)
 
 

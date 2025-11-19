@@ -1,13 +1,13 @@
 """
-项目配置管理
-使用 pydantic-settings 从环境变量加载配置
+Project Configuration Management
+Uses pydantic-settings to load configuration from environment variables
 """
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import List
 
 
 class Settings(BaseSettings):
-    """应用配置"""
+    """Application configuration"""
 
     # API Configuration
     api_provider: str = "ark"
@@ -56,15 +56,15 @@ class Settings(BaseSettings):
 
     @property
     def allowed_origins_list(self) -> List[str]:
-        """将逗号分隔的origins转换为列表"""
+        """Convert comma-separated origins to list"""
         return [origin.strip() for origin in self.allowed_origins.split(",")]
 
 
-# 全局配置实例
+# Global configuration instance
 settings = Settings()
 
 
-# 用于测试的配置验证
+# Configuration validation for testing
 if __name__ == "__main__":
     print("=== Configuration Loaded ===")
     print(f"API Provider: {settings.api_provider}")

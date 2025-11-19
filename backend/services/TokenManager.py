@@ -1,6 +1,6 @@
 """
-Token管理器：生成和验证JWT token
-用于创建安全的一次性会话URL
+Token Manager: Generate and verify JWT tokens
+Used to create secure one-time session URLs
 """
 import secrets
 from datetime import datetime, timedelta
@@ -10,10 +10,10 @@ from backend.core.config import settings
 
 
 class TokenManager:
-    """Token管理器：生成和验证JWT token"""
+    """Token Manager: Generate and verify JWT tokens"""
 
     def __init__(self):
-        """初始化Token管理器"""
+        """Initialize Token Manager"""
         self.secret_key = settings.jwt_secret_key
         self.algorithm = settings.jwt_algorithm
         self.expire_minutes = settings.token_expire_minutes
@@ -25,30 +25,30 @@ class TokenManager:
         patient_info: Dict[str, Any]
     ) -> tuple[str, datetime]:
         """
-        生成URL token（JWT格式）
+        Generate URL token (JWT format)
 
         Args:
-            session_id: 会话ID
-            patient_id: 患者ID
-            patient_info: 患者信息（从外部医疗系统获取）
+            session_id: Session ID
+            patient_id: Patient ID
+            patient_info: Patient information (from external medical system)
 
         Returns:
-            (token字符串, 过期时间)
+            (token string, expiration time)
         """
-        # 计算过期时间
+        # Calculate expiration time
         expires_at = datetime.utcnow() + timedelta(minutes=self.expire_minutes)
 
-        # 构建JWT payload
+        # Build JWT payload
         payload = {
             "session_id": session_id,
             "patient_id": patient_id,
             "patient_info": patient_info,
             "exp": expires_at,
             "iat": datetime.utcnow(),
-            "jti": secrets.token_urlsafe(16)  # JWT ID，防止重放攻击
+            "jti": secrets.token_urlsafe(16)  # JWT ID, prevents replay attacks
         }
 
-        # 生成JWT token
+        # Generate JWT token
         token = jwt.encode(
             payload,
             self.secret_key,
@@ -59,13 +59,13 @@ class TokenManager:
 
     def verify_token(self, token: str) -> Optional[Dict[str, Any]]:
         """
-        验证token并返回payload
+        Verify token and return payload
 
         Args:
-            token: JWT token字符串
+            token: JWT token string
 
         Returns:
-            解码后的payload，如果验证失败返回None
+            Decoded payload, returns None if verification fails
         """
         try:
             payload = jwt.decode(
@@ -76,19 +76,19 @@ class TokenManager:
             return payload
 
         except jwt.ExpiredSignatureError:
-            print("Token已过期")
+            print("Token has expired")
             return None
 
         except jwt.InvalidTokenError as e:
-            print(f"无效的Token: {e}")
+            print(f"Invalid token: {e}")
             return None
 
     def generate_session_id(self) -> str:
         """
-        生成唯一的session ID
+        Generate unique session ID
 
         Returns:
-            session_id字符串
+            session_id string
         """
         timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S")
         random_part = secrets.token_urlsafe(8)
@@ -96,13 +96,13 @@ class TokenManager:
 
     def is_token_expired(self, token: str) -> bool:
         """
-        检查token是否过期（不验证签名）
+        Check if token is expired (without verifying signature)
 
         Args:
-            token: JWT token字符串
+            token: JWT token string
 
         Returns:
-            True表示已过期，False表示未过期
+            True if expired, False if not expired
         """
         try:
             payload = jwt.decode(
@@ -119,35 +119,35 @@ class TokenManager:
             return True
 
 
-# 全局Token管理器实例
+# Global Token Manager instance
 _token_manager: Optional[TokenManager] = None
 
 
 def get_token_manager() -> TokenManager:
-    """获取全局Token管理器实例（单例模式）"""
+    """Get global Token Manager instance (singleton pattern)"""
     global _token_manager
     if _token_manager is None:
         _token_manager = TokenManager()
     return _token_manager
 
 
-# 单元测试
+# Unit tests
 if __name__ == "__main__":
-    print("=== Token管理器测试 ===\n")
+    print("=== Token Manager Test ===\n")
 
     tm = TokenManager()
 
-    # 测试1: 生成token
-    print("【测试1 - 生成Token】")
+    # Test 1: Generate token
+    print("【Test 1 - Generate Token】")
     session_id = tm.generate_session_id()
-    print(f"生成的session_id: {session_id}")
+    print(f"Generated session_id: {session_id}")
 
     patient_info = {
-        "patient_name": "张三",
+        "patient_name": "John Doe",
         "patient_age": 45,
         "gender": "male",
-        "doctor_name": "李医生",
-        "department": "心内科"
+        "doctor_name": "Dr. Smith",
+        "department": "Cardiology"
     }
 
     token, expires_at = tm.generate_url_token(
@@ -156,29 +156,29 @@ if __name__ == "__main__":
         patient_info=patient_info
     )
 
-    print(f"生成的Token: {token[:50]}...")
-    print(f"过期时间: {expires_at}")
+    print(f"Generated Token: {token[:50]}...")
+    print(f"Expiration time: {expires_at}")
 
-    # 测试2: 验证token
-    print("\n【测试2 - 验证Token】")
+    # Test 2: Verify token
+    print("\n【Test 2 - Verify Token】")
     payload = tm.verify_token(token)
     if payload:
-        print("✓ Token验证成功")
+        print("✓ Token verification successful")
         print(f"  session_id: {payload['session_id']}")
         print(f"  patient_id: {payload['patient_id']}")
         print(f"  patient_name: {payload['patient_info']['patient_name']}")
     else:
-        print("✗ Token验证失败")
+        print("✗ Token verification failed")
 
-    # 测试3: 验证无效token
-    print("\n【测试3 - 验证无效Token】")
+    # Test 3: Verify invalid token
+    print("\n【Test 3 - Verify Invalid Token】")
     invalid_token = "invalid.token.here"
     payload = tm.verify_token(invalid_token)
-    print(f"无效Token验证结果: {'✗ 正确拒绝' if payload is None else '✓ 错误接受'}")
+    print(f"Invalid token verification result: {'✗ Correctly rejected' if payload is None else '✓ Incorrectly accepted'}")
 
-    # 测试4: 检查过期
-    print("\n【测试4 - 检查Token是否过期】")
+    # Test 4: Check expiration
+    print("\n【Test 4 - Check Token Expiration】")
     is_expired = tm.is_token_expired(token)
-    print(f"Token是否过期: {'是' if is_expired else '否'}")
+    print(f"Is token expired: {'Yes' if is_expired else 'No'}")
 
-    print("\n测试完成")
+    print("\nTest complete")

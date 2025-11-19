@@ -1,25 +1,25 @@
 """
-数据库Schema定义
-包含SQLite、Chroma、Neo4j三个数据库的结构定义
+Database Schema Definitions
+Contains structure definitions for SQLite, Chroma, and Neo4j databases
 """
 
 # ==================== SQLite Schema ====================
 
 SQLITE_SCHEMA = """
--- 会话管理表（仅存储临时会话状态）
+-- Session management table (stores only temporary session state)
 CREATE TABLE IF NOT EXISTS sessions (
     session_id TEXT PRIMARY KEY,
     patient_id TEXT NOT NULL,
     url_token TEXT UNIQUE NOT NULL,
     token_expires_at TIMESTAMP NOT NULL,
 
-    -- 会话状态
+    -- Session status
     status TEXT DEFAULT 'active' CHECK(status IN ('active', 'ended', 'expired')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_activity_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     ended_at TIMESTAMP,
 
-    -- 外部医疗系统提供的临时信息
+    -- Temporary information provided by external medical system
     patient_name TEXT,
     patient_age INTEGER,
     gender TEXT,
@@ -37,48 +37,48 @@ CREATE INDEX IF NOT EXISTS idx_sessions_expires ON sessions(token_expires_at);
 # ==================== Chroma Metadata Schema ====================
 
 CHROMA_METADATA_SCHEMA = {
-    "description": "向量数据库metadata结构定义",
+    "description": "Vector database metadata structure definition",
     "fields": {
-        # 核心标识字段
+        # Core identifier fields
         "patient_id": {
             "type": "str",
             "required": True,
-            "description": "患者ID，用于过滤查询"
+            "description": "Patient ID, used for filtering queries"
         },
         "unit_type": {
             "type": "str",
             "required": True,
             "enum": ["session", "cluster"],
-            "description": "记忆单元类型"
+            "description": "Memory unit type"
         },
         "session_id": {
             "type": "str",
             "required": True,
-            "description": "原始会话ID"
+            "description": "Original session ID"
         },
         "cluster_id": {
             "type": "int",
             "required": False,
-            "description": "聚类簇ID（仅cluster类型有值）"
+            "description": "Cluster ID (only for cluster type)"
         },
 
-        # 时间字段
+        # Time fields
         "created_at": {
-            "type": "str",  # ISO 8601格式
+            "type": "str",  # ISO 8601 format
             "required": True,
-            "description": "创建时间"
+            "description": "Creation time"
         },
         "end_time": {
             "type": "str",
             "required": True,
-            "description": "对话结束时间"
+            "description": "Dialogue end time"
         },
 
-        # 完整分析结果（JSON字符串）
+        # Complete analysis results (JSON string)
         "analysis_json": {
-            "type": "str",  # JSON.dumps()的结果
+            "type": "str",  # Result of JSON.dumps()
             "required": True,
-            "description": "DialogueAnalyzer的完整输出",
+            "description": "Complete output from DialogueAnalyzer",
             "contains": {
                 "session_topic": "str",
                 "narrative_summary": "str",
@@ -99,14 +99,14 @@ CHROMA_METADATA_SCHEMA = {
         "cluster_id": None,
         "created_at": "2025-11-19T10:00:00Z",
         "end_time": "2025-11-19T10:15:00Z",
-        "analysis_json": '{"session_topic": "头痛咨询", "narrative_summary": "...", ...}'
+        "analysis_json": '{"session_topic": "Headache consultation", "narrative_summary": "...", ...}'
     }
 }
 
 # ==================== Neo4j Schema ====================
 
 NEO4J_SCHEMA = {
-    "description": "图数据库schema定义",
+    "description": "Graph database schema definition",
 
     "nodes": {
         "Patient": {
@@ -120,7 +120,7 @@ NEO4J_SCHEMA = {
         "Symptom": {
             "label": "Symptom",
             "properties": {
-                "id": {"type": "str", "unique": True, "required": True},  # 格式: S_symptom_name
+                "id": {"type": "str", "unique": True, "required": True},  # Format: S_symptom_name
                 "name": {"type": "str", "required": True}
             },
             "indexes": ["id", "name"]
@@ -129,7 +129,7 @@ NEO4J_SCHEMA = {
         "Disease": {
             "label": "Disease",
             "properties": {
-                "id": {"type": "str", "unique": True, "required": True},  # 格式: D_disease_name
+                "id": {"type": "str", "unique": True, "required": True},  # Format: D_disease_name
                 "name": {"type": "str", "required": True}
             },
             "indexes": ["id", "name"]
@@ -138,7 +138,7 @@ NEO4J_SCHEMA = {
         "Diagnosis": {
             "label": "Diagnosis",
             "properties": {
-                "id": {"type": "str", "unique": True, "required": True},  # 格式: DG_diagnosis_name
+                "id": {"type": "str", "unique": True, "required": True},  # Format: DG_diagnosis_name
                 "name": {"type": "str", "required": True}
             },
             "indexes": ["id", "name"]
@@ -147,7 +147,7 @@ NEO4J_SCHEMA = {
         "Drug": {
             "label": "Drug",
             "properties": {
-                "id": {"type": "str", "unique": True, "required": True},  # 格式: DR_drug_name
+                "id": {"type": "str", "unique": True, "required": True},  # Format: DR_drug_name
                 "name": {"type": "str", "required": True}
             },
             "indexes": ["id", "name"]
@@ -156,7 +156,7 @@ NEO4J_SCHEMA = {
         "Examination": {
             "label": "Examination",
             "properties": {
-                "id": {"type": "str", "unique": True, "required": True},  # 格式: E_exam_name
+                "id": {"type": "str", "unique": True, "required": True},  # Format: E_exam_name
                 "name": {"type": "str", "required": True}
             },
             "indexes": ["id", "name"]
@@ -165,7 +165,7 @@ NEO4J_SCHEMA = {
         "Treatment": {
             "label": "Treatment",
             "properties": {
-                "id": {"type": "str", "unique": True, "required": True},  # 格式: T_treatment_name
+                "id": {"type": "str", "unique": True, "required": True},  # Format: T_treatment_name
                 "name": {"type": "str", "required": True}
             },
             "indexes": ["id", "name"]
@@ -273,11 +273,11 @@ NEO4J_SCHEMA = {
     ]
 }
 
-# ==================== 图查询模板 ====================
+# ==================== Graph Query Templates ====================
 
 GRAPH_QUERY_TEMPLATES = {
     "drug_interaction": """
-        // 查询患者当前用药的相互作用
+        // Query patient's current medication interactions
         MATCH (p:Patient {patient_id: $patient_id})-[:PRESCRIBED]->(dr1:Drug)
         MATCH (dr1)-[i:INTERACTS_WITH]->(dr2:Drug)
         RETURN dr1.name AS drug1,
@@ -294,7 +294,7 @@ GRAPH_QUERY_TEMPLATES = {
     """,
 
     "symptom_disease": """
-        // 查询患者症状可能关联的疾病
+        // Query diseases potentially related to patient's symptoms
         MATCH (p:Patient {patient_id: $patient_id})-[:HAS_SYMPTOM]->(s:Symptom)
         MATCH (s)<-[:MAY_CAUSE]-(d:Disease)
         RETURN s.name AS symptom,
@@ -305,7 +305,7 @@ GRAPH_QUERY_TEMPLATES = {
     """,
 
     "diagnosis_chain": """
-        // 查询患者的诊断链（症状→诊断→治疗）
+        // Query patient's diagnosis chain (symptom→diagnosis→treatment)
         MATCH path = (p:Patient {patient_id: $patient_id})-[:HAS_SYMPTOM]->(s:Symptom)
                      -[:MAY_CAUSE]->(d:Disease)
                      <-[:IS_SUGGESTED_FOR]-(dg:Diagnosis)
@@ -315,7 +315,7 @@ GRAPH_QUERY_TEMPLATES = {
     """,
 
     "treatment_history": """
-        // 查询患者的治疗历史
+        // Query patient's treatment history
         MATCH (p:Patient {patient_id: $patient_id})-[r:PRESCRIBED]->(dr:Drug)
         RETURN dr.name AS drug,
                r.prescribed_at AS prescribed_at,
@@ -325,7 +325,7 @@ GRAPH_QUERY_TEMPLATES = {
     """,
 
     "patient_medical_graph": """
-        // 获取患者的完整医疗图谱（1度关系）
+        // Get patient's complete medical graph (1-degree relationships)
         MATCH (p:Patient {patient_id: $patient_id})-[r]->(n)
         RETURN p, r, n
         LIMIT 100
@@ -334,20 +334,20 @@ GRAPH_QUERY_TEMPLATES = {
 
 
 if __name__ == "__main__":
-    print("=== 数据库Schema定义 ===\n")
+    print("=== Database Schema Definitions ===\n")
 
     print("1. SQLite Schema:")
     print(SQLITE_SCHEMA)
 
     print("\n2. Chroma Metadata Schema:")
-    print(f"  字段数: {len(CHROMA_METADATA_SCHEMA['fields'])}")
-    print(f"  示例: {CHROMA_METADATA_SCHEMA['example']}")
+    print(f"  Field count: {len(CHROMA_METADATA_SCHEMA['fields'])}")
+    print(f"  Example: {CHROMA_METADATA_SCHEMA['example']}")
 
     print("\n3. Neo4j Schema:")
-    print(f"  节点类型: {len(NEO4J_SCHEMA['nodes'])}")
-    print(f"  关系类型: {len(NEO4J_SCHEMA['relationships'])}")
-    print(f"  约束数量: {len(NEO4J_SCHEMA['constraints'])}")
+    print(f"  Node types: {len(NEO4J_SCHEMA['nodes'])}")
+    print(f"  Relationship types: {len(NEO4J_SCHEMA['relationships'])}")
+    print(f"  Constraint count: {len(NEO4J_SCHEMA['constraints'])}")
 
-    print("\n4. 图查询模板:")
+    print("\n4. Graph Query Templates:")
     for query_type in GRAPH_QUERY_TEMPLATES.keys():
         print(f"  - {query_type}")

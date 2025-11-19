@@ -1,6 +1,6 @@
 """
-FastAPI主应用：医疗咨询系统后端
-提供REST API和WebSocket接口
+FastAPI Main Application: Medical Consultation System Backend
+Provides REST API and WebSocket interfaces
 """
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -24,7 +24,7 @@ from backend.services.MedicalResponseGenerator import MedicalResponseGenerator
 # ==================== Pydantic Models ====================
 
 class CreateSessionRequest(BaseModel):
-    """创建会话请求"""
+    """Create session request"""
     patient_id: str
     patient_name: str
     patient_age: int
@@ -35,7 +35,7 @@ class CreateSessionRequest(BaseModel):
 
 
 class CreateSessionResponse(BaseModel):
-    """创建会话响应"""
+    """Create session response"""
     session_id: str
     url: str
     url_token: str
@@ -43,12 +43,12 @@ class CreateSessionResponse(BaseModel):
 
 
 class ChatMessage(BaseModel):
-    """聊天消息"""
+    """Chat message"""
     message: str
 
 
 class ChatResponse(BaseModel):
-    """聊天响应"""
+    """Chat response"""
     response: str
     session_id: str
     used_short_memory: bool
@@ -58,7 +58,7 @@ class ChatResponse(BaseModel):
 
 
 class SessionSummaryResponse(BaseModel):
-    """会话摘要响应"""
+    """Session summary response"""
     session_id: str
     patient_id: str
     dialogue_turns: int
@@ -70,13 +70,13 @@ class SessionSummaryResponse(BaseModel):
 # ==================== FastAPI Application ====================
 
 app = FastAPI(
-    title="医疗咨询系统API",
-    description="智能医疗对话系统，支持短期记忆、长期记忆和RAG检索",
+    title="Medical Consultation System API",
+    description="Intelligent medical dialogue system with short-term memory, long-term memory, and RAG retrieval",
     version="1.0.0",
     debug=settings.debug
 )
 
-# CORS配置
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.allowed_origins_list,
@@ -85,33 +85,33 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 获取项目根目录
+# Get project root directory
 BASE_DIR = Path(__file__).parent.parent.parent
 
-# 静态文件服务
+# Static file service
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "frontend" / "static")), name="static")
 
-# Jinja2 模板
+# Jinja2 templates
 templates = Jinja2Templates(directory=str(BASE_DIR / "frontend" / "templates"))
 
-# 初始化管理器
+# Initialize managers
 session_manager = get_session_manager()
 memory_storage = get_memory_storage()
 memory_retrieval = get_memory_retrieval()
 response_generator = MedicalResponseGenerator()
 
 
-# ==================== 模拟外部医疗系统API ====================
+# ==================== Simulated External Medical System API ====================
 
 @app.post("/api/external/create-session", response_model=CreateSessionResponse)
 async def external_create_session(request: CreateSessionRequest):
     """
-    外部医疗系统调用此接口创建会话
+    External medical system calls this interface to create a session
 
-    流程：
-    1. 生成session_id和URL token
-    2. 存储到数据库
-    3. 返回URL给外部系统（外部系统通过短信/邮件发送给患者）
+    Process:
+    1. Generate session_id and URL token
+    2. Store in database
+    3. Return URL to external system (external system sends to patient via SMS/email)
     """
     try:
         patient_info = {
@@ -136,28 +136,28 @@ async def external_create_session(request: CreateSessionRequest):
         )
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"创建会话失败: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to create session: {str(e)}")
 
 
-# ==================== 聊天界面入口 ====================
+# ==================== Chat Interface Entry Point ====================
 
 @app.get("/chat/{url_token}")
 async def chat_page(request: Request, url_token: str):
     """
-    患者点击URL后进入的聊天页面
+    Chat page patients enter after clicking URL
 
-    验证token → 返回聊天界面HTML
+    Verify token → Return chat interface HTML
     """
-    # 验证token
+    # Verify token
     session = session_manager.get_session_by_token(url_token)
 
     if not session:
         return HTMLResponse(
-            content="<h1>链接已失效</h1><p>此会话已过期或不存在，请联系医生获取新的链接。</p>",
+            content="<h1>Link Expired</h1><p>This session has expired or does not exist. Please contact your doctor for a new link.</p>",
             status_code=403
         )
 
-    # 使用Jinja2模板渲染聊天界面
+    # Render chat interface using Jinja2 template
     return templates.TemplateResponse("chat.html", {
         "request": request,
         "session_id": session['session_id'],
@@ -168,42 +168,42 @@ async def chat_page(request: Request, url_token: str):
     })
 
 
-# ==================== WebSocket实时对话 ====================
+# ==================== WebSocket Real-time Dialogue ====================
 
 @app.websocket("/ws/{session_id}")
 async def websocket_endpoint(websocket: WebSocket, session_id: str):
     """
-    WebSocket连接：实时对话
+    WebSocket connection: Real-time dialogue
 
-    流程：
-    1. 接收用户消息
-    2. 添加到短期记忆
-    3. RAG检索（如果需要）
-    4. 生成回复
-    5. 发送回复给用户
+    Process:
+    1. Receive user message
+    2. Add to short-term memory
+    3. RAG retrieval (if needed)
+    4. Generate response
+    5. Send response to user
     """
     await websocket.accept()
-    print(f"WebSocket连接建立: {session_id}")
+    print(f"WebSocket connection established: {session_id}")
 
     try:
         while True:
-            # 接收消息
+            # Receive message
             data = await websocket.receive_text()
             message_data = json.loads(data) if isinstance(data, str) else data
 
             if message_data.get('type') == 'user':
                 user_message = message_data['content']
 
-                # 1. 添加到短期记忆
+                # 1. Add to short-term memory
                 session_manager.add_dialogue_turn(session_id, "user", user_message)
 
-                # 2. 获取短期记忆上下文
+                # 2. Get short-term memory context
                 memory = session_manager.get_short_term_memory(session_id)
                 short_term_context = memory.get_context() if memory else ""
 
-                # 3. 获取会话信息
-                # TODO: 需要从session_manager获取patient_id
-                # 临时方案：从数据库查询
+                # 3. Get session information
+                # TODO: Need to get patient_id from session_manager
+                # Temporary solution: query from database
                 from backend.core.DatabaseManager import get_db_manager
                 db = get_db_manager()
                 cursor = db.sqlite_conn.cursor()
@@ -211,7 +211,7 @@ async def websocket_endpoint(websocket: WebSocket, session_id: str):
                 row = cursor.fetchone()
                 patient_id = row[0] if row else None
 
-                # 4. 生成回复
+                # 4. Generate response
                 response_text = await generate_response_async(
                     patient_id=patient_id,
                     user_query=user_message,
@@ -219,17 +219,17 @@ async def websocket_endpoint(websocket: WebSocket, session_id: str):
                     session_id=session_id
                 )
 
-                # 5. 添加到短期记忆
+                # 5. Add to short-term memory
                 session_manager.add_dialogue_turn(session_id, "assistant", response_text)
 
-                # 6. 发送回复
+                # 6. Send response
                 await websocket.send_json({
                     "type": "assistant",
                     "content": response_text
                 })
 
     except WebSocketDisconnect:
-        print(f"WebSocket连接断开: {session_id}")
+        print(f"WebSocket connection disconnected: {session_id}")
 
 
 async def generate_response_async(
@@ -239,11 +239,11 @@ async def generate_response_async(
     session_id: str
 ) -> str:
     """
-    异步生成回复
+    Asynchronously generate response
 
-    整合：短期记忆 + 长期记忆检索 + LLM回复生成
+    Integrate: short-term memory + long-term memory retrieval + LLM response generation
     """
-    # 1. 长期记忆检索
+    # 1. Long-term memory retrieval
     long_term_memory = ""
     if patient_id:
         retrieval_result = memory_retrieval.retrieve(
@@ -256,7 +256,7 @@ async def generate_response_async(
         if retrieval_result['rag_triggered']:
             long_term_memory = retrieval_result['formatted_context']
 
-    # 2. 生成回复
+    # 2. Generate response
     result = response_generator.generate_response(
         user_query=user_query,
         short_term_context=short_term_context,
@@ -266,26 +266,26 @@ async def generate_response_async(
     return result['response']
 
 
-# ==================== 会话管理API ====================
+# ==================== Session Management API ====================
 
 @app.post("/api/session/{session_id}/end")
 async def end_session(session_id: str):
     """
-    结束会话
+    End session
 
-    流程：
-    1. 获取对话历史
-    2. 触发长期记忆存储
-    3. 更新会话状态
+    Process:
+    1. Get dialogue history
+    2. Trigger long-term memory storage
+    3. Update session status
     """
     try:
-        # 1. 获取对话历史
+        # 1. Get dialogue history
         dialogue_history = session_manager.get_dialogue_history(session_id)
 
         if not dialogue_history:
-            raise HTTPException(status_code=404, detail="会话不存在或无对话记录")
+            raise HTTPException(status_code=404, detail="Session does not exist or has no dialogue records")
 
-        # 2. 获取会话信息
+        # 2. Get session information
         from backend.core.DatabaseManager import get_db_manager
         db = get_db_manager()
         cursor = db.sqlite_conn.cursor()
@@ -293,13 +293,13 @@ async def end_session(session_id: str):
         row = cursor.fetchone()
 
         if not row:
-            raise HTTPException(status_code=404, detail="会话不存在")
+            raise HTTPException(status_code=404, detail="Session does not exist")
 
         patient_id = row[0]
         start_time = row[1]
         end_time = datetime.utcnow().isoformat()
 
-        # 3. 存储长期记忆（异步执行，不阻塞）
+        # 3. Store long-term memory (asynchronously, non-blocking)
         asyncio.create_task(store_memory_async(
             session_id=session_id,
             patient_id=patient_id,
@@ -308,13 +308,13 @@ async def end_session(session_id: str):
             end_time=end_time
         ))
 
-        # 4. 结束会话
+        # 4. End session
         session_manager.end_session(session_id, reason='user_request')
 
-        return {"status": "success", "message": "会话已结束"}
+        return {"status": "success", "message": "Session ended"}
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"结束会话失败: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to end session: {str(e)}")
 
 
 async def store_memory_async(
@@ -324,7 +324,7 @@ async def store_memory_async(
     start_time: str,
     end_time: str
 ):
-    """异步存储长期记忆"""
+    """Asynchronously store long-term memory"""
     try:
         memory_storage.store_session_memory(
             session_id=session_id,
@@ -333,17 +333,17 @@ async def store_memory_async(
             start_time=start_time,
             end_time=end_time
         )
-        print(f"✓ 长期记忆存储完成: {session_id}")
+        print(f"✓ Long-term memory storage complete: {session_id}")
     except Exception as e:
-        print(f"✗ 长期记忆存储失败: {e}")
+        print(f"✗ Long-term memory storage failed: {e}")
 
 
 @app.get("/api/session/{session_id}/summary")
 async def get_session_summary(session_id: str):
     """
-    获取会话摘要（供外部医疗系统调用）
+    Get session summary (called by external medical system)
 
-    返回：对话轮数、开始/结束时间、状态
+    Returns: dialogue turns, start/end time, status
     """
     from backend.core.DatabaseManager import get_db_manager
     db = get_db_manager()
@@ -352,7 +352,7 @@ async def get_session_summary(session_id: str):
     row = cursor.fetchone()
 
     if not row:
-        raise HTTPException(status_code=404, detail="会话不存在")
+        raise HTTPException(status_code=404, detail="Session does not exist")
 
     session = dict(row)
 
@@ -372,24 +372,24 @@ async def get_session_summary(session_id: str):
 @app.get("/api/session/{session_id}/memory-summary")
 async def get_session_memory_summary(session_id: str):
     """
-    获取会话的长期记忆摘要
+    Get session's long-term memory summary
 
-    从向量数据库中读取完整的对话分析结果
+    Read complete dialogue analysis results from vector database
     """
     from backend.core.DatabaseManager import get_db_manager
 
     db = get_db_manager()
 
-    # 从 Chroma 查询该会话的长期记忆
+    # Query long-term memory for this session from Chroma
     results = db.chroma_collection.get(
         where={"session_id": session_id},
         include=["metadatas", "documents"]
     )
 
     if not results['ids']:
-        raise HTTPException(status_code=404, detail="未找到该会话的长期记忆")
+        raise HTTPException(status_code=404, detail="Long-term memory not found for this session")
 
-    # 解析第一条记录（通常一个会话只有一条）
+    # Parse first record (typically one record per session)
     metadata = results['metadatas'][0]
     document = results['documents'][0]
     analysis = json.loads(metadata['analysis_json'])
@@ -410,11 +410,11 @@ async def get_session_memory_summary(session_id: str):
     }
 
 
-# ==================== 健康检查 ====================
+# ==================== Health Check ====================
 
 @app.get("/health")
 async def health_check():
-    """健康检查"""
+    """Health check"""
     return {
         "status": "healthy",
         "timestamp": datetime.utcnow().isoformat(),
@@ -424,9 +424,9 @@ async def health_check():
 
 @app.get("/")
 async def root():
-    """根路径"""
+    """Root path"""
     return {
-        "message": "医疗咨询系统API",
+        "message": "Medical Consultation System API",
         "docs": "/docs",
         "health": "/health",
         "test": "/test"
@@ -435,19 +435,19 @@ async def root():
 
 @app.get("/test")
 async def test_page(request: Request):
-    """外部医疗系统测试页面"""
+    """External medical system test page"""
     return templates.TemplateResponse("external_test.html", {"request": request})
 
 
-# ==================== 启动函数 ====================
+# ==================== Startup Function ====================
 
 if __name__ == "__main__":
     import uvicorn
 
     print("="*60)
-    print("医疗咨询系统启动中...")
-    print(f"访问地址: http://{settings.host}:{settings.port}")
-    print(f"API文档: http://{settings.host}:{settings.port}/docs")
+    print("Medical Consultation System starting...")
+    print(f"Access URL: http://{settings.host}:{settings.port}")
+    print(f"API Docs: http://{settings.host}:{settings.port}/docs")
     print("="*60)
 
     uvicorn.run(
