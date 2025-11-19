@@ -1,6 +1,6 @@
 import json
 from typing import Dict, List, Tuple, Optional
-from APIManager import APIManager
+from backend.ml.APIManager import APIManager
 
 class LightweightMedicalClassifier:
     """

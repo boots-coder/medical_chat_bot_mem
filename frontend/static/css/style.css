@@ -1,0 +1,128 @@
+/**
+ * Medical Chat UI Styles
+ * 医疗咨询界面自定义样式
+ */
+
+/* 聊天消息区域滚动条样式 */
+#chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#chat-messages::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+#chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* 消息气泡动画 */
+#chat-messages > div {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 输入框焦点状态 */
+#message-input:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 按钮禁用状态 */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 连接状态指示器 */
+#connection-status {
+    display: flex;
+    align-items: center;
+}
+
+#connection-status::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.text-green-600::before {
+    background-color: #10b981;
+}
+
+.text-yellow-600::before {
+    background-color: #f59e0b;
+    animation: pulse 1.5s infinite;
+}
+
+.text-red-600::before {
+    background-color: #ef4444;
+}
+
+.text-gray-500::before {
+    background-color: #6b7280;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .container {
+        padding: 0.5rem;
+    }
+
+    #chat-messages {
+        height: 70vh;
+    }
+
+    .max-w-xl {
+        max-width: 90%;
+    }
+}
+
+/* 消息内容样式 */
+#chat-messages .inline-block {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* 加载动画 */
+.loading-dots {
+    display: inline-block;
+}
+
+.loading-dots::after {
+    content: '...';
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { content: '.'; }
+    33% { content: '..'; }
+    66% { content: '...'; }
+}

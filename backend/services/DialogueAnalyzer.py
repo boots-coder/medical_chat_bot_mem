@@ -1,6 +1,6 @@
 from typing import List, Dict
 import json
-from APIManager import APIManager
+from backend.ml.APIManager import APIManager
 
 
 class TokenLimitExceeded(Exception):
@@ -69,7 +69,7 @@ class DialogueAnalyzer:
             system_prompt=system_prompt,
             user_prompt=user_prompt,
             temperature=0.1,  # 低温度确保结构化输出的一致性
-            max_tokens=1000
+            max_tokens=3000  # 增加输出长度以容纳完整的知识图谱
         )
         
         if not result:

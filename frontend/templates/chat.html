@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线医疗咨询 - {{ patient_name }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto max-w-4xl p-4">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <!-- 头部信息 -->
+            <div class="border-b pb-4 mb-4">
+                <h1 class="text-2xl font-bold text-gray-800">在线医疗咨询</h1>
+                <p class="text-gray-600 mt-2">
+                    患者: {{ patient_name }} |
+                    医生: {{ doctor_name }} ({{ department }})
+                </p>
+            </div>
+
+            <!-- 聊天消息区域 -->
+            <div id="chat-messages" class="h-96 overflow-y-auto mb-4 p-4 bg-gray-50 rounded">
+                <div class="text-center text-gray-500 text-sm">
+                    欢迎！请描述您的症状或问题
+                </div>
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="flex gap-2">
+                <input
+                    id="message-input"
+                    type="text"
+                    class="flex-1 border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="输入您的问题..."
+                    onkeypress="if(event.key==='Enter') sendMessage()"
+                >
+                <button
+                    onclick="sendMessage()"
+                    class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition"
+                >
+                    发送
+                </button>
+                <button
+                    onclick="endSession()"
+                    class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 transition"
+                >
+                    结束咨询
+                </button>
+            </div>
+
+            <!-- 连接状态指示器 -->
+            <div id="connection-status" class="mt-2 text-sm text-gray-500">
+                <span id="status-text">正在连接...</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sessionId = '{{ session_id }}';
+        const wsPort = {{ ws_port }};
+    </script>
+    <script src="/static/js/chat.js"></script>
+</body>
+</html>

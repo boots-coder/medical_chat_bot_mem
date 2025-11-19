@@ -1,22 +1,48 @@
 import json
 from typing import Optional
-from APIManager import APIManager
+from backend.ml.APIManager import APIManager
 
 
 class RAGIntentClassifier:
     """
-    RAG意图分类器：判断用户查询是否需要检索长期记忆
-    
+    RAG意图分类器：判断用户查询是否需要检索长期记忆，并确定查询策略
+
+    功能：
+    1. 判断是否需要RAG检索（need_rag: bool）
+    2. 如果需要RAG，进一步判断查询策略：
+       - 是否需要查询图数据库（graph_db: bool）
+       - 图数据库查询类型（graph_query_type: str）
+
     与ShortTermMemoryManager集成，基于当前query和短期记忆上下文
     判断是否需要触发跨session的RAG查询
-    
+
     前提条件：用户来访次数 > 1（已有历史记录）
     """
-    
+
+    # 图查询类型定义
+    GRAPH_QUERY_TYPES = {
+        "drug_interaction": {
+            "keywords": ["药物", "一起吃", "冲突", "相互作用", "能不能同时", "会不会影响"],
+            "description": "药物相互作用查询"
+        },
+        "symptom_disease": {
+            "keywords": ["症状", "是什么病", "可能是", "诊断", "什么原因"],
+            "description": "症状-疾病关联查询"
+        },
+        "diagnosis_chain": {
+            "keywords": ["病史", "历史", "以前", "诊断过", "治疗过", "记录"],
+            "description": "诊断链查询"
+        },
+        "treatment_history": {
+            "keywords": ["治疗方案", "效果", "复查", "疗效", "好转"],
+            "description": "治疗历史查询"
+        }
+    }
+
     def __init__(self, api_manager: APIManager = None):
         """
         初始化RAG意图分类器
-        
+
         Args:
             api_manager: API管理器实例，如果为None则创建默认实例
         """
@@ -159,16 +185,92 @@ class RAGIntentClassifier:
     def quick_check(self, user_query: str, short_term_context: str = "") -> bool:
         """
         快速检查是否需要RAG（简化版本，仅返回True/False）
-        
+
         Args:
             user_query: 用户查询
             short_term_context: 短期记忆上下文
-            
+
         Returns:
             True: 需要RAG检索, False: 不需要RAG检索或API调用失败
         """
         result = self.classify_rag_intent(user_query, short_term_context)
         return result["need_rag"] if result else False
+
+    def classify_query_strategy(self, user_query: str) -> dict:
+        """
+        基于规则的查询策略分类（不调用LLM，快速判断）
+
+        判断是否需要查询图数据库，以及使用什么类型的图查询
+
+        Args:
+            user_query: 用户查询内容
+
+        Returns:
+            {
+                "vector_db": True,           # 总是使用向量数据库
+                "graph_db": bool,            # 是否需要图数据库
+                "graph_query_type": str|None # 图查询类型
+            }
+        """
+        query_lower = user_query.lower()
+
+        # 默认策略：只用向量检索
+        strategy = {
+            "vector_db": True,
+            "graph_db": False,
+            "graph_query_type": None
+        }
+
+        # 检查是否匹配图查询模式
+        for query_type, config in self.GRAPH_QUERY_TYPES.items():
+            if any(keyword in query_lower for keyword in config["keywords"]):
+                strategy["graph_db"] = True
+                strategy["graph_query_type"] = query_type
+                break  # 匹配到第一个就停止
+
+        return strategy
+
+    def classify_with_strategy(self, user_query: str, short_term_context: str) -> Optional[dict]:
+        """
+        完整的RAG意图分类 + 查询策略判断
+
+        Args:
+            user_query: 用户当前的查询内容
+            short_term_context: 短期记忆管理器提供的上下文
+
+        Returns:
+            {
+                "need_rag": bool,
+                "confidence": float,
+                "reason": str,
+                "query_strategy": {
+                    "vector_db": bool,
+                    "graph_db": bool,
+                    "graph_query_type": str|None
+                }
+            }
+            返回None表示API调用失败
+        """
+        # 步骤1: RAG意图分类（LLM调用）
+        rag_result = self.classify_rag_intent(user_query, short_term_context)
+
+        if not rag_result:
+            return None
+
+        # 步骤2: 如果需要RAG，进行查询策略分类（基于规则）
+        if rag_result["need_rag"]:
+            strategy = self.classify_query_strategy(user_query)
+        else:
+            # 不需要RAG，策略无意义
+            strategy = {
+                "vector_db": False,
+                "graph_db": False,
+                "graph_query_type": None
+            }
+
+        # 合并结果
+        rag_result["query_strategy"] = strategy
+        return rag_result
 
 
 # 单元测试
@@ -240,5 +342,77 @@ def test_rag_intent_classifier():
     print("="*60)
 
 
+def test_query_strategy():
+    """测试查询策略分类功能"""
+    print("="*60)
+    print("查询策略分类测试")
+    print("="*60)
+
+    classifier = RAGIntentClassifier()
+
+    test_cases = [
+        ("我现在吃的降压药和止痛药会不会有冲突？", "drug_interaction"),
+        ("这些症状可能是什么病？", "symptom_disease"),
+        ("我的糖尿病治疗历史记录", "diagnosis_chain"),
+        ("上次的治疗方案效果怎么样？", "treatment_history"),
+        ("我头痛应该吃什么药？", None),  # 不需要图查询
+    ]
+
+    for query, expected_type in test_cases:
+        strategy = classifier.classify_query_strategy(query)
+        print(f"\n查询: {query}")
+        print(f"  向量DB: {strategy['vector_db']}")
+        print(f"  图DB: {strategy['graph_db']}")
+        print(f"  图查询类型: {strategy['graph_query_type']}")
+
+        if expected_type:
+            status = "✓" if strategy['graph_query_type'] == expected_type else "✗"
+            print(f"  {status} 预期类型: {expected_type}")
+
+    print("\n" + "="*60)
+    print("策略测试完成")
+    print("="*60)
+
+
+def test_classify_with_strategy():
+    """测试完整的分类流程（意图 + 策略）"""
+    print("="*60)
+    print("完整分类流程测试（意图 + 策略）")
+    print("="*60)
+
+    classifier = RAGIntentClassifier()
+
+    # 测试场景：需要RAG且需要图查询
+    short_context = """历史摘要：患者有高血压病史，正在服用降压药。
+
+当前对话：
+用户：我最近头痛很厉害
+助手：您的头痛可能与血压有关，建议监测血压"""
+
+    query = "我现在的降压药能和布洛芬一起吃吗？"
+
+    print(f"\n查询: {query}")
+    print(f"短期上下文: {short_context[:50]}...")
+
+    result = classifier.classify_with_strategy(query, short_context)
+
+    if result:
+        print(f"\n【RAG意图】")
+        print(f"  need_rag: {result['need_rag']}")
+        print(f"  confidence: {result['confidence']:.2f}")
+        print(f"  reason: {result['reason']}")
+
+        print(f"\n【查询策略】")
+        print(f"  向量DB: {result['query_strategy']['vector_db']}")
+        print(f"  图DB: {result['query_strategy']['graph_db']}")
+        print(f"  图查询类型: {result['query_strategy']['graph_query_type']}")
+
+    print("\n" + "="*60)
+    print("完整测试完成")
+    print("="*60)
+
+
 if __name__ == "__main__":
-    test_rag_intent_classifier()
+    # test_rag_intent_classifier()
+    # test_query_strategy()
+    test_classify_with_strategy()

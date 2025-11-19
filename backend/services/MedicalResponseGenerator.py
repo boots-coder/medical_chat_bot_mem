@@ -1,8 +1,8 @@
 import json
 from typing import Optional, Dict, Any
-from APIManager import APIManager
-from ShortTermMemoryManager import ShortTermMemoryManager
-from RAGIntentClassifier import RAGIntentClassifier
+from backend.ml.APIManager import APIManager
+from backend.models.ShortTermMemoryManager import ShortTermMemoryManager
+from backend.ml.RAGIntentClassifier import RAGIntentClassifier
 from TestData import get_test_scenario
 
 
@@ -37,51 +37,44 @@ class MedicalResponseGenerator:
     
     def _build_system_prompt(self) -> str:
         """构建医疗回复生成的系统提示词"""
-        return """你是一个专业的医疗AI助手，具备短期记忆和长期记忆能力。
-
-## 你的能力
-- 短期记忆：记住当前对话的所有内容和历史摘要
-- 长期记忆：能够检索用户的历史就诊记录、症状变化、用药历史
-- 个性化建议：基于用户的完整病史提供针对性建议
+        return """你是专业的医疗AI助手，具备记忆能力。
 
 ## 回复原则
-1. **安全第一**：严重症状建议立即就医，不提供确诊
-2. **个性化**：充分利用历史信息，提供个性化建议  
-3. **连贯性**：回复要与对话上下文保持连贯
-4. **专业性**：使用准确的医学术语，但确保患者理解
+1. **简洁精准**：直接回答问题，避免冗余信息
+2. **安全第一**：严重症状建议就医，不提供确诊
+3. **个性化**：利用历史信息提供针对性建议
+4. **通俗易懂**：避免过多医学术语，患者能理解即可
 
-## 信息整合策略
-- 如果有长期记忆信息，要重点对比当前症状与历史记录
-- 如果用户询问历史用药，要结合历史记录给出建议
-- 如果是新症状，主要基于当前描述和一般医学知识
+## 回复要求
+- 每次回复控制在 3-5 句话内
+- 直接回答用户问题，不要过度展开
+- 如有历史记录，简要对比即可
+- 必要时才给出用药建议，不要主动推荐药物
+- 避免使用"症状分析"、"个性化建议"等格式化标题
 
-## 回复格式
-请按以下结构回复：
+## 示例风格
+用户："我头痛怎么办？"
+✅ 好的回复："根据您的描述，可能是紧张性头痛。建议先休息，保持安静环境。如果疼痛加剧或持续超过24小时，建议就医。"
+❌ 差的回复："**症状分析：**您出现了头痛症状，这可能是由多种原因引起的...**个性化建议：**...**用药指导：**..."
 
-**症状分析：** [简要分析当前症状]
-
-**个性化建议：** [基于历史记录的针对性建议]
-
-**用药指导：** [具体的用药建议]
-
-**注意事项：** [需要注意的事项]
-
-注意：如果没有长期记忆信息，就基于短期记忆和当前查询正常回复。"""
+保持回复自然、简洁、有针对性。"""
     
     def generate_response(
-        self, 
-        user_query: str, 
-        long_term_memory: str = "", 
+        self,
+        user_query: str,
+        short_term_context: str = "",
+        long_term_memory: str = "",
         mock_mode: bool = False
     ) -> Dict[str, Any]:
         """
         生成医疗回复
-        
+
         Args:
             user_query: 用户当前查询
+            short_term_context: 短期记忆上下文（从SessionManager获取）
             long_term_memory: 长期记忆上下文（如果需要RAG）
             mock_mode: 是否为测试模式（使用模拟的RAG结果）
-            
+
         Returns:
             {
                 "response": str,           # 生成的回复
@@ -99,9 +92,9 @@ class MedicalResponseGenerator:
                 "rag_triggered": False,
                 "confidence": 0.0
             }
-        
-        # 1. 获取短期记忆上下文
-        short_memory_context = self.memory_manager.get_context()
+
+        # 1. 使用传入的短期记忆上下文
+        short_memory_context = short_term_context
         
         # 2. RAG意图分类
         rag_result = self.rag_classifier.classify_rag_intent(user_query, short_memory_context)

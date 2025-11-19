@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外部医疗系统模拟 - 测试页面</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="bg-gradient-to-r from-blue-50 to-indigo-50 min-h-screen">
+    <div class="container mx-auto max-w-4xl p-6">
+        <!-- 标题 -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">外部医疗系统模拟</h1>
+            <p class="text-gray-600">此页面用于测试医疗咨询系统的会话创建功能</p>
+        </div>
+
+        <!-- 创建会话表单 -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">创建会话</h2>
+
+            <form id="create-session-form" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- 患者信息 -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">患者ID</label>
+                        <input type="text" id="patient_id" name="patient_id" required
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="P12345">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">患者姓名</label>
+                        <input type="text" id="patient_name" name="patient_name" required
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="张三">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">年龄</label>
+                        <input type="number" id="patient_age" name="patient_age" required
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="45" min="1" max="150">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">性别</label>
+                        <select id="gender" name="gender" required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">请选择</option>
+                            <option value="male">男</option>
+                            <option value="female">女</option>
+                            <option value="other">其他</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">医生姓名</label>
+                        <input type="text" id="doctor_name" name="doctor_name" required
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="李医生">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">科室</label>
+                        <input type="text" id="department" name="department" required
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="心内科">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">预约ID</label>
+                        <input type="text" id="appointment_id" name="appointment_id" required
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="APT001">
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-3">
+                    <button type="button" onclick="fillTestData()"
+                            class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
+                        填充测试数据
+                    </button>
+                    <button type="submit"
+                            class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+                        创建会话
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 会话信息展示 -->
+        <div id="session-info" class="bg-white rounded-lg shadow-md p-6 hidden">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">会话创建成功</h2>
+
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">会话ID</label>
+                    <input id="display-session-id" type="text" readonly
+                           class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">患者访问URL</label>
+                    <div class="flex space-x-2">
+                        <input id="display-url" type="text" readonly
+                               class="flex-1 px-3 py-2 bg-gray-50 border border-gray-300 rounded-md">
+                        <button onclick="copyURL()"
+                                class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
+                            复制
+                        </button>
+                        <a id="open-chat-link" href="#" target="_blank"
+                           class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
+                            打开聊天
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">URL Token</label>
+                    <input id="display-token" type="text" readonly
+                           class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md font-mono text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">过期时间</label>
+                    <input id="display-expires" type="text" readonly
+                           class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md">
+                </div>
+
+                <div class="pt-3 border-t">
+                    <button onclick="getSummary()"
+                            class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition mr-2">
+                        查看会话摘要
+                    </button>
+                    <button onclick="resetForm()"
+                            class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition">
+                        创建新会话
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 会话摘要展示 -->
+        <div id="session-summary" class="bg-white rounded-lg shadow-md p-6 mt-6 hidden">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">会话摘要</h2>
+            <pre id="summary-content" class="bg-gray-50 p-4 rounded-md overflow-auto text-sm"></pre>
+        </div>
+
+        <!-- 错误信息 -->
+        <div id="error-message" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md mt-6 hidden">
+            <strong>错误：</strong>
+            <span id="error-text"></span>
+        </div>
+    </div>
+
+    <script src="/static/js/external_test.js"></script>
+</body>
+</html>
