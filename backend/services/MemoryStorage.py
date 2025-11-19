@@ -175,58 +175,120 @@ class MemoryStorage:
         for cluster_id, qa_list in cluster_dialogues.items():
             print(f"\n    处理簇 {cluster_id} ({len(qa_list)}个问答对):")
 
-            # 2.1 转换为dialogue格式
-            cluster_dialogue = self._qa_pairs_to_dialogue(qa_list)
+            # 噪声点需要逐个分类和存储
+            if cluster_id == -1:
+                print(f"      → 噪声簇，逐个判断医疗相关性...")
+                noise_stored = 0
 
-            # 2.2 医疗相关性过滤
-            cluster_text = self._format_qa_pairs_to_text(qa_list)
-            is_medical = self.medical_classifier.classify(cluster_text)
+                for idx, qa in enumerate(qa_list):
+                    # 单个问答对的医疗相关性判断
+                    single_text = self._format_qa_pairs_to_text([qa])
+                    is_medical = self.medical_classifier.classify(single_text)
 
-            if is_medical is None:
-                print(f"      ⚠️  分类器失败，跳过")
-                continue
+                    if is_medical is None:
+                        print(f"        噪声点{idx}: ⚠️ 分类器失败，跳过")
+                        continue
 
-            if not is_medical:
-                print(f"      ✗ 非医疗相关，跳过")
-                continue
+                    if not is_medical:
+                        print(f"        噪声点{idx}: ✗ 非医疗相关，跳过")
+                        continue
 
-            print(f"      ✓ 医疗相关，开始分析...")
+                    print(f"        噪声点{idx}: ✓ 医疗相关，开始分析...")
 
-            # 2.3 对话分析
-            try:
-                analysis = self.dialogue_analyzer.analyze_session(
-                    dialogue_list=cluster_dialogue,
+                    # 转换为dialogue格式
+                    single_dialogue = self._qa_pairs_to_dialogue([qa])
+
+                    # 对话分析
+                    try:
+                        analysis = self.dialogue_analyzer.analyze_session(
+                            dialogue_list=single_dialogue,
+                            session_id=session_id,
+                            user_id=patient_id,
+                            start_time=start_time,
+                            end_time=end_time
+                        )
+                    except Exception as e:
+                        print(f"        噪声点{idx}: ✗ 分析失败: {e}")
+                        continue
+
+                    # 存储单个噪声点
+                    unit_id = f"{session_id}_noise_{idx}"
+                    self._store_to_vector_db(
+                        unit_id=unit_id,
+                        unit_type="noise",
+                        session_id=session_id,
+                        patient_id=patient_id,
+                        cluster_id=-1,
+                        analysis=analysis
+                    )
+
+                    self._store_to_graph_db(
+                        patient_id=patient_id,
+                        session_id=session_id,
+                        knowledge_graph=analysis['knowledge_graph'],
+                        timestamp=end_time
+                    )
+
+                    noise_stored += 1
+                    print(f"        噪声点{idx}: ✓ 存储完成")
+
+                stored_count += noise_stored
+                print(f"      噪声簇处理完成: 存储了 {noise_stored}/{len(qa_list)} 个问答对")
+
+            else:
+                # 有效簇：整体判断和存储
+                # 2.1 转换为dialogue格式
+                cluster_dialogue = self._qa_pairs_to_dialogue(qa_list)
+
+                # 2.2 医疗相关性过滤
+                cluster_text = self._format_qa_pairs_to_text(qa_list)
+                is_medical = self.medical_classifier.classify(cluster_text)
+
+                if is_medical is None:
+                    print(f"      ⚠️  分类器失败，跳过")
+                    continue
+
+                if not is_medical:
+                    print(f"      ✗ 非医疗相关，跳过")
+                    continue
+
+                print(f"      ✓ 医疗相关，开始分析...")
+
+                # 2.3 对话分析
+                try:
+                    analysis = self.dialogue_analyzer.analyze_session(
+                        dialogue_list=cluster_dialogue,
+                        session_id=session_id,
+                        user_id=patient_id,
+                        start_time=start_time,
+                        end_time=end_time
+                    )
+                except Exception as e:
+                    print(f"      ✗ 分析失败: {e}")
+                    continue
+
+                # 2.4 存储
+                unit_id = f"{session_id}_cluster_{cluster_id}"
+                self._store_to_vector_db(
+                    unit_id=unit_id,
+                    unit_type="cluster",
                     session_id=session_id,
-                    user_id=patient_id,
-                    start_time=start_time,
-                    end_time=end_time
+                    patient_id=patient_id,
+                    cluster_id=cluster_id,
+                    analysis=analysis
                 )
-            except Exception as e:
-                print(f"      ✗ 分析失败: {e}")
-                continue
 
-            # 2.4 存储
-            unit_id = f"{session_id}_cluster_{cluster_id}"
-            self._store_to_vector_db(
-                unit_id=unit_id,
-                unit_type="cluster",
-                session_id=session_id,
-                patient_id=patient_id,
-                cluster_id=cluster_id,
-                analysis=analysis
-            )
+                self._store_to_graph_db(
+                    patient_id=patient_id,
+                    session_id=session_id,
+                    knowledge_graph=analysis['knowledge_graph'],
+                    timestamp=end_time
+                )
 
-            self._store_to_graph_db(
-                patient_id=patient_id,
-                session_id=session_id,
-                knowledge_graph=analysis['knowledge_graph'],
-                timestamp=end_time
-            )
+                stored_count += 1
+                print(f"      ✓ 簇 {cluster_id} 存储完成")
 
-            stored_count += 1
-            print(f"      ✓ 簇 {cluster_id} 存储完成")
-
-        print(f"\n  ✓ 聚类存储完成: 共存储 {stored_count} 个簇")
+        print(f"\n  ✓ 聚类存储完成: 共存储 {stored_count} 个单元")
 
     def _store_to_vector_db(
         self,
