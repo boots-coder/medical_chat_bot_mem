@@ -1,0 +1,6018 @@
+[
+  {
+    "query": "How am I responding to treatment?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.76,
+    "reason": "General response inquiry",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "您说的严重程度怎样?",
+    "short_term_context": "当前对话:\nUser: 我血压高\nAssistant: 每天测两次血压,少吃盐\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Severity question",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "I'm experiencing another UTI",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Infection recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "Should I be worried about this?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Concern assessment",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "What medical issue was identified previously?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Past medical problem identification",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "心衰控制得好吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Heart failure control",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "之前有停过什么药吗?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Medication discontinuation",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "How well controlled is my hypertension recently?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Chronic disease control assessment",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "What's my pain level trend for chronic pain?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Chronic pain tracking",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "The doctor said something important last time",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.72,
+    "reason": "Vague important information recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "持续时间比往常长",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": true,
+    "confidence": 0.76,
+    "reason": "Duration extension from baseline",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "Have I taken this drug combination before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Polypharmacy history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "How to apply a transdermal patch?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Patch application",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "好像又是那个老毛病",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.74,
+    "reason": "Vague recurrence reference",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "How does caffeine affect the body?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Substance effect",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "最近血压模式怎样?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "BP pattern inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "了解了，谢谢",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Understanding thanks",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "What are probiotics good for?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Supplement benefit",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "This nausea feels identical to my previous episode",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Symptom recurrence identification",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "What causes migraines?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Cause inquiry",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "What dosage of metformin was I taking?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Dosage history query",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "能再解释一下吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Explanation request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "之前的治疗方案是什么?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Treatment plan recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "My insomnia returned",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Sleep problem recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "My vision problems are back",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Visual symptom return",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "My ears are ringing",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Auditory symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Can you check what they diagnosed me with before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Historical diagnosis verification",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "How controlled is my atrial flutter?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Arrhythmia control status",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "How effective was the joint injection?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Intra-articular injection outcome",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "Did I need to taper off that medication?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Tapering protocol recall",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "How well is the eye drop working?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Ophthalmic treatment efficacy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "I have a strange odor",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.88,
+    "reason": "Unusual smell",
+    "category": "新症状描述"
+  },
+  {
+    "query": "肺炎怎么治疗?",
+    "short_term_context": "历史摘要: 2型糖尿病患者,上次糖化血红蛋白7.2%。\n\n当前对话:\nUser: 最近空腹血糖130左右\nAssistant: 稍微偏高但在可接受范围内",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Treatment question",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "能上班吗?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Work capability",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "You mentioned a follow-up, when should that be?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Follow-up timing",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "The rash looks different from the one I had before",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Visual symptom comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "上次说的注意事项是什么?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Precaution recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Has the diet modification been effective?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Dietary intervention outcome",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "要去急诊吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Emergency need",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "I have dry mouth",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.9,
+    "reason": "Xerostomia",
+    "category": "新症状描述"
+  },
+  {
+    "query": "What did the doctor say was wrong last time?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Previous diagnosis recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Did that medication interact with my other drugs?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Drug interaction history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "突然感到头晕",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Sudden dizziness",
+    "category": "新症状描述"
+  },
+  {
+    "query": "治疗能预防复发吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Preventive efficacy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "You said to call if something happens, what exactly?",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Emergency criteria",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Is this allergy reaction stronger than last year?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Seasonal comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "That's helpful",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Usefulness confirmation",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "What is the difference between Type 1 and Type 2 diabetes?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Disease comparison",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "What about the alternative you suggested?",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Alternative discussion",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "呼吸困难又出现了",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Breathing difficulty return",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "能说简单点吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Simplification request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "What medications was I prescribed before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Historical prescription query",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "How to use nasal spray?",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Nasal administration",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "What causes kidney stones?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Condition etiology",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "How contagious is COVID-19?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Transmission inquiry",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Is my inflammatory bowel disease under control?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "IBD management status",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "反复发作",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.88,
+    "reason": "Recurring episodes",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "Should I monitor this at home?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Home monitoring",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "How does cholesterol affect the heart?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Physiological relationship",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Can I split this tablet?",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Tablet modification",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "又是同样的问题",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Same issue again",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "您说的那个药叫什么名字?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Medication name recall",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "My muscles are aching",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Muscular pain",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Should I change my diet?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Dietary modification",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "Can you tell me what the treatment protocol was?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Protocol information request",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Can I crush this pill?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Formulation question",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "I'm clear on that",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Clarity statement",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "要吃多久?",
+    "short_term_context": "当前对话:\nUser: 我头痛\nAssistant: 建议服用400mg布洛芬,饭后服用\nUser: ",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Duration question",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "How to use an auto-injector?",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Injection device",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "How can I strengthen my bones?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Bone health inquiry",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "I can't recall which procedures were done",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Procedure recall difficulty",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "What was my insulin regimen previously?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Insulin history inquiry",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "The dizziness isn't as bad as it was before",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Severity reduction comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "这样就明白了",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Understanding achieved",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "That feeling is back",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.68,
+    "reason": "Ambiguous symptom return",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "吃药要忌酒吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Alcohol restriction",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "怎么预防糖尿病?",
+    "short_term_context": "历史摘要: 2型糖尿病患者,上次糖化血红蛋白7.2%。\n\n当前对话:\nUser: 最近空腹血糖130左右\nAssistant: 稍微偏高但在可接受范围内",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Prevention question",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "My sleep is poor",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.9,
+    "reason": "Sleep disturbance",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Can you tell me what the specialist said last month?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Specialist consultation recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "My sleep quality is worse than what we discussed before",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Functional comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "联合治疗效果更好吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Combination therapy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "This timeline mirrors my previous experience",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.76,
+    "reason": "Temporal pattern matching",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "Are the side effects less severe than previously?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Adverse event comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "我的偏头痛又犯了",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Migraine recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "There was a treatment change discussed previously",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.71,
+    "reason": "Treatment modification memory",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "能说清楚一点吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Clarification request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "慢性疼痛有缓解吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Chronic pain relief",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "I have abdominal cramping",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "GI pain symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "How effective was the detox program?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Detoxification outcome",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "Are my symptoms controlled with this treatment?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Symptom control evaluation",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "好的，我会这么做",
+    "short_term_context": "当前对话:\nUser: 我头痛\nAssistant: 建议服用400mg布洛芬,饭后服用\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Action commitment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "What precautions should I take?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Precautionary measures",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "Did the generic version work as well for me?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Generic vs brand efficacy",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Have I tried this medication before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Drug exposure history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "上次开的安眠药有效吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Sleep medication efficacy",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Is this headache worse than last time?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Direct comparison with previous visit",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "Has my mobility improved compared to last time?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Functional status comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "It feels like we're back to square one",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.71,
+    "reason": "Treatment regression indication",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "What causes anxiety disorders?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Mental health etiology",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Can you explain that again?",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Clarification request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "I'm having concentration issues",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.88,
+    "reason": "Cognitive difficulty",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Did that antibiotic work for me last time?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Historical drug efficacy query",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "How is my heart failure being controlled?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Heart failure management",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "理疗有帮助吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Physical therapy outcome",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "What was written in my last medical report?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Medical record query",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "That warning you gave, can you repeat it?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Safety information confirmation",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "好像又犯了",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": true,
+    "confidence": 0.72,
+    "reason": "Vague recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "Do I need tests?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Testing necessity",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "I'm feeling bloated",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "GI discomfort",
+    "category": "新症状描述"
+  },
+  {
+    "query": "How long should I continue the medication?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Duration inquiry",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "How much water should I drink with it?",
+    "short_term_context": "Current dialogue:\nUser: My blood pressure is high\nAssistant: You should monitor it twice daily and avoid salty foods\nUser: ",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Administration detail",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "My breathing is better than it was last week",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Improvement comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "What are the benefits of Mediterranean diet?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Diet inquiry",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "The pain intensity varies, unlike before",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.75,
+    "reason": "Characteristic change identification",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "Can children be around me?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Contagion concern",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "I feel dizzy suddenly",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Sudden onset symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Should I avoid certain foods?",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Dietary restriction",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Should I continue the same dosing schedule?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Dosing regimen continuity",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "和之前说的那次差不多",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.72,
+    "reason": "Indirect historical comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "Did the counseling sessions help?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.88,
+    "reason": "Counseling effectiveness",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "My hair is falling out",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": false,
+    "confidence": 0.89,
+    "reason": "Hair loss symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "My anxiety feels more intense than it did previously",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Mental health symptom comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "What was that medication name you said?",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Immediate information recall",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "What is a normal blood sugar level?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Reference value inquiry",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "What are omega-3 fatty acids?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Nutritional component",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Should I seek second opinion?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.88,
+    "reason": "Second opinion consideration",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "You talked about precautions, what were they?",
+    "short_term_context": "Current dialogue:\nUser: My blood pressure is high\nAssistant: You should monitor it twice daily and avoid salty foods\nUser: ",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Precaution recall",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Has my appetite improved from what it was before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Functional parameter comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "治疗有效果吗?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Treatment effectiveness",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "They found something in my tests last month",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.74,
+    "reason": "Non-specific finding recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Can I fly with this condition?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Travel safety",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "化疗有效吗?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Chemotherapy efficacy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "Are the treatments preventing flare-ups?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Preventive efficacy inquiry",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "Can you summarize what you just explained?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Summary request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "What about people like me specifically?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.88,
+    "reason": "Personalization inquiry",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Should I fast before treatment?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Pre-treatment preparation",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "腿没力气",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Leg weakness",
+    "category": "新症状描述"
+  },
+  {
+    "query": "How effective has the new regimen been?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Regimen effectiveness",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "What lifestyle changes were advised previously?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Lifestyle modification recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "I'll remember that",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Memory commitment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Did I take any medication during pregnancy before?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Pregnancy medication history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "一直在咳嗽",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Persistent cough",
+    "category": "新症状描述"
+  },
+  {
+    "query": "睡前可以吃吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Bedtime timing",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "I understand completely",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Complete comprehension",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Is everything under control?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.7,
+    "reason": "Broad control question",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "What vitamin supplements was I taking?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Supplement history inquiry",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Can you clarify what you meant by that?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Meaning clarification",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Has the CPAP machine been effective?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "CPAP therapy outcome",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "跟上次的节奏很像",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.75,
+    "reason": "Timeline pattern similarity",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "癌症是怎么形成的?",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Pathogenesis",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "How effective was the wound care?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Wound treatment outcome",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "皮疹看起来和之前的不同",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Rash appearance comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "手臂上长了疹子",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Arm rash",
+    "category": "新症状描述"
+  },
+  {
+    "query": "I'm having that problem again",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Recurrent issue mention",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "Is my gout under better control now?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Gout management inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "How to use insulin injections?",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Administration method",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Should I still avoid that medication?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Contraindication recall",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Are my flare-ups more frequent than before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Episode frequency comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "之前那个药有副作用吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Adverse reaction history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "肾功能状态如何?",
+    "short_term_context": "历史摘要: 2型糖尿病患者,上次糖化血红蛋白7.2%。\n\n当前对话:\nUser: 最近空腹血糖130左右\nAssistant: 稍微偏高但在可接受范围内",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Renal function status",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "感觉又回到之前的状态了",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.7,
+    "reason": "Regression to previous state",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "How to apply this ointment?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Topical application",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Was I compliant with my previous medication?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.89,
+    "reason": "Adherence history inquiry",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Should I take it on an empty stomach?",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Fasting requirement",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Okay, I'll try that",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Trial commitment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "感觉病情有点变化",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.73,
+    "reason": "Subjective change perception",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "Can you check my medication history?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Comprehensive medication review",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "胰岛素是如何工作的?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Mechanism inquiry",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "I can't recall what the doctor said last time",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Diagnostic information recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "The cough returned after stopping medication",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Post-treatment recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "Is my chronic fatigue improving?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Fatigue symptom tracking",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "What happens if I don't do what you suggested?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Consequence inquiry",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "抗生素一天吃几次?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Dosing frequency",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "I'm experiencing additional symptoms this time",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.73,
+    "reason": "Symptom set expansion",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "I have a fever this morning",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Current fever presentation",
+    "category": "新症状描述"
+  },
+  {
+    "query": "疼痛又回来了",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Pain return",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "How to prevent diabetes?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Prevention inquiry",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "上次的降压药是哪种?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Antihypertensive recall",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Is this normal?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Normality inquiry",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "上次CT扫描发现了什么?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "CT scan finding query",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "What is BMI and why does it matter?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Health metric explanation",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "我以前吃过这个药吗?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Drug exposure history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "上次的治疗方案效果如何?",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Treatment plan efficacy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "What causes high cholesterol?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Lipid disorder etiology",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "The breathing difficulty came back",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Respiratory symptom return",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "What's my kidney function status?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Renal function monitoring",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "I have a rash on my arm",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Dermatological finding",
+    "category": "新症状描述"
+  },
+  {
+    "query": "皮肤痒",
+    "short_term_context": "历史摘要: 2型糖尿病患者,上次糖化血红蛋白7.2%。\n\n当前对话:\nUser: 最近空腹血糖130左右\nAssistant: 稍微偏高但在可接受范围内",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Skin itching",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Should I avoid the medication that caused issues?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Problematic drug avoidance",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "监测是什么意思?",
+    "short_term_context": "当前对话:\nUser: 我恶心\nAssistant: 试试姜茶,少量多餐\nUser: ",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Term clarification",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Thank you very much",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Formal gratitude",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "That contraindication you mentioned, what was it?",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Contraindication recall",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "The heartburn came back",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "GI symptom recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "这次发作的频率比以前高吗?",
+    "short_term_context": "历史摘要: 2型糖尿病患者,上次糖化血红蛋白7.2%。\n\n当前对话:\nUser: 最近空腹血糖130左右\nAssistant: 稍微偏高但在可接受范围内",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Episode frequency increase",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "需要看医生吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Doctor consultation",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "This cough seems milder compared to last month",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Temporal symptom comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "What's my recent blood pressure pattern?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "BP pattern analysis",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "医生上次说了个挺重要的事",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": true,
+    "confidence": 0.72,
+    "reason": "Vague important information",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Can I drink alcohol?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.9,
+    "reason": "Alcohol permission",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "上次开的药还有效期吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Prescription validity",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Can you review what was found during my last checkup?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Checkup findings review",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "The old symptoms are back",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Old symptom recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "I'm experiencing that same strange sensation again",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.78,
+    "reason": "Vague symptom recurrence",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "How do painkillers work?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Analgesic mechanism",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Right, I understand",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Correctness confirmation",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "You just said to avoid something, what was it?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Avoidance clarification",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Can I take it before bed?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Bedtime administration",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "What are the side effects of antibiotics?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "General adverse effect",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "What is hypertension?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.98,
+    "reason": "General medical definition",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Is my inflammation decreasing compared to before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Biomarker trend analysis",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "我会按您说的做",
+    "short_term_context": "当前对话:\nUser: 我血压高\nAssistant: 每天测两次血压,少吃盐\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Compliance statement",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Can you review my previous medication list?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Medication list review",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Are my arthritis symptoms being managed well?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Arthritis management status",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "What should I do about my headache?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Current symptom management",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "好的，明白",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.98,
+    "reason": "Double confirmation",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "My skin is itching badly",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Pruritic symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Should I go to the emergency room?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Urgency assessment",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "清楚了",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Clarity statement",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "What evaluations were performed last time?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Evaluation history inquiry",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Can you check what diagnostics I had last month?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Diagnostic procedure review",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "What did you say comes after this step?",
+    "short_term_context": "Current dialogue:\nUser: My blood pressure is high\nAssistant: You should monitor it twice daily and avoid salty foods\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Sequential step query",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "那个药我需要逐渐停吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Tapering requirement",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Did I build tolerance to that medication?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Drug tolerance development",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "I appreciate it",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Appreciation expression",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "What medication did I use for my allergies last year?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Seasonal medication history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "The infection has returned",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Infection recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "This matches what happened during my previous illness",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.8,
+    "reason": "Episode matching",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "You mentioned some side effects, what were they?",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Recent information query",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Is this helping me?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.72,
+    "reason": "Vague efficacy question",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "My migraine is back again",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Symptom recurrence identification",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "What is autoimmune disease?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Disease category",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "How to prime an insulin pen?",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Device preparation",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Can I take it with other medications?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Drug interaction",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "What causes iron deficiency anemia?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Nutritional deficiency",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Is the therapy working for me?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Therapy effectiveness inquiry",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "What about the symptoms you just described?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Symptom discussion continuation",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "什么维生素增强免疫力?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Supplement inquiry",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "I have decreased appetite",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Appetite change",
+    "category": "新症状描述"
+  },
+  {
+    "query": "病情对治疗有反应吗?",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Treatment response",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "Did my symptoms improve after the last treatment?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Post-treatment improvement",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "I'm having heart palpitations",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Cardiac symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Was my previous medication more effective?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Comparative drug efficacy",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "The nausea is back",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "GI symptom return",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "专家说的那个病名我忘了",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": true,
+    "confidence": 0.74,
+    "reason": "Forgotten disease name",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "My eyes are watering",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Ocular symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "This episode lasted longer than usual",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.76,
+    "reason": "Duration comparison requiring baseline",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "药怎么保存?",
+    "short_term_context": "当前对话:\nUser: 我头痛\nAssistant: 建议服用400mg布洛芬,饭后服用\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Storage method",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "I'm experiencing mood swings",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.87,
+    "reason": "Emotional symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Is my diabetes under better control than previously?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Chronic disease trend analysis",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "I'm feeling lightheaded",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Vestibular symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "What was the name of my cholesterol medication?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Statin medication recall",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Is this migraine following the same pattern as before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Temporal pattern analysis",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "出汗很多",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Excessive sweating",
+    "category": "新症状描述"
+  },
+  {
+    "query": "The pain has returned",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Symptom return statement",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "和上次检查相比,指标有改善吗?",
+    "short_term_context": "历史摘要: 2型糖尿病患者,上次糖化血红蛋白7.2%。\n\n当前对话:\nUser: 最近空腹血糖130左右\nAssistant: 稍微偏高但在可接受范围内",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Lab result trend analysis",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "How much will this cost, you mentioned it?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.89,
+    "reason": "Cost clarification",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "What was I diagnosed with during my last appointment?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Past diagnostic result query",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "糖化血红蛋白的趋势如何?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "HbA1c trend inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "多久做一次您刚才说的?",
+    "short_term_context": "当前对话:\nUser: 我发烧了\nAssistant: 每6小时服用500mg对乙酰氨基酚,多休息\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Frequency question",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "How will I know it's working like you said?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Efficacy indicator",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "新冠病毒传染性强吗?",
+    "short_term_context": "历史摘要: 2型糖尿病患者,上次糖化血红蛋白7.2%。\n\n当前对话:\nUser: 最近空腹血糖130左右\nAssistant: 稍微偏高但在可接受范围内",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Transmission question",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Is my blood pressure higher than it was before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Comparing current vs historical metrics",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "What's my HbA1c trend over the past months?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Long-term glycemic marker",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "好像有个药我不能吃",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.71,
+    "reason": "Uncertain contraindication",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "偏头痛发作频率降低了吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Migraine frequency",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "My hemorrhoids are acting up",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Rectal problem recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "病情稳定吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Disease stability",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "The same sequence of symptoms is occurring",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.78,
+    "reason": "Symptom cascade comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "Did my pain decrease after treatment?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Pain reduction assessment",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "I need the diagnosis from my previous consultation",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Consultation outcome request",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "You said there are risks, what are they?",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Risk inquiry",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "My reflexes seem slow",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.87,
+    "reason": "Neurological observation",
+    "category": "新症状描述"
+  },
+  {
+    "query": "关节痛又来了",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Joint pain return",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "What causes acid reflux?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "GI condition etiology",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Can you remind me of my treatment plan?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Treatment plan review request",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "I'm having trouble breathing",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Respiratory distress",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Perfect, I understand",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Strong confirmation",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "What was the treatment approach last month?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Treatment strategy inquiry",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "That app you suggested, what's it called?",
+    "short_term_context": "Current dialogue:\nUser: My blood pressure is high\nAssistant: You should monitor it twice daily and avoid salty foods\nUser: ",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "App name recall",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Is my asthma under good control now?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Asthma control evaluation",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "The doctor mentioned something last time, what was it?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Vague diagnostic recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "I need to know my diagnosis from the last visit",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Explicit diagnosis request",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "What's my ejection fraction trend?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Cardiac function monitoring",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "How long did you say to take it?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Duration clarification",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "What topical medication was prescribed before?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Topical treatment history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "能查一下我之前用的什么药吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Medication history check",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "The pain is back but feels slightly different",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.75,
+    "reason": "Implicit comparison requiring historical context",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "How important is what you just told me?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Importance assessment",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Am I getting better compared to before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Treatment outcome comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "My legs feel weak",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Motor weakness",
+    "category": "新症状描述"
+  },
+  {
+    "query": "感冒一般多久能好?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Duration inquiry",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "What did you say the normal range is?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Reference range query",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "What inhaler was prescribed to me before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Inhaler prescription recall",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Did the injections provide relief?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Injection efficacy query",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "How stable is my heart condition?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Cardiac status monitoring",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "今天早上发烧了",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Morning fever",
+    "category": "新症状描述"
+  },
+  {
+    "query": "I'm feeling confused",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.89,
+    "reason": "Cognitive symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "How well did the acupuncture work?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.89,
+    "reason": "Alternative therapy efficacy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "能详细说说吗?",
+    "short_term_context": "当前对话:\nUser: 我血压高\nAssistant: 每天测两次血压,少吃盐\nUser: ",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Detail request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "How well controlled is my epilepsy?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Seizure control assessment",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "Can you spell that medication name?",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Spelling request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Should I take it before or after meals?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Meal timing",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "There was something about my medication before",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.7,
+    "reason": "Unclear medication information",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "My gums are bleeding",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Oral bleeding",
+    "category": "新症状描述"
+  },
+  {
+    "query": "我能运动吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Exercise permission",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "Good to know",
+    "short_term_context": "Current dialogue:\nUser: My blood pressure is high\nAssistant: You should monitor it twice daily and avoid salty foods\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Information acknowledgment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "How can I lower my risk of stroke?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Risk reduction",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "What was the final diagnosis from my last visit?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Terminal diagnosis inquiry",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "What diagnostic workup was completed before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Workup completion query",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "My rash is recurring",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Dermatological recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "That procedure you described, how long does it take?",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Procedure duration",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "I'm experiencing tremors",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Movement disorder symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "反应不如之前明显",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.69,
+    "reason": "Treatment response decline",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "Should I isolate myself?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Isolation need",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "I have sensitivity to light",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Photophobia",
+    "category": "新症状描述"
+  },
+  {
+    "query": "What vitamins boost immunity?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Supplement inquiry",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "能帮我看看以前的处方吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Prescription review request",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "How can I improve my gut health?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Digestive wellness",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "喉咙很痛",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Sore throat",
+    "category": "新症状描述"
+  },
+  {
+    "query": "刚才的注意事项再说一遍?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Precaution repeat",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "What eye drops was I using previously?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Ophthalmic medication history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "How serious is what you just described?",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Severity assessment",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "What if I miss a dose?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Missed dose protocol",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Should I keep taking the pills from before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Medication continuation question",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "那个药的名字我想不起来了",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.7,
+    "reason": "Medication name recall difficulty",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Thanks for the advice",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Advice appreciation",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "休息就够了吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Rest sufficiency",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "The muscle spasms returned",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Muscular symptom recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "How to use eye drops correctly?",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Ophthalmic administration",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "注射有缓解作用吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Injection efficacy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "免疫治疗有作用吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Immunotherapy response",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "What can I do to feel better?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Relief seeking",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "When is the best time to take it?",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Timing optimization",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Should I stop working out?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Exercise cessation",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "I feel short of breath",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Breathing difficulty",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Have I used this brand of medication before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Brand-specific drug history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "What condition did they find in my previous tests?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Test-based diagnosis query",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Did the doctor stop any of my medications?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Medication discontinuation query",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "这次发烧的模式跟以前一样吗?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Fever pattern comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "I'm experiencing brain fog",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.88,
+    "reason": "Cognitive complaint",
+    "category": "新症状描述"
+  },
+  {
+    "query": "I have constipation",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "GI dysfunction",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Did I experience withdrawal from that medication?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Withdrawal history query",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Is my sugar level worse than my previous checkup?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Lab result comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "谢谢您",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Simple thanks",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "That specialist you mentioned, what kind?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Specialist type",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Thanks for your time",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Time appreciation",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Should I shake the bottle first?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Preparation step",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "What was the first step you mentioned?",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Sequence clarification",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "How often should I do what you just suggested?",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Frequency inquiry",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "What pain medication did I use previously?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Pain management history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Can I work with these symptoms?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Work capability",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "放疗效果如何?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Radiation therapy outcome",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "How does the immune system work?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Physiological system",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Can I take it at the same time as other meds?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Timing coordination",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "I remember having issues with a medication",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.71,
+    "reason": "Non-specific adverse event recall",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Is the oxygen therapy helping?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Oxygen therapy efficacy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "需要饭后吃吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Meal timing",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "需要空腹吃吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Fasting requirement",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "I have numbness in my fingers",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Neurological symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "I'm experiencing restlessness",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.89,
+    "reason": "Psychomotor symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "What is inflammation?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Biological process",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "What are electrolytes?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Physiological component",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Should I take it with milk?",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Dairy interaction",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "You said something about diet, what was it?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Recent advice recall",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "The swelling seems smaller compared to my last visit",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Physical finding comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "血压稳定吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "BP stability question",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "How confident are you about this recommendation?",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.87,
+    "reason": "Confidence inquiry",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "My urine looks dark",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Urine appearance change",
+    "category": "新症状描述"
+  },
+  {
+    "query": "肿胀又回来了",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Swelling recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "Can I restart the medication I stopped?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Medication resumption question",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "尿频",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Frequent urination",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Can you define that term you used?",
+    "short_term_context": "Current dialogue:\nUser: My blood pressure is high\nAssistant: You should monitor it twice daily and avoid salty foods\nUser: ",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Definition request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "需要什么治疗?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Treatment inquiry",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "上次拿了什么报告来着",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.73,
+    "reason": "Report type recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "This chest pain feels exactly like last time",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Symptom similarity with history",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "Alright, I'll do that",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Commitment confirmation",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "应该避免什么?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Avoidance inquiry",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "What specialist should I see?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Specialist referral",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "Did the rehabilitation program help?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Rehabilitation outcome",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "Should I call an ambulance?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Emergency response",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "What's my average blood sugar been lately?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Glycemic control tracking",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "吸入器怎么用?",
+    "short_term_context": "当前对话:\nUser: 我发烧了\nAssistant: 每6小时服用500mg对乙酰氨基酚,多休息\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Inhaler usage",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "压力会导致疾病吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Risk factor",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "现在很恶心",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Current nausea",
+    "category": "新症状描述"
+  },
+  {
+    "query": "How well is my anxiety being managed?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Anxiety disorder control",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "Okay, will do",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Action commitment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Has the pacemaker improved my symptoms?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Device therapy efficacy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "I have a burning sensation",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Pain quality description",
+    "category": "新症状描述"
+  },
+  {
+    "query": "My anxiety is acting up again",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Mental health symptom return",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "现在肚子疼",
+    "short_term_context": "历史摘要: 2型糖尿病患者,上次糖化血红蛋白7.2%。\n\n当前对话:\nUser: 最近空腹血糖130左右\nAssistant: 稍微偏高但在可接受范围内",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Current abdominal pain",
+    "category": "新症状描述"
+  },
+  {
+    "query": "I'm experiencing hiccups",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.88,
+    "reason": "Diaphragmatic symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "How can I boost my metabolism?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Metabolic inquiry",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "My knee is very stiff",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Joint symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "我的血压比之前高了",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Vital sign comparison with history",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "I have a persistent cough",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Respiratory symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "眼睛看东西模糊",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Blurry vision",
+    "category": "新症状描述"
+  },
+  {
+    "query": "什么是高血压?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": false,
+    "confidence": 0.98,
+    "reason": "Medical term definition",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Have I been on this medication long-term before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Long-term use history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "能开之前那个药的处方吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Prescription refill request",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "How will I feel after doing what you suggested?",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.9,
+    "reason": "Outcome expectation",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "How often should I exercise?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Exercise frequency",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "为什么会得心脏病?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Disease cause",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "这次头痛比上次严重吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Direct symptom severity comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "I get it now",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Comprehension statement",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "The skin condition flared up again",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Dermatological flare",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "How to dispose of expired medication?",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Disposal method",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "What signs indicate worsening?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Warning signs",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "What is the recommended daily calorie intake?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Nutritional guideline",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "以前用的什么感冒药?",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Cold medication history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Thank you for the explanation",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Gratitude expression",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "I'll do as you suggest",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Suggestion acceptance",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "比上个月的疼痛要轻一些",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Pain severity temporal comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "I'm not sure if it's working",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.7,
+    "reason": "Uncertain treatment response",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "My joints feel inflamed",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Inflammatory sensation",
+    "category": "新症状描述"
+  },
+  {
+    "query": "可以等等看吗?",
+    "short_term_context": "历史摘要: 2型糖尿病患者,上次糖化血红蛋白7.2%。\n\n当前对话:\nUser: 最近空腹血糖130左右\nAssistant: 稍微偏高但在可接受范围内",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Wait option",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "上次开的什么药来着?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Previous prescription inquiry",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "干预措施成功吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Intervention success",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "How can I prevent osteoporosis?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Prevention strategy",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "My stomach hurts right now",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Acute symptom description",
+    "category": "新症状描述"
+  },
+  {
+    "query": "You said something about lifestyle, what exactly?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Lifestyle advice recall",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "This doesn't follow my usual pattern",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.69,
+    "reason": "Pattern deviation detection",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "The triggers seem different from last time",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.74,
+    "reason": "Etiology comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "Are my hormone levels balanced now?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Endocrine balance inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "How to use ear drops?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Otic administration",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "我的高血压最近控制得怎么样?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Hypertension control inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "My joint pain is recurring",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Joint symptom return",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "I forgot which tests the doctor ordered before",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Test order recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "腰痛",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Back pain",
+    "category": "新症状描述"
+  },
+  {
+    "query": "I'm having recurring dizzy spells",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Balance symptom recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "You mentioned some benefits, what are they?",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Benefit inquiry",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "I have a severe headache today",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Current new symptom presentation",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Which blood pressure med was I on last month?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Specific medication recall",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "That makes sense now",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Logical confirmation",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "My balance feels off",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Balance disturbance",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Are my migraines less frequent now?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Migraine frequency tracking",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "要改变饮食吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Diet change",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "和平时的模式不一样",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.7,
+    "reason": "Pattern deviation from usual",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "What's my liver function trend?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Hepatic function monitoring",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "Can I exercise with this condition?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Activity permission",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "What should I watch for, you said?",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Monitoring guidance",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Can you break that down for me?",
+    "short_term_context": "Current dialogue:\nUser: My blood pressure is high\nAssistant: You should monitor it twice daily and avoid salty foods\nUser: ",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Step-by-step request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Has my weight changed since our last discussion?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Parameter tracking over time",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "What exercises are good for arthritis?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Exercise recommendation",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "一周运动几次合适?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Exercise frequency",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Can I drive with this?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Driving safety",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "之前好像换过药",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.68,
+    "reason": "Vague medication change",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Can stress cause heart disease?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Risk factor question",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "What procedures did I undergo last time?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Historical procedure inquiry",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "能再详细一点吗?",
+    "short_term_context": "当前对话:\nUser: 我恶心\nAssistant: 试试姜茶,少量多餐\nUser: ",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "More detail request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "I appreciate the help",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Appreciation statement",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Compared to last time, should I be worried?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.68,
+    "reason": "Comparison with anxiety component",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "I understand now",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Understanding statement",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "My knee pain is more severe than during my last visit",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Severity comparison with history",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "How is my cholesterol trending?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Lipid profile monitoring",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "How is pneumonia treated?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "General treatment question",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Did the injection work better than pills last time?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Route of administration comparison",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Has the physical therapy helped?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "PT outcome assessment",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "我的病情有好转吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Condition improvement",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "The tremors are back again",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Movement symptom return",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "Is this contagious?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Transmission risk",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "Is my chronic kidney disease progressing?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "CKD progression inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "我对什么药过敏来着?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.97,
+    "reason": "Drug allergy recall",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "What lab work was completed previously?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Laboratory test history",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "I'm having hot flashes",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Vasomotor symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Are my symptoms progressing faster than last time?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Disease progression comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "上次医生让我做的那个疗法是什么?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Therapy type recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "阿司匹林的剂量是多少?",
+    "short_term_context": "当前对话:\nUser: 我恶心\nAssistant: 试试姜茶,少量多餐\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Dosage question",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "What did the scan reveal last time?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Imaging result inquiry",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "I have a clicking joint",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Joint sound",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Did the medication require monitoring last time?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Monitoring requirement recall",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "我能重新开始吃那个药吗?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Medication resumption",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "感觉很焦虑",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.9,
+    "reason": "Anxiety feeling",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Thanks for clarifying",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Clarification appreciation",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "My stomach pain is recurring with the same intensity",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Recurrence pattern matching",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "以前吃的止痛药叫什么?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Analgesic name recall",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "最近很疲劳",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Recent fatigue",
+    "category": "新症状描述"
+  },
+  {
+    "query": "My voice is hoarse",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Voice change",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Okay, thank you doctor",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Professional gratitude",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Should I elevate the affected area?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Positioning advice",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "我有按时吃过那个药吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.88,
+    "reason": "Adherence history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "剂量是多少您再说一下?",
+    "short_term_context": "当前对话:\nUser: 我头痛\nAssistant: 建议服用400mg布洛芬,饭后服用\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Dosage repeat",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Should I avoid alcohol with this?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Contraindication inquiry",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "这个疗法对我有用吗?",
+    "short_term_context": "历史摘要: 2型糖尿病患者,上次糖化血红蛋白7.2%。\n\n当前对话:\nUser: 最近空腹血糖130左右\nAssistant: 稍微偏高但在可接受范围内",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Therapy effectiveness",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "这次来得比以前快",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.73,
+    "reason": "Onset speed comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "I remember getting some results last time",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.69,
+    "reason": "Vague result recollection",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Can you give me more details about that?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Detail expansion",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Understood, thanks",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Brief acknowledgment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "What did you say about interactions?",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Interaction information recall",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "之前诊断的是什么问题?",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Previous diagnostic issue query",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "I'm experiencing the same issue again",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Same issue repetition",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "How can I reduce stress naturally?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Stress management",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "我现在懂了",
+    "short_term_context": "当前对话:\nUser: 我恶心\nAssistant: 试试姜茶,少量多餐\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Current understanding",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "How should I take the ibuprofen you just mentioned?",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Follow-up on current discussion",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Can I wait to see if it gets better?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Wait-and-see option",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "That brand you mentioned, what was it called?",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Brand name recall",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Did that painkiller cause me any problems?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Analgesic adverse event history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "I think my condition is getting worse",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.75,
+    "reason": "Subjective deterioration concern",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "My palpitations are back",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Cardiac symptom return",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "Was I allergic to any medication before?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.97,
+    "reason": "Allergy history inquiry",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "什么食物降胆固醇?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Dietary advice",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "What screening was done during my previous checkup?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Screening procedure inquiry",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Is the medication working better than it did before?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Treatment efficacy comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "I'm seeing similar changes to last time",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.75,
+    "reason": "Progressive symptom comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "这次的症状和上次不太一样",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Symptom characteristic comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "Can you check what treatment I was on before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Treatment verification request",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "牙疼得厉害",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Severe toothache",
+    "category": "新症状描述"
+  },
+  {
+    "query": "How to take liquid medication?",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Liquid formulation",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "The onset was faster than my previous episodes",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.77,
+    "reason": "Temporal dynamics comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "What was my asthma control medication?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Controller medication recall",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "What therapy was I receiving previously?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Therapy type inquiry",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "How does insulin work?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Mechanism question",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "What was the conclusion from my previous examination?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Examination outcome query",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "为什么要这样做?",
+    "short_term_context": "当前对话:\nUser: 我血压高\nAssistant: 每天测两次血压,少吃盐\nUser: ",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Rationale question",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "What was the treatment duration you mentioned?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Treatment timeline query",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "感觉治疗效果有点不同",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.73,
+    "reason": "Subjective difference",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "How to use a nebulizer?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Device operation",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Thanks, that's useful",
+    "short_term_context": "Current dialogue:\nUser: My blood pressure is high\nAssistant: You should monitor it twice daily and avoid salty foods\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Utility acknowledgment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "糖尿病管理效果好吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Diabetes management evaluation",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "That's clear now",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Clarity confirmation",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Is my condition responding to treatment?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Treatment response assessment",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "Did I respond well to that treatment last time?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Treatment response history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "That helps, thank you",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Helpful acknowledgment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "I'm experiencing chills",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Systemic symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "The numbness has returned",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Neurological symptom return",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "需要检查吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Test necessity",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "What's the difference between the two you mentioned?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Comparison request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "My response to rest isn't as good as before",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.71,
+    "reason": "Treatment response differential",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "感觉和上次发作的时候很像",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Episode similarity recognition",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "老问题又复发了",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Chronic problem relapse",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "What's my liver enzyme pattern recently?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Liver function pattern",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "What foods help lower cholesterol?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Dietary advice",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "能查一下我的用药记录吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Medication history review",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "My blood pressure feels high",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.88,
+    "reason": "Subjective vital sign",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Is my pulmonary hypertension stable?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Pulmonary pressure status",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "How stable is my Parkinson's disease?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Neurodegenerative disease monitoring",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "How does smoking affect lungs?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Health impact question",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Appreciate your help",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Help acknowledgment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Can I take it every day long-term?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Long-term safety",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "What antidepressant was I prescribed before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Antidepressant history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Is my diabetes management improving?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Disease management trend inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "I notice the same progression as before",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.77,
+    "reason": "Timeline comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "我会记住的",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Memory commitment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Has the swelling reduced since my last visit?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Physical improvement tracking",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "关节炎适合什么运动?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Exercise advice",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Is the treatment showing results?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Treatment outcome inquiry",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "我忘了上次吃的药叫什么了",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Medication name recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "您说的几个选择哪个好?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Option comparison",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "能告诉我之前的病历上写的什么吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Medical record content request",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "失眠",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": false,
+    "confidence": 0.9,
+    "reason": "Insomnia",
+    "category": "新症状描述"
+  },
+  {
+    "query": "不记得以前有这么严重",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.71,
+    "reason": "Memory-based severity comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "Do I need hospitalization?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Admission necessity",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "How is my fibromyalgia pain pattern?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Fibromyalgia symptom tracking",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "Can you elaborate on that point?",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Detail request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "How does cancer develop?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Pathophysiology question",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Did I have side effects from the previous drug?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Adverse reaction history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Can I treat this at home?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Home treatment option",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "How does meditation help health?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Mind-body practice",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "How is my lupus activity lately?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Autoimmune disease activity",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "How can I improve my cardiovascular health?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Cardiovascular wellness",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Has the chemotherapy been effective?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Chemotherapy efficacy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "Can you verify my allergy medication history?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Allergy treatment verification",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "甲状腺指标正常吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Thyroid marker inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "Can this get worse?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Progression concern",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "上次化验报告显示什么?",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Lab report content inquiry",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "What's my recent A1C reading trend?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Diabetes marker monitoring",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "I think there was a diagnosis but I'm not sure",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.68,
+    "reason": "Uncertain diagnostic recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "刚才您说的布洛芬怎么吃?",
+    "short_term_context": "当前对话:\nUser: 我发烧了\nAssistant: 每6小时服用500mg对乙酰氨基酚,多休息\nUser: ",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Medication instruction follow-up",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "What is celiac disease?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Disease definition",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Is this normal progression or worse than expected?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.7,
+    "reason": "Deviation from expected course",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "我懂了",
+    "short_term_context": "当前对话:\nUser: 我恶心\nAssistant: 试试姜茶,少量多餐\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Comprehension statement",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "The reflux symptoms returned",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "GERD recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "That timeline you mentioned, how long exactly?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Timeline clarification",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "How should I take ibuprofen?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "General medication usage",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Can you explain this in simpler terms?",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Simplification request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "What follow-up care was recommended last time?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Follow-up plan recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Did the radiation therapy work?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Radiation treatment outcome",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "I have brittle nails",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.87,
+    "reason": "Nail change",
+    "category": "新症状描述"
+  },
+  {
+    "query": "I feel nauseous right now",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Current GI symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "How to take sublingual tablets?",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Sublingual route",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "What did you mean by monitoring?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Term clarification",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "哮喘控制得好不好?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Asthma control status",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "I need to know what medication I took previously",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Past medication inquiry",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "How long before I see results from this?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Timeline expectation",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "The vertigo is back",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Vertigo recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "这危险吗?",
+    "short_term_context": "历史摘要: 2型糖尿病患者,上次糖化血红蛋白7.2%。\n\n当前对话:\nUser: 最近空腹血糖130左右\nAssistant: 稍微偏高但在可接受范围内",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Danger assessment",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "Can I take it with coffee?",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.9,
+    "reason": "Caffeine interaction",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "How many times per day for antibiotics?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Dosing frequency",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "关于饮食您说了什么?",
+    "short_term_context": "当前对话:\nUser: 我头痛\nAssistant: 建议服用400mg布洛芬,饭后服用\nUser: ",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Diet advice recall",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Should I apply ice or heat?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Treatment modality",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "I'm less responsive to the same interventions",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.76,
+    "reason": "Treatment efficacy decline",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "活动能力比之前有提升吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Functional improvement tracking",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "I can't remember the medication name from before",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Drug name recall difficulty",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "感到发冷",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Feeling chills",
+    "category": "新症状描述"
+  },
+  {
+    "query": "My ankle is swollen",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "New physical finding",
+    "category": "新症状描述"
+  },
+  {
+    "query": "How well did the casting heal the fracture?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Orthopedic treatment outcome",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "What was the reason you mentioned for this?",
+    "short_term_context": "Current dialogue:\nUser: My blood pressure is high\nAssistant: You should monitor it twice daily and avoid salty foods\nUser: ",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Rationale inquiry",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Can I chew this tablet?",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Administration form",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Should I rinse my mouth after?",
+    "short_term_context": "Current dialogue:\nUser: My blood pressure is high\nAssistant: You should monitor it twice daily and avoid salty foods\nUser: ",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Post-administration care",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "刚才提到的副作用是什么?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Side effect inquiry",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "I have a stuffy nose",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Nasal congestion",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Was there a drug I couldn't tolerate?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.72,
+    "reason": "Intolerance history uncertainty",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Clear, thanks",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Brief clarity confirmation",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Did the sleep medication work for me?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Sleep aid efficacy query",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "I see, that makes sense",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Understanding confirmation",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Okay, I've got it",
+    "short_term_context": "Current dialogue:\nUser: I feel nauseous\nAssistant: Try ginger tea and eat small frequent meals\nUser: ",
+    "need_rag": false,
+    "confidence": 0.98,
+    "reason": "Possession of information",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "I have a lump I noticed",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "New mass detection",
+    "category": "新症状描述"
+  },
+  {
+    "query": "What's causing this?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Etiology inquiry",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "上个月开的药怎么吃来着?",
+    "short_term_context": "历史摘要: 2型糖尿病患者,上次糖化血红蛋白7.2%。\n\n当前对话:\nUser: 最近空腹血糖130左右\nAssistant: 稍微偏高但在可接受范围内",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Dosage instruction recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "The specialist mentioned a condition I forgot",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.73,
+    "reason": "Forgotten specialist diagnosis",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "What's my fasting glucose trend?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Glucose monitoring inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "What's my creatinine level trend?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Kidney marker tracking",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "耳朵有响声",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Ear ringing",
+    "category": "新症状描述"
+  },
+  {
+    "query": "肚子绞痛",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Abdominal cramp",
+    "category": "新症状描述"
+  },
+  {
+    "query": "The intensity fluctuates more than it did previously",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": true,
+    "confidence": 0.74,
+    "reason": "Variability comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "Is the combination therapy working better?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Combination treatment evaluation",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "心脏病情稳定吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Cardiac condition stability",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "副作用比上次轻一些吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Adverse effect comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "那个症状又出现了",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Symptom reappearance",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "上次医生建议的治疗方法是啥?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Treatment recommendation query",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "又开始发作了",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Flare-up occurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "这次咳嗽没有之前那么厉害",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Symptom intensity reduction",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "疫苗是如何工作的?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Vaccine mechanism",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "What was the dosage you prescribed last time?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Dosage information query",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Okay, sounds good",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Agreement expression",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "I have difficulty swallowing",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Dysphagia",
+    "category": "新症状描述"
+  },
+  {
+    "query": "感冒的症状有哪些?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Symptom inquiry",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "What was the duration of my last antibiotic course?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Treatment duration history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "What are antioxidants?",
+    "short_term_context": "Historical summary: Patient presented with intermittent headaches for 3 days.\n\nCurrent dialogue:\nUser: I took ibuprofen and felt better\nAssistant: Good, symptom relief is a positive sign",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Nutritional concept",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "我记得之前吃过类似的药",
+    "short_term_context": "历史摘要: 2型糖尿病患者,上次糖化血红蛋白7.2%。\n\n当前对话:\nUser: 最近空腹血糖130左右\nAssistant: 稍微偏高但在可接受范围内",
+    "need_rag": true,
+    "confidence": 0.74,
+    "reason": "Vague medication similarity",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "之前是不是换过药?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.73,
+    "reason": "Medication change uncertainty",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "What treatment did you recommend last time?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Previous treatment plan recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "That dosage you mentioned, can you repeat it?",
+    "short_term_context": "Current dialogue:\nUser: I have a fever\nAssistant: Take acetaminophen 500mg every 6 hours and rest\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Dosage confirmation",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Should I refrigerate this?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Storage temperature",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "My face is puffy",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Facial swelling",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Can I continue my regular activities?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Activity continuation",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "Can I continue taking the ibuprofen prescribed last time?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Previous prescription continuation query",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Has my cholesterol improved from my last test?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Lab trend analysis",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "What did the test results indicate last month?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Historical test interpretation",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "上个月用的胰岛素剂量是多少?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Insulin dosage history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Is my psoriasis improving with treatment?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Dermatological condition tracking",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "最近血糖平均值是多少?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Average glucose inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "细菌和病毒有什么区别?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Conceptual difference",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "要注意什么您刚才说的?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Monitoring point",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "胸口有点闷",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Chest discomfort",
+    "category": "新症状描述"
+  },
+  {
+    "query": "That's great, thank you",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Positive acknowledgment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Can you repeat those instructions?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Instruction repetition",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "膝盖疼痛比上次来的时候更严重",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Joint pain progression",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "What causes allergic reactions?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Allergic mechanism",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Should I take medication for this?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Medication need",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "Did the stent placement help?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Interventional procedure outcome",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "好的，我试试",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Trial commitment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "能坐飞机吗?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Flight safety",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "Is rest enough for this?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Rest sufficiency",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "Are my test results better than the previous ones?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Diagnostic result trending",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "That test you mentioned, when should I get it?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Timing question",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "药物效果好不好?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Medication efficacy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "How well is the insulin controlling my sugar?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Insulin efficacy inquiry",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "Did the nerve block provide relief?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Pain intervention efficacy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "好的，我知道了",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.98,
+    "reason": "Standard acknowledgment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "The symptoms are appearing in a different order",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.72,
+    "reason": "Sequence alteration",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "What was my exercise prescription from before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Non-pharmacological treatment query",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Has my energy level increased since last visit?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Symptom severity tracking",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "需要担心吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Worry assessment",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "Can you explain the mechanism you described?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Mechanism clarification",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "What imaging studies were performed last time?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Imaging study recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "Is my pain tolerance better than it was last month?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Subjective improvement assessment",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "上次医生说我是什么病来着?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Previous diagnosis recall question",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "我明白了",
+    "short_term_context": "当前对话:\nUser: 我头痛\nAssistant: 建议服用400mg布洛芬,饭后服用\nUser: ",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Clear understanding",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "Did the blood transfusion help?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Transfusion efficacy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "The chest pain came back",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Pain recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "另一个方案是什么?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Alternative inquiry",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "和上次相比,肿胀消退了不少",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Physical finding improvement",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "I don't remember it being this severe previously",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.72,
+    "reason": "Memory-based comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "药贴怎么贴?",
+    "short_term_context": "当前对话:\nUser: 我头痛\nAssistant: 建议服用400mg布洛芬,饭后服用\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Patch application",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Has my thyroid been in normal range?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Thyroid status inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "The psoriasis is flaring again",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Chronic skin condition flare",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "胰岛素怎么注射?",
+    "short_term_context": "当前对话:\nUser: 我恶心\nAssistant: 试试姜茶,少量多餐\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Injection method",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "是什么原因?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Cause inquiry",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "I think it's happening again",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.7,
+    "reason": "Ambiguous recurrence statement",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "胸痛又来了",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Chest pain return",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "Did the lifestyle changes help?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.9,
+    "reason": "Non-pharmacological intervention",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "我现在头痛怎么办?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Current headache management",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "我记不清上次检查的结论了",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Examination conclusion recall",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "I'm having another gout attack",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.96,
+    "reason": "Specific disease recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "Can you send me information about what we discussed?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Information request",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "皮疹又长出来了",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Rash recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "How stable is my cirrhosis?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Liver disease stability",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "Are my rheumatoid arthritis flares less frequent?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "RA flare frequency",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "How much water should I drink daily?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "General health advice",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "各项指标都在正常范围吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Overall metrics inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "Thanks so much",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Strong gratitude",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "What treatment do I need?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Treatment inquiry",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "慢阻肺进展有没有放缓?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "COPD progression inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "BMI是什么意思?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Health metric",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "膝盖僵硬",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": false,
+    "confidence": 0.91,
+    "reason": "Knee stiffness",
+    "category": "新症状描述"
+  },
+  {
+    "query": "好像之前有个诊断来着",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.69,
+    "reason": "Uncertain diagnosis memory",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "That resource you talked about, where is it?",
+    "short_term_context": "Current dialogue:\nUser: My blood pressure is high\nAssistant: You should monitor it twice daily and avoid salty foods\nUser: ",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Resource location",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "I'm experiencing another kidney stone",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Renal problem recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "我的病情比上次有好转吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Overall condition improvement inquiry",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "My depression symptoms returned",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Mental health relapse",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "治疗效果比上次好吗?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Treatment efficacy comparison",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "Has my blood pressure been stable?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "BP stability assessment",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "I'm having muscle cramps",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Muscular spasm",
+    "category": "新症状描述"
+  },
+  {
+    "query": "Should I take it with food?",
+    "short_term_context": "Current dialogue:\nUser: I have a headache\nAssistant: I recommend taking 400mg ibuprofen with food\nUser: ",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Administration timing",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "My tongue feels swollen",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.9,
+    "reason": "Oral symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "I have frequent urination",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Urinary symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "How to use a spacer with inhaler?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Accessory device",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "How successful was the procedure?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Procedure success inquiry",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "能在家治疗吗?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Home treatment",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "It's recurring but different",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.74,
+    "reason": "Modified recurrence",
+    "category": "复发症状识别"
+  },
+  {
+    "query": "不确定是否有效",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.7,
+    "reason": "Uncertain efficacy",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "好的，知道了",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Acknowledgment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "What's the next step?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Next action",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "Do I need to see a doctor?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Medical consultation need",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "谢谢您的建议",
+    "short_term_context": "当前对话:\nUser: 我发烧了\nAssistant: 每6小时服用500mg对乙酰氨基酚,多休息\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Advice thanks",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "我的指标好像不太对",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.71,
+    "reason": "Vague metric concern",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "What's the difference between bacteria and virus?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Conceptual difference",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "Got it, thank you",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.97,
+    "reason": "Confirmation with gratitude",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "How to measure liquid dosage?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Measurement method",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Are my allergy symptoms better controlled?",
+    "short_term_context": "Historical summary: Patient has Type 2 diabetes, last A1C was 7.2%.\n\nCurrent dialogue:\nUser: My fasting glucose is around 130 lately\nAssistant: That's slightly elevated but within acceptable range",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Allergy management evaluation",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "Can I get a refill of my previous prescription?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Prescription refill request",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "Why does high blood pressure occur?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Etiology question",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "药膏怎么涂?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Ointment application",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Should I compress the area?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Compression application",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "I feel anxious and stressed",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.9,
+    "reason": "Mental health symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "手指发麻",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Finger numbness",
+    "category": "新症状描述"
+  },
+  {
+    "query": "症状控制住了吗?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Symptom control",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "饭前吃还是饭后吃?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Meal relationship",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "How am I doing overall with my condition?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.78,
+    "reason": "General status inquiry",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "胆固醇水平有改善吗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Cholesterol improvement",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "This reminds me of that episode we talked about",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.72,
+    "reason": "Indirect historical reference",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "What should I avoid?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Avoidance guidance",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "Can I take a bath?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.89,
+    "reason": "Bathing safety",
+    "category": "当前状态询问"
+  },
+  {
+    "query": "What anti-inflammatory was I using before?",
+    "short_term_context": "Historical summary: Patient with hypertension on lisinopril 10mg daily.\n\nCurrent dialogue:\nUser: Blood pressure readings are 135/85 this week\nAssistant: The readings show good control with current medication",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Anti-inflammatory history",
+    "category": "用药历史追溯"
+  },
+  {
+    "query": "How is my anemia responding to treatment?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.91,
+    "reason": "Anemia treatment response",
+    "category": "慢病管理询问"
+  },
+  {
+    "query": "Is my blood pressure more stable than it was?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.94,
+    "reason": "Vital sign stability assessment",
+    "category": "历史症状比较"
+  },
+  {
+    "query": "药片可以掰成两半吗?",
+    "short_term_context": "当前对话:\nUser: 我血压高\nAssistant: 每天测两次血压,少吃盐\nUser: ",
+    "need_rag": false,
+    "confidence": 0.92,
+    "reason": "Tablet splitting",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "胆固醇如何影响心脏?",
+    "short_term_context": "历史摘要: 高血压患者,服用赖诺普利10mg每日。\n\n当前对话:\nUser: 这周血压135/85\nAssistant: 目前药物控制效果良好",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Physiological effect",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "眼药水怎么滴?",
+    "short_term_context": "当前对话:\nUser: 我头痛\nAssistant: 建议服用400mg布洛芬,饭后服用\nUser: ",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Eye drop usage",
+    "category": "用药方法询问"
+  },
+  {
+    "query": "Can you check what therapy I was doing before?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.92,
+    "reason": "Therapy status verification",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "上次检查好像发现了什么",
+    "short_term_context": "历史摘要: 患者主诉头痛三天,间歇性发作。\n\n当前对话:\nUser: 我吃了布洛芬后好一些\nAssistant: 好的,症状缓解是好现象",
+    "need_rag": true,
+    "confidence": 0.7,
+    "reason": "Non-specific finding memory",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "您说要避免什么来着?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Avoidance recall",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "I have a terrible toothache",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.93,
+    "reason": "Dental pain",
+    "category": "新症状描述"
+  },
+  {
+    "query": "I'll keep that in mind",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Retention commitment",
+    "category": "简单确认问题"
+  },
+  {
+    "query": "My throat is very sore",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.94,
+    "reason": "Acute throat symptom",
+    "category": "新症状描述"
+  },
+  {
+    "query": "What is metabolic syndrome?",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.96,
+    "reason": "Syndrome definition",
+    "category": "通用医疗咨询"
+  },
+  {
+    "query": "之前做过什么治疗?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.93,
+    "reason": "Historical treatment inquiry",
+    "category": "历史诊疗查询"
+  },
+  {
+    "query": "那个品牌叫什么?",
+    "short_term_context": "当前对话:\nUser: 我恶心\nAssistant: 试试姜茶,少量多餐\nUser: ",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Brand recall",
+    "category": "当前对话延续"
+  },
+  {
+    "query": "Did the surgery achieve the desired outcome?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Surgical outcome evaluation",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "气短",
+    "short_term_context": "",
+    "need_rag": false,
+    "confidence": 0.95,
+    "reason": "Shortness of breath",
+    "category": "新症状描述"
+  },
+  {
+    "query": "How effective was the antibiotic course?",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.95,
+    "reason": "Antibiotic treatment outcome",
+    "category": "治疗效果跟踪"
+  },
+  {
+    "query": "It's that familiar feeling coming back",
+    "short_term_context": "",
+    "need_rag": true,
+    "confidence": 0.73,
+    "reason": "Subjective symptom recognition",
+    "category": "历史症状比较"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "total_samples": 940,
+  "need_rag_samples": 470,
+  "no_need_rag_samples": 470,
+  "english_samples": 658,
+  "chinese_samples": 282,
+  "categories": {
+    "治疗效果跟踪": 70,
+    "当前对话延续": 90,
+    "复发症状识别": 60,
+    "当前状态询问": 70,
+    "历史诊疗查询": 90,
+    "慢病管理询问": 70,
+    "用药历史追溯": 80,
+    "历史症状比较": 100,
+    "用药方法询问": 70,
+    "通用医疗咨询": 80,
+    "简单确认问题": 60,
+    "新症状描述": 100
+  },
+  "avg_confidence": {
+    "need_rag": 0.895,
+    "no_need_rag": 0.937
+  },
+  "context_distribution": {
+    "with_context": 304,
+    "without_context": 636
+  }
+}

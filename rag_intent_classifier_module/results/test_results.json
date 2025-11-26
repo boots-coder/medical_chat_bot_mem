@@ -1,0 +1,1321 @@
+{
+  "accuracy": 0.9893617021276596,
+  "results": [
+    {
+      "query": "I need details about my last prescription",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9962658286094666,
+      "correct": true
+    },
+    {
+      "query": "How effective was the treatment plan from last time?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9969866871833801,
+      "correct": true
+    },
+    {
+      "query": "How to use an inhaler properly?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9977543950080872,
+      "correct": true
+    },
+    {
+      "query": "How do I know if what you described is happening?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9476985931396484,
+      "correct": true
+    },
+    {
+      "query": "What did my last blood work show?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9972777962684631,
+      "correct": true
+    },
+    {
+      "query": "什么时候做那个检查?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9269358515739441,
+      "correct": true
+    },
+    {
+      "query": "How long does a cold usually last?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9901102185249329,
+      "correct": true
+    },
+    {
+      "query": "How to store this medication?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9975579977035522,
+      "correct": true
+    },
+    {
+      "query": "Should I taper off this medication?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9281574487686157,
+      "correct": true
+    },
+    {
+      "query": "How well is the immunotherapy working?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9957701563835144,
+      "correct": true
+    },
+    {
+      "query": "How to use a metered-dose inhaler?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.995133101940155,
+      "correct": true
+    },
+    {
+      "query": "Is the exercise program showing benefits?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9963201284408569,
+      "correct": true
+    },
+    {
+      "query": "能和其他药一起吃吗?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9846611618995667,
+      "correct": true
+    },
+    {
+      "query": "How to use suppositories?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9962812066078186,
+      "correct": true
+    },
+    {
+      "query": "上次的药有什么不良反应吗?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9977452158927917,
+      "correct": true
+    },
+    {
+      "query": "明白了，谢谢",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9953072667121887,
+      "correct": true
+    },
+    {
+      "query": "这个治疗方案成功吗?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9968061447143555,
+      "correct": true
+    },
+    {
+      "query": "能重复一下步骤吗?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9960160851478577,
+      "correct": true
+    },
+    {
+      "query": "这正常吗?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.8543080687522888,
+      "correct": true
+    },
+    {
+      "query": "My vision is blurry today",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.989413857460022,
+      "correct": true
+    },
+    {
+      "query": "新方案效果怎样?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9973238706588745,
+      "correct": true
+    },
+    {
+      "query": "Has my condition improved since my last appointment?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9972430467605591,
+      "correct": true
+    },
+    {
+      "query": "Is this dangerous?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9937142729759216,
+      "correct": true
+    },
+    {
+      "query": "Should I take it in the morning?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9975913763046265,
+      "correct": true
+    },
+    {
+      "query": "I'm having night sweats",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9951220154762268,
+      "correct": true
+    },
+    {
+      "query": "心跳很快",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9822356700897217,
+      "correct": true
+    },
+    {
+      "query": "I have unusual bruising",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9963567852973938,
+      "correct": true
+    },
+    {
+      "query": "My tolerance level has changed since last time",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9974735379219055,
+      "correct": true
+    },
+    {
+      "query": "Did the dialysis improve my condition?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.995919942855835,
+      "correct": true
+    },
+    {
+      "query": "My wound isn't healing",
+      "expected": false,
+      "predicted": true,
+      "confidence": 0.8052878379821777,
+      "correct": false
+    },
+    {
+      "query": "炎症指标比上次降低了吗?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9974067807197571,
+      "correct": true
+    },
+    {
+      "query": "How does vaccination work?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9903550148010254,
+      "correct": true
+    },
+    {
+      "query": "How can I improve my sleep quality?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9895999431610107,
+      "correct": true
+    },
+    {
+      "query": "Is the medication from my last visit still valid?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.997588038444519,
+      "correct": true
+    },
+    {
+      "query": "My old back problem is recurring",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9966663718223572,
+      "correct": true
+    },
+    {
+      "query": "Can I take over-the-counter meds?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9946725964546204,
+      "correct": true
+    },
+    {
+      "query": "上次开的布洛芬还能继续吃吗?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9943426847457886,
+      "correct": true
+    },
+    {
+      "query": "Is the steroid treatment working?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9970592260360718,
+      "correct": true
+    },
+    {
+      "query": "You said to monitor something, how do I do that?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.997973620891571,
+      "correct": true
+    },
+    {
+      "query": "The pain feels different from my last episode",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9968594312667847,
+      "correct": true
+    },
+    {
+      "query": "The fatigue has returned",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.996340274810791,
+      "correct": true
+    },
+    {
+      "query": "Has my multiple sclerosis been active?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9938279986381531,
+      "correct": true
+    },
+    {
+      "query": "I need to know what tests were run before",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9962685108184814,
+      "correct": true
+    },
+    {
+      "query": "如何提高睡眠质量?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9954046010971069,
+      "correct": true
+    },
+    {
+      "query": "之前那个药对我有效吗?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9975998997688293,
+      "correct": true
+    },
+    {
+      "query": "You mentioned a few options, which is best?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9949787259101868,
+      "correct": true
+    },
+    {
+      "query": "My tongue has white coating",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9833380579948425,
+      "correct": true
+    },
+    {
+      "query": "那个动作怎么做?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9546253681182861,
+      "correct": true
+    },
+    {
+      "query": "The joint stiffness is less severe than last month",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9959968328475952,
+      "correct": true
+    },
+    {
+      "query": "脚踝肿了",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.979255735874176,
+      "correct": true
+    },
+    {
+      "query": "需要住院吗?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9934144020080566,
+      "correct": true
+    },
+    {
+      "query": "I have a metallic taste",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9937443137168884,
+      "correct": true
+    },
+    {
+      "query": "Okay, got it",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9949341416358948,
+      "correct": true
+    },
+    {
+      "query": "The recovery period seems extended compared to before",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9970731735229492,
+      "correct": true
+    },
+    {
+      "query": "那个感觉又来了",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9924894571304321,
+      "correct": true
+    },
+    {
+      "query": "您说要吃多久来着?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9964261651039124,
+      "correct": true
+    },
+    {
+      "query": "具体要多长时间?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9943785071372986,
+      "correct": true
+    },
+    {
+      "query": "The swelling is back in my ankles",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9919963479042053,
+      "correct": true
+    },
+    {
+      "query": "Can this heal on its own?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9910262227058411,
+      "correct": true
+    },
+    {
+      "query": "The pattern seems to be repeating",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9686815738677979,
+      "correct": true
+    },
+    {
+      "query": "I forgot what pills I was taking last month",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9969269633293152,
+      "correct": true
+    },
+    {
+      "query": "Has my sarcoidosis been active lately?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9973682761192322,
+      "correct": true
+    },
+    {
+      "query": "这个疼痛需要治疗吗?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9577630758285522,
+      "correct": true
+    },
+    {
+      "query": "Is my depression well managed currently?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.995104193687439,
+      "correct": true
+    },
+    {
+      "query": "这个药可以掰开吗?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9169623255729675,
+      "correct": true
+    },
+    {
+      "query": "What condition was I being treated for previously?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9974246025085449,
+      "correct": true
+    },
+    {
+      "query": "The ear ringing came back",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9917805790901184,
+      "correct": true
+    },
+    {
+      "query": "What are my options?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.996254563331604,
+      "correct": true
+    },
+    {
+      "query": "What was that statistic you mentioned?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9341298937797546,
+      "correct": true
+    },
+    {
+      "query": "What's the correct dosage for aspirin?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9965829253196716,
+      "correct": true
+    },
+    {
+      "query": "肌肉酸痛",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.8968026041984558,
+      "correct": true
+    },
+    {
+      "query": "Can you review my previous test schedule?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9965904951095581,
+      "correct": true
+    },
+    {
+      "query": "Have I had issues with this drug class before?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9924476146697998,
+      "correct": true
+    },
+    {
+      "query": "之前的药比现在的好吗?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9965336322784424,
+      "correct": true
+    },
+    {
+      "query": "Is my heart rate more irregular than it was last time?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9975335597991943,
+      "correct": true
+    },
+    {
+      "query": "血糖控制得比以前好吗?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9963803887367249,
+      "correct": true
+    },
+    {
+      "query": "Is this fever pattern similar to what I had last time?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9977733492851257,
+      "correct": true
+    },
+    {
+      "query": "What's the goal of what you're suggesting?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9980413913726807,
+      "correct": true
+    },
+    {
+      "query": "Can I swim with this?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9975981116294861,
+      "correct": true
+    },
+    {
+      "query": "Is bed rest necessary?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9938251972198486,
+      "correct": true
+    },
+    {
+      "query": "正常血糖值是多少?",
+      "expected": false,
+      "predicted": true,
+      "confidence": 0.6492454409599304,
+      "correct": false
+    },
+    {
+      "query": "How to reconstitute powder medication?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9971897006034851,
+      "correct": true
+    },
+    {
+      "query": "What scans did I get last time?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9975147247314453,
+      "correct": true
+    },
+    {
+      "query": "How does alcohol affect the liver?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9919431209564209,
+      "correct": true
+    },
+    {
+      "query": "I'm experiencing back pain",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9263602495193481,
+      "correct": true
+    },
+    {
+      "query": "How is my sleep apnea being managed?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.974670946598053,
+      "correct": true
+    },
+    {
+      "query": "Are my symptoms responding better to treatment now?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.996164083480835,
+      "correct": true
+    },
+    {
+      "query": "What tests did I have during my last visit?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9972009658813477,
+      "correct": true
+    },
+    {
+      "query": "Can you tell me what monitoring tests I had?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9930689334869385,
+      "correct": true
+    },
+    {
+      "query": "Okay, I understand",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9934982061386108,
+      "correct": true
+    },
+    {
+      "query": "How well did the medication work?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9932509064674377,
+      "correct": true
+    },
+    {
+      "query": "What are the symptoms of flu?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9923112988471985,
+      "correct": true
+    },
+    {
+      "query": "每天喝多少水合适?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9950072765350342,
+      "correct": true
+    },
+    {
+      "query": "Can you remind me of my diagnosis from last visit?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9969965219497681,
+      "correct": true
+    },
+    {
+      "query": "关节炎症状管理得怎样?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9802207946777344,
+      "correct": true
+    },
+    {
+      "query": "Is my asthma more stable than it was previously?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9967730641365051,
+      "correct": true
+    },
+    {
+      "query": "What was my rescue inhaler last time?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9964042901992798,
+      "correct": true
+    },
+    {
+      "query": "Is the topical cream working?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9900756478309631,
+      "correct": true
+    },
+    {
+      "query": "症状是不是比之前加重了?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9956798553466797,
+      "correct": true
+    },
+    {
+      "query": "手术达到预期效果了吗?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.993858277797699,
+      "correct": true
+    },
+    {
+      "query": "I think I took something similar before",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9969868063926697,
+      "correct": true
+    },
+    {
+      "query": "Did the nebulizer treatment help?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9967617988586426,
+      "correct": true
+    },
+    {
+      "query": "Is surgery needed?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9903663396835327,
+      "correct": true
+    },
+    {
+      "query": "治疗后疼痛减轻了吗?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9961189031600952,
+      "correct": true
+    },
+    {
+      "query": "The cycle appears to be starting over",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9939128756523132,
+      "correct": true
+    },
+    {
+      "query": "I'm experiencing relapse symptoms",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9967824220657349,
+      "correct": true
+    },
+    {
+      "query": "Am I recovering slower than I did last time?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9960286617279053,
+      "correct": true
+    },
+    {
+      "query": "How successful was the intervention?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9844145774841309,
+      "correct": true
+    },
+    {
+      "query": "眩晕又犯了",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.987206757068634,
+      "correct": true
+    },
+    {
+      "query": "Do I need antibiotics?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.995131254196167,
+      "correct": true
+    },
+    {
+      "query": "Have I used any herbal supplements previously?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9967373013496399,
+      "correct": true
+    },
+    {
+      "query": "这个症状有点眼熟",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.7367653250694275,
+      "correct": true
+    },
+    {
+      "query": "The hives came back",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9938223361968994,
+      "correct": true
+    },
+    {
+      "query": "I see what you mean",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9979792237281799,
+      "correct": true
+    },
+    {
+      "query": "What blood tests were ordered last visit?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9971798658370972,
+      "correct": true
+    },
+    {
+      "query": "I'm having irregular heartbeat",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9822372794151306,
+      "correct": true
+    },
+    {
+      "query": "焦虑症又发作了",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9887732863426208,
+      "correct": true
+    },
+    {
+      "query": "Is my COPD progression slowing down?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9973710775375366,
+      "correct": true
+    },
+    {
+      "query": "能帮我看看上次的诊断结果吗?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9967586398124695,
+      "correct": true
+    },
+    {
+      "query": "How to rotate injection sites?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9864821434020996,
+      "correct": true
+    },
+    {
+      "query": "恢复速度和上次比怎么样?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9975147247314453,
+      "correct": true
+    },
+    {
+      "query": "What's the recovery time?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9888289570808411,
+      "correct": true
+    },
+    {
+      "query": "What interventions were suggested last visit?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9970319271087646,
+      "correct": true
+    },
+    {
+      "query": "I need help with this pain",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9600433111190796,
+      "correct": true
+    },
+    {
+      "query": "I'm experiencing vertigo",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9656258225440979,
+      "correct": true
+    },
+    {
+      "query": "好的，谢谢医生",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9905595183372498,
+      "correct": true
+    },
+    {
+      "query": "抗生素有什么副作用?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.958441436290741,
+      "correct": true
+    },
+    {
+      "query": "I forgot what illness I was diagnosed with before",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9953640699386597,
+      "correct": true
+    },
+    {
+      "query": "吞咽困难",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.988500714302063,
+      "correct": true
+    },
+    {
+      "query": "Is the compression therapy effective?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9959586262702942,
+      "correct": true
+    },
+    {
+      "query": "I'm sweating excessively",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9962210655212402,
+      "correct": true
+    },
+    {
+      "query": "关于药物相互作用您说了什么?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9874688386917114,
+      "correct": true
+    },
+    {
+      "query": "I'm noticing a similar trajectory",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9884147644042969,
+      "correct": true
+    },
+    {
+      "query": "那个抗生素对我管用吗?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9971104860305786,
+      "correct": true
+    },
+    {
+      "query": "Can you remind me what examinations were done?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9915496110916138,
+      "correct": true
+    },
+    {
+      "query": "You mentioned support groups, where can I find them?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9974358677864075,
+      "correct": true
+    },
+    {
+      "query": "I'll follow your advice",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9855404496192932,
+      "correct": true
+    },
+    {
+      "query": "Was I on any antibiotics last visit?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9969567060470581,
+      "correct": true
+    },
+    {
+      "query": "Okay, I see",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9948081374168396,
+      "correct": true
+    },
+    {
+      "query": "我忘了上次检查出来是什么了",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9970800280570984,
+      "correct": true
+    },
+    {
+      "query": "I'm having recurring episodes",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9887095093727112,
+      "correct": true
+    },
+    {
+      "query": "我今天头很痛",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9110188484191895,
+      "correct": true
+    },
+    {
+      "query": "I have cold hands and feet",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.974791944026947,
+      "correct": true
+    },
+    {
+      "query": "治疗后症状有改善吗?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9967014193534851,
+      "correct": true
+    },
+    {
+      "query": "什么时候吃最好?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9949451088905334,
+      "correct": true
+    },
+    {
+      "query": "Has my atrial fibrillation been stable?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9929643869400024,
+      "correct": true
+    },
+    {
+      "query": "How to clean my inhaler?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9959313273429871,
+      "correct": true
+    },
+    {
+      "query": "I'm experiencing chest pain",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.805053174495697,
+      "correct": true
+    },
+    {
+      "query": "I'm having similar issues",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9861177802085876,
+      "correct": true
+    },
+    {
+      "query": "How do I do the exercise you described?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9975244402885437,
+      "correct": true
+    },
+    {
+      "query": "How is blood pressure measured?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9952083230018616,
+      "correct": true
+    },
+    {
+      "query": "Is the biologic medication working?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9975702166557312,
+      "correct": true
+    },
+    {
+      "query": "Did the steroid help me last time?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9965999722480774,
+      "correct": true
+    },
+    {
+      "query": "谢谢您的解释",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9864569306373596,
+      "correct": true
+    },
+    {
+      "query": "I'm feeling very tired lately",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9831703305244446,
+      "correct": true
+    },
+    {
+      "query": "糖浆怎么喝?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9963284134864807,
+      "correct": true
+    },
+    {
+      "query": "要吃药吗?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9914687871932983,
+      "correct": true
+    },
+    {
+      "query": "My numbers seem off lately",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.965387225151062,
+      "correct": true
+    },
+    {
+      "query": "Something about my pills changed last time",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9968047142028809,
+      "correct": true
+    },
+    {
+      "query": "呼吸有点困难",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9909507036209106,
+      "correct": true
+    },
+    {
+      "query": "Have I tried both versions of this medication?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.995759904384613,
+      "correct": true
+    },
+    {
+      "query": "感染又复发了",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.994142472743988,
+      "correct": true
+    },
+    {
+      "query": "忘记吃药怎么办?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9271952509880066,
+      "correct": true
+    },
+    {
+      "query": "Can I mix it with juice?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9977812170982361,
+      "correct": true
+    },
+    {
+      "query": "Can I take it with vitamins?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9959782361984253,
+      "correct": true
+    },
+    {
+      "query": "What's my bone density status?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9771568179130554,
+      "correct": true
+    },
+    {
+      "query": "How does this relate to what we're discussing?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9875029921531677,
+      "correct": true
+    },
+    {
+      "query": "老毛病又犯了",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.986533522605896,
+      "correct": true
+    },
+    {
+      "query": "Did I have that medication in my list?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9965020418167114,
+      "correct": true
+    },
+    {
+      "query": "过敏反应是怎么引起的?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9813810586929321,
+      "correct": true
+    },
+    {
+      "query": "How does aspirin work?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.988352358341217,
+      "correct": true
+    },
+    {
+      "query": "Is the hormone therapy working?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9908360242843628,
+      "correct": true
+    },
+    {
+      "query": "I'm having another flare-up",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.832619309425354,
+      "correct": true
+    },
+    {
+      "query": "The symptoms are changing like they did last cycle",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9971516728401184,
+      "correct": true
+    },
+    {
+      "query": "I think it's happening again",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9888078570365906,
+      "correct": true
+    },
+    {
+      "query": "1型和2型糖尿病有什么区别?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.6868399977684021,
+      "correct": true
+    },
+    {
+      "query": "专家上次说的诊断是什么?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9871302247047424,
+      "correct": true
+    },
+    {
+      "query": "怎么能好受一点?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9954593777656555,
+      "correct": true
+    },
+    {
+      "query": "Alright, understood",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9865922331809998,
+      "correct": true
+    },
+    {
+      "query": "您刚才描述的症状是什么?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9966208934783936,
+      "correct": true
+    },
+    {
+      "query": "布洛芬怎么吃?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9976269602775574,
+      "correct": true
+    },
+    {
+      "query": "What is the glycemic index?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9934096932411194,
+      "correct": true
+    },
+    {
+      "query": "Alright, thanks",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9939965009689331,
+      "correct": true
+    },
+    {
+      "query": "记得上次提到了心脏的问题",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.988848090171814,
+      "correct": true
+    },
+    {
+      "query": "上个月医生说的那个病叫什么?",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9971182346343994,
+      "correct": true
+    },
+    {
+      "query": "Something about my heart was mentioned before",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9956536293029785,
+      "correct": true
+    },
+    {
+      "query": "The treatment seems different this time",
+      "expected": true,
+      "predicted": true,
+      "confidence": 0.9909380674362183,
+      "correct": true
+    },
+    {
+      "query": "That recommendation you made, why that one?",
+      "expected": false,
+      "predicted": false,
+      "confidence": 0.9977667331695557,
+      "correct": true
+    }
+  ]
+}

@@ -60,3 +60,6 @@ htmlcov/
 
 # Model cache
 .cache/
+
+# RAG Classifier trained models (too large for git)
+rag_intent_classifier_module/models/
