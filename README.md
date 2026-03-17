@@ -88,47 +88,113 @@
 
 ## 核心架构
 
-```
-┌─────────────────────────────────────────────────┐
-│  患者点击 URL → JWT Token 验证                    │
-└──────────────────────┬──────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────┐
-│  WebSocket 实时对话 ← → FastAPI 后端              │
-└──────────────────────┬──────────────────────────┘
-                       ↓
-            ┌──────────┴──────────┐
-            │   SessionManager    │
-            │  · Token 校验       │
-            │  · 超时管理         │
-            └──────────┬──────────┘
-                       ↓
-┌─────────────────────────────────────────────────┐
-│  短期记忆（内存）                                  │
-│  滑动窗口：保留最近 10 轮对话                       │
-│  超出 Token 阈值时自动摘要                         │
-└──────────────────────┬──────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────┐
-│  RAG 意图分类器                                    │
-│  "这个问题需要历史数据吗？"                          │
-└──────┬──────────────────────────────┬───────────┘
-      不需要                          需要
-       ↓                              ↓
-┌──────────────┐          ┌───────────────────────┐
-│  仅用短期记忆  │          │  长期记忆检索           │
-│  直接生成回复  │          │  ├─ 向量库 (Chroma)    │
-│              │          │  └─ 图数据库 (Neo4j)    │
-└──────┬───────┘          └───────────┬───────────┘
-       └──────────────┬───────────────┘
-                      ↓
-          ┌───────────────────────┐
-          │  医疗回复生成器 (LLM)   │
-          │  综合三源信息生成回复    │
-          └───────────────────────┘
+### 实时对话处理流程
+
+> 用户每发送一条消息，系统执行以下完整链路（对应 `main.py` WebSocket handler → 各 Service 模块）
+
+```mermaid
+flowchart TD
+    A["患者点击 URL"] --> B["JWT Token 验证<br/><code>TokenManager.verify_token()</code>"]
+    B -->|验证失败/过期| B1["拒绝访问"]
+    B -->|验证通过| C["建立 WebSocket 连接<br/><code>ws://localhost:8000/ws/{session_id}</code>"]
+
+    C --> D["接收用户消息<br/><code>websocket.receive_text()</code>"]
+
+    D --> E["写入短期记忆<br/><code>ShortTermMemoryManager.add_turn()</code>"]
+
+    E --> F{"Token 数 > 2000<br/>或轮数 ≥ 10？"}
+    F -->|否| G["保留完整滑动窗口"]
+    F -->|是| H["LLM 摘要压缩<br/><code>_summarize_conversations()</code>"]
+    H --> H1["historical_summary = 新摘要<br/>current_window = 清空"]
+
+    G --> I["获取短期上下文<br/><code>memory.get_context()</code><br/>= 历史摘要 + 当前窗口"]
+    H1 --> I
+
+    I --> J["查询 SQLite 获取 patient_id"]
+
+    J --> K["RAG 意图分类<br/><code>RAGIntentClassifier.classify_with_strategy()</code><br/>输入: query + 短期上下文"]
+
+    K --> L{"need_rag?"}
+
+    L -->|"false（新症状/当前对话延续）"| M["long_term_context = 空"]
+
+    L -->|"true（引用历史/慢病管理）"| N["查询策略分类<br/><code>classify_query_strategy()</code><br/>基于关键词规则匹配"]
+
+    N --> O["向量检索<br/><code>Chroma.query()</code><br/>SBERT 编码 query → 余弦相似度 Top-5<br/>按 patient_id 过滤"]
+
+    N --> P{"graph_db?<br/>关键词命中？"}
+    P -->|"是（药物/症状/历史/治疗）"| Q["图谱检索<br/><code>Neo4j.query()</code><br/>drug_interaction / symptom_disease<br/>diagnosis_chain / treatment_history"]
+    P -->|否| R["仅向量结果"]
+
+    O --> S["格式化检索结果<br/><code>_format_retrieval_results()</code>"]
+    Q --> S
+    R --> S
+
+    S --> T["long_term_context = 格式化文本"]
+
+    M --> U["医疗回复生成<br/><code>MedicalResponseGenerator.generate_response()</code>"]
+    T --> U
+
+    U --> V["构建 LLM Prompt<br/>= 短期上下文 + 长期上下文 + 当前 query"]
+    V --> W["LLM API 调用<br/>temperature=0.3 / max_tokens=800"]
+    W --> X["发送回复<br/><code>websocket.send_json()</code>"]
+    X --> Y["助手回复写入短期记忆<br/><code>add_turn('assistant', response)</code>"]
+    Y --> D
+
+    style A fill:#e1f5fe
+    style B1 fill:#ffcdd2
+    style F fill:#fff9c4
+    style L fill:#fff9c4
+    style P fill:#fff9c4
+    style O fill:#e8f5e9
+    style Q fill:#f3e5f5
+    style J fill:#fff3e0
+    style W fill:#fce4ec
 ```
 
-**核心思路**：RAG 意图分类器是整个系统的"交通调度员"——它决定走快速通道（仅短期记忆）还是检索历史数据（长期记忆），避免每次都进行不必要的数据库查询。
+### 会话结束 — 长期记忆存储流程
+
+> 当会话结束时（用户点击"End Session" / 30分钟超时），触发后台异步存储（对应 `MemoryStorage.store_session_memory()`）
+
+```mermaid
+flowchart TD
+    A["POST /api/session/{session_id}/end"] --> B["获取完整对话历史<br/><code>dialogue_histories[session_id]</code>"]
+    B --> C{"对话轮数 > 30?"}
+
+    C -->|"≤ 30（短对话）"| D["直接分析<br/><code>DialogueAnalyzer.analyze_session()</code>"]
+
+    C -->|"> 30（长对话）"| E["上下文感知聚类<br/><code>ContextAwareDialogueClusterer.process()</code>"]
+
+    E --> F["SBERT 编码每个问答对<br/>融合历史上下文（权重平方递减）"]
+    F --> G["HDBSCAN 密度聚类"]
+    G --> H["输出: N 个有效簇 + 噪声点"]
+
+    H --> I["遍历每个簇/噪声点"]
+    I --> J["医疗相关性过滤<br/><code>LightweightMedicalClassifier.classify()</code>"]
+
+    J -->|非医疗相关| K["跳过"]
+    J -->|医疗相关| L["LLM 结构化分析<br/><code>DialogueAnalyzer.analyze_session()</code>"]
+
+    D --> M["生成结构化摘要"]
+    L --> M
+
+    M --> N["守卫检查<br/>session_topic 是否为闲聊/问候？<br/>实体数 ≤ 1？"]
+    N -->|无效| K
+    N -->|有效| O["三库分发存储"]
+
+    O --> P["SQLite<br/>会话元数据<br/>session_id, patient_id<br/>时间戳, 状态"]
+    O --> Q["Chroma<br/>SBERT 编码 narrative_summary<br/>存入向量 + metadata<br/>(patient_id, unit_type,<br/>session_id, analysis_json)"]
+    O --> R["Neo4j<br/>创建实体节点<br/>(Patient, Symptom, Drug...)<br/>创建关系边<br/>(HAS_SYMPTOM, MAY_CAUSE...)"]
+
+    style A fill:#e1f5fe
+    style C fill:#fff9c4
+    style J fill:#fff9c4
+    style N fill:#fff9c4
+    style K fill:#ffcdd2
+    style P fill:#fff3e0
+    style Q fill:#e8f5e9
+    style R fill:#f3e5f5
+```
 
 ---
 
@@ -541,42 +607,51 @@ GET /health
 
 ## 完整工作流示例
 
-### 第一次就诊
+> 以下流程与上方 [项目演示](#项目演示) 中的截图一一对应。
+
+### 第一次就诊（对应 Step 0 ~ Step 5）
 
 ```
-1. 外部系统调用 POST /api/external/create-session
-   → 生成 URL: http://localhost:8000/chat/eyJhbGciOi...
+1. 外部系统填写患者信息（Step 0）
+   → 调用 POST /api/external/create-session
 
-2. 患者点击 URL 进入聊天
+2. 系统创建 Session，生成一次性 URL（Step 1）
+   → URL: http://localhost:8000/chat/eyJhbGciOi...
 
-3. 对话过程：
-   患者："我最近两天一直头痛，特别难受"
-   → 短期记忆：[头痛, 两天]
-   → RAG 分类：无历史数据，不需要 RAG
-   → 回复："请问头痛是持续性的还是阵发性的？"
+3. 患者点击 URL 进入聊天界面（Step 2）
 
-   患者："一阵一阵的，太阳穴位置，还有点恶心"
-   → 短期记忆：[头痛, 两天, 阵发性, 太阳穴, 恶心]
-   → 回复："根据症状可能是偏头痛，建议服用布洛芬..."
+4. 对话过程（Step 3）：
+   患者："你好我头疼谢谢"
+   → 短期记忆：[头痛]
+   → RAG 分类：need_rag=false（新症状，无需历史数据）
+   → 回复："头痛可以先尝试休息，保持环境安静..."
 
-4. 会话结束 → 触发长期记忆存储：
-   · SQLite：记录会话元数据
-   · Chroma："患者主诉头痛2天，阵发性，太阳穴位置伴恶心，诊断偏头痛，建议布洛芬"
-   · Neo4j：Patient→HAS_SYMPTOM→头痛, Patient→HAS_SYMPTOM→恶心,
-            偏头痛→IS_SUGGESTED_FOR→Patient, 布洛芬→RECOMMENDED_FOR→偏头痛
+   患者："好的，我刚才怎么了？"
+   → 短期记忆：[头痛, 刚才怎么了]
+   → RAG 分类：need_rag=false（当前会话延续，短期记忆已覆盖）
+   → 回复："你刚才提到有头痛的症状..."
+
+5. 后端日志确认 RAG 分类与患者 ID 提取正确（Step 4）
+
+6. 会话结束 → 触发长期记忆存储（Step 5）：
+   · SQLite：记录会话元数据（session_id, patient_id, 时间戳）
+   · Chroma：向量化存储叙述性摘要
+   · Neo4j：构建 Patient→HAS_SYMPTOM→Headache 等知识图谱
 ```
 
-### 第二次复诊（一周后）
+### 第二次复诊（对应 Step 6 ~ Step 8）
 
 ```
-1. 患者收到新 URL，进入聊天
+1. 使用相同患者 ID 创建新 Session（Step 6）
 
-2. 患者："上次和你说过的，还能继续吃那个药吗？"
-   → 短期记忆：[上次, 继续吃药]
-   → RAG 分类：need_rag=true（引用历史治疗）
-   → 向量检索：匹配到"偏头痛，建议布洛芬"的历史摘要
-   → 图谱检索：Patient→PRESCRIBED→布洛芬
-   → 回复："您上次因偏头痛就诊，开了布洛芬。可以继续服用，有什么不适吗？"
+2. 患者："我上次来看病发生了什么？"（Step 7）
+   → RAG 分类：need_rag=true（明确引用历史）
+   → 向量检索：匹配到上次头痛咨询的摘要
+   → 回复："根据记录，您上次在3月17日咨询过头痛问题。当时建议您先休息观察，
+           若疼痛持续或加重需就医。现在头痛症状已经缓解了吗？"
+
+3. 在 Neo4j 中查看完整知识图谱（Step 8）
+   → 26 个节点，28 条关系，完整的医疗关系网络
 ```
 
 ---
